@@ -1,10 +1,10 @@
-import { Input } from "@/components/ui/input"
+import ExampleForm from '@/components/ExampleForm'
 
 export default function LoginPage() {
   return (
-    <>
-    <Input/>
-    <div>LoginPage</div>
-    </>
+    <div>
+      <h1>Login Page</h1>
+      <ExampleForm />
+    </div>
   )
 }

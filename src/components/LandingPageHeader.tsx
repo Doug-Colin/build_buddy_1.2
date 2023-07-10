@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 // import { Button } from "@/components/ui/button"
 import { buttonVariants } from "@/components/ui/button"
-import { ModeToggle } from './mode-toggle'
+import { ThemeToggle } from '@/components/ThemeToggle'
 //add later when connecting to backend/redux
 //import {logout, reset} from '../features/auth/authSlice'
 
@@ -27,7 +27,7 @@ export default function LandingPageHeader() {
                     <Link className={buttonVariants({ variant: "link" })} to="/register">Sign Up</Link>
                     </li>
                     <li>
-                        <ModeToggle />
+                        <ThemeToggle />
                     </li>
                     {/* )} */}
                 </>

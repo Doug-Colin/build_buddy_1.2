@@ -9,10 +9,13 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { useTheme } from "@/components/theme-provider"
 
-export function ModeToggle() {
+// Pass a className prop to this component so that we can style it via props wherever we call it.
+// Use TypeScript's type definitions to specify the component can accept any properties an HTML <div> element would.
+export function ThemeToggle({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const { setTheme } = useTheme()
 
   return (
+    <div className={className} {...props}>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
@@ -34,5 +37,6 @@ export function ModeToggle() {
         </DropdownMenuItem> */}
       </DropdownMenuContent>
     </DropdownMenu>
+    </div>
   )
 }
