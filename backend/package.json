@@ -1,0 +1,43 @@
+{
+  "name": "build_buddy",
+  "version": "1.0.0",
+  "description": "Productivity app for boutique manufacturers",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "format": "prettier --write .",
+    "lint": "eslint --fix . --ext .js,.jsx"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Doug-Colin/build_buddy.git"
+  },
+  "author": "Doug Colin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Doug-Colin/build_buddy/issues"
+  },
+  "homepage": "https://github.com/Doug-Colin/build_buddy#readme",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "dotenv": "^16.1.4",
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react": "^7.32.2",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.2.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^8.2.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.0"
+  }
+}

@@ -31,12 +31,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 //3) r-h-f and zod
-//define the type for the zod schema via z.infer method so that TS can infer the types of the zod schema object/form
+//here we define the type for the zod schema via z.infer method so that TS can infer the types of the zod schema object/form
 type Input = z.infer<typeof registerSchema>;
 
 //if using as main element on page, for example on LoginPage, when calling, wrap in div and set min-h-screen so that it takes up the whole page and doesn't move around.
 export default function CardWithForm() {
-  //2), 4), 5) r-h-f & zod
+  //here we perform steps 2), 4), 5) r-h-f & zod
   //initialize form and pass TS type for relevant xzod schema into rhf useForm os it can know what kind of input to expect
   //Note on below: mr-h-f form variable gives us a handy fnctn called form.watch(). It provides us with the updated info, so if you console.log(form.watch()) in the form component, check the console and you'll see an Object with all the fields we defined in our formSchema as properties. If you type in the form inputs, it will then show you the values changing live. This is a good way to check if r-h-f is controlling our forms properly.
   const form = useForm<Input>({
@@ -51,7 +51,7 @@ export default function CardWithForm() {
 
   console.log(form.watch());
 
-  //step 7
+  //here is step 7
   function onSubmit(data: Input) {
     alert(JSON.stringify(data, null, 4))
     console.log(data);
