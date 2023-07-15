@@ -1,10 +1,10 @@
-import ExampleForm from '@/components/ExampleForm'
+
+import LoginForm from '../LoginForm'
 
 export default function LoginPage() {
   return (
     <div>
-      <h1>Login Page</h1>
-      <ExampleForm />
+      <LoginForm />
     </div>
   )
 }

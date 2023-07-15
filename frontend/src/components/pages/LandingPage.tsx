@@ -37,7 +37,7 @@ export default function LandingPage() {
                     </p>
                     <p className="max-w-[500px] text-muted-foreground text-xl mb-4">Build Buddy helps you take care of the annoying parts of running a small business so that you can spend more time doing what you do best- building.</p>
                     <Button asChild variant="secondary" size="lg">
-                        <Link to="/register" className="mt-4 mb-16">Register</Link>
+                        <Link to="/register" className="mt-4 mb-16">Try it out</Link>
                     </Button>
                     <h2 className="text-3xl mb-3">More time building. Less time administering.</h2>
                     <p className="mb-8">Build Buddy saves you time by by making the the chores of running a small business easy:</p>
@@ -50,7 +50,7 @@ export default function LandingPage() {
                         <FeatureCard
                             image={projectsIcon}
                             altText="An icon of paper folders representing projects"
-                            description="Manage Projects via task-lists and time tarcking."
+                            description="Manage Projects through reusable task-lists."
                         />
                         <FeatureCard
                             image={barchartIcon}

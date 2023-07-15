@@ -26,21 +26,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { registerSchema } from "@/validators/auth";
+import { exampleRegisterSchema } from "@/validators/exampleRegisterSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 //3) r-h-f and zod
 //here we define the type for the zod schema via z.infer method so that TS can infer the types of the zod schema object/form
-type Input = z.infer<typeof registerSchema>;
+type Input = z.infer<typeof exampleRegisterSchema>;
 
 //if using as main element on page, for example on LoginPage, when calling, wrap in div and set min-h-screen so that it takes up the whole page and doesn't move around.
-export default function CardWithForm() {
+export default function ExampleForm() {
   //here we perform steps 2), 4), 5) r-h-f & zod
   //initialize form and pass TS type for relevant xzod schema into rhf useForm os it can know what kind of input to expect
   //Note on below: mr-h-f form variable gives us a handy fnctn called form.watch(). It provides us with the updated info, so if you console.log(form.watch()) in the form component, check the console and you'll see an Object with all the fields we defined in our formSchema as properties. If you type in the form inputs, it will then show you the values changing live. This is a good way to check if r-h-f is controlling our forms properly.
   const form = useForm<Input>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(exampleRegisterSchema),
     defaultValues: {
       confirmPassword: "",
       email: "",
@@ -58,7 +58,7 @@ export default function CardWithForm() {
   }
   return (
     //center it
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
       <Card className="w-[350px]">
         <CardHeader>
           <CardTitle>Register</CardTitle>
@@ -144,6 +144,28 @@ export default function CardWithForm() {
                         {...field}
                         type="confirmPassword"
                         autoComplete="new-password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* 
+              Following FormField has input and validation for numbers only, no strings (check zod schema).
+                  -if you want to eliminate the 'spinner' arrows for number iteration that appear in an input when you set type="number", you have to do so in the css. 
+              */}
+              <FormField
+                control={form.control}
+                name="number"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Enter Numbers Only</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Please enter a number"
+                        {...field}
+                        type="number"
+                        autoComplete="off"
                       />
                     </FormControl>
                     <FormMessage />

@@ -1,4 +1,5 @@
 import { Moon, Sun } from "lucide-react"
+import { useTheme } from "@/components/theme-provider"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -7,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { useTheme } from "@/components/theme-provider"
+
 
 // Pass a className prop to this component so that we can style it via props wherever we call it.
 // Use TypeScript's type definitions to specify the component can accept any properties an HTML <div> element would.

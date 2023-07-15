@@ -45,12 +45,34 @@ And what if we need validation rules like string or number only?
 */
 
 //Final? Style: change the styling of the for input in the html <form>'s className Tailwind classes if desired 
-export const registerSchema = z.object ({
+export const exampleRegisterSchema = z.object ({
     //tell zod this will be a string and must be an email
     email: z.string().email(), 
     name: z.string().min(3).max(255),
     password: z.string().min(6).max(100),
+    //validation to ensure confirmation password matches first password:
     confirmPassword: z.string().min(6).max(100),
-    year: z.string().min(2).max(10) 
+    //validation for a number val only(entered as string of course) value of certain length, 
+    number: z
+        .string()
+        .min(7)
+        .max(15)
+        .refine((val) => !isNaN(val as unknown as number), {message: "Input should be number between 7 and 15 digits long"}),
+    year: z.string().min(2).max(10)
 })
+.refine((data) => data.password === data.confirmPassword,{
+    message: 'Passwords do not match',
+    path: ['confirmPassword']
+ }
+)
 
+//Note on refine functions: When you append .refinde to an individual field, the validation is specific to that field. When you append it to the z.object, the validation is specific to the entire object, the validation considers the entire object, for example comparing two fields like 'password' and 'confirmPassword'. This is called 'cross-field validation'.
+
+//Note on superRefine() functions: .refine() will only run if all the individual fields validation passes. superRefine() however runs even if individual field validations fail
+
+/*When to use which:
+
+Use individual field .refine() when you have validation logic specific to a single field.
+Use z.object().refine() when you have cross-field validation logic.
+Use z.object().superRefine() when you want to ensure a validation runs regardless of the state of individual fields
+*/

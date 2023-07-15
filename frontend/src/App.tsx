@@ -10,6 +10,8 @@ export default function App() {
 
   return (
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        {/* wrap everything in <div> set to 'min-h-screen' so that card elements (forms, calculators etc) do not move around on the scree (otherwise they were shifting when the modal poppued up for theme setting) */}
+        <div className="min-h-screen">
         <Router>
             {/* Only routes can go inside route tag */}
             <Routes>
@@ -21,6 +23,7 @@ export default function App() {
             <Route path='/calculate' element={<Calculations />} /> */}
             </Routes>
         </Router>
+        </div>
       </ThemeProvider>
   )
 }

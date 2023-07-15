@@ -24,7 +24,7 @@ export default function LandingPageHeader() {
                     <Link className={buttonVariants({ variant: "link" })} to="/login">Login</Link>
                     </li>
                     <li>
-                    <Link className={buttonVariants({ variant: "link" })} to="/register">Sign Up</Link>
+                    <Link className={buttonVariants({ variant: "link" })} to="/register">Register</Link>
                     </li>
                     <li>
                         <ThemeToggle />
