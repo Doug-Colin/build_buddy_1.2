@@ -27,3 +27,5 @@ dist-ssr
 # Personal project notes
 project_notes.md
 /project_notes
+
+/frontend/src/features/examples

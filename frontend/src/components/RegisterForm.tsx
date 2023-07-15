@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { registerSchema } from "@/validators/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Axios } from "axios"
 
 type Input = z.infer<typeof registerSchema>;
 
