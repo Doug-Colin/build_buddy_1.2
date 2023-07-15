@@ -1,17 +1,30 @@
-//'service' file is strictly for making http requests, sending the data back, and setting any data in local storage.
+//Redux 'service' file strictly for making http requests, sending data back, and setting any data in local storage.
 
-/*import axios so we can:
-    -make HTTP requests from within the application (like postman for frontend).
-    -send our json web token if necessary
-*/
+//import axios to make HTTP requests from within the application (as with with postman for backend) & send JWT if necessary
 import axios from 'axios'
 
-//bsae url for making HTTP requests to the api endpoint for user registration
-//rather than add the localhost port here, we can goto frontend package.json and add the port path as a proxy, so now http reqs will lookat localhost 5050 and then this endpoint
+//define base url for making HTTP requests to the api endpoint for user registration
+//add port path as a proxy to frontend package.json, so now http reqs will look at localhost 5050, then this endpoint
 const API_URL = '/api/users/'
 
+//define type for properties of the user data
+export interface User {
+    _id: string;
+    name: string;
+    email: string;
+    createdAt: string; // ISO string representation of a date.
+    updatedAt: string; // ''
+  }
+
+//define type for properties of data sent to backend when registering or loggin in
+export interface RegisterUserData {
+    name: string;
+    email: string;
+    password: string;
+  }
+
 //Register user
-const register = async (userData) => {
+const register = async (userData: RegisterUserData): Promise<User> => {
     //store the response from the API in response variable
     const response = await axios.post(API_URL, userData)
     //if response contains data(w/token), successful registration, so store it locally so user stays authenticated
@@ -23,7 +36,7 @@ const register = async (userData) => {
 }
 
 //Login user
-const login = async (userData) => {
+const login = async (userData: RegisterUserData): Promise<User> => {
   //store the response from the API in variable response.
   //path: API_URL = '/api/users/', so we only need to append 'login', no slash, to hit backend login endpoint
   const response = await axios.post(API_URL + 'login', userData)
