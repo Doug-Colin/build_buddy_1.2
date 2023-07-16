@@ -1,17 +1,17 @@
-import LandingPageHeader from "../LandingPageHeader"
+import Header from "@/components/Header"
 import { Link } from 'react-router-dom'
-import { Button } from "../ui/button"
-import FeatureCard from "../FeatureCard"
+import { Button } from "@/components/ui/button"
+import FeatureCard from "@/pages/landing-page/components/FeatureCard"
 import { useTheme } from "@/components/theme-provider"
 
-import barchartIconDarkMode from "../../assets/barchartIconDarkMode.svg"
-import calcIconDarkMode from "../../assets/calcIconDarkMode.svg"
-import estimateIconDarkMode from "../../assets/estimateIconDarkMode.svg"
-import projectsIconDarkMode from "../../assets/projectsIconDarkmode.svg"
-import barchartIconLightMode from "../../assets/barchartIconLightMode.svg"
-import calcIconLightMode from "../../assets/calcIconLightMode.svg"
-import estimateIconLightMode from "../../assets/estimateIconLightMode.svg"
-import projectsIconLightMode from "../../assets/projectsIconLightmode.svg"
+import barchartIconDarkMode from "@/assets/barchartIconDarkMode.svg"
+import calcIconDarkMode from "@/assets/calcIconDarkMode.svg"
+import estimateIconDarkMode from "@/assets/estimateIconDarkMode.svg"
+import projectsIconDarkMode from "@/assets/projectsIconDarkmode.svg"
+import barchartIconLightMode from "@/assets/barchartIconLightMode.svg"
+import calcIconLightMode from "@/assets/calcIconLightMode.svg"
+import estimateIconLightMode from "@/assets/estimateIconLightMode.svg"
+import projectsIconLightMode from "@/assets/projectsIconLightmode.svg"
 
 
 //Personally I like the conditional rendering of the path in string. 
@@ -29,7 +29,7 @@ export default function LandingPage() {
 
     return (
         <>
-            <LandingPageHeader />
+            <Header />
             <main>
                 <section className="flex flex-col items-center space-x-4">
                     <h1 className="text-3xl font-bold leading-tight tracking-tighter md:text-6xl mt-24 mb-12" >Build Buddy</h1>
