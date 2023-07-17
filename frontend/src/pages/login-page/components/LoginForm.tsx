@@ -10,71 +10,80 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { registerSchema } from "@/validators/registerSchema";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useNavigate } from "react-router-dom";
+import { login, reset } from "@/features/auth/authSlice";
+import { loginSchema } from "@/validators/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Axios } from "axios"
 
-type Input = z.infer<typeof registerSchema>;
+type Input = z.infer<typeof loginSchema>;
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const form = useForm<Input>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(loginSchema),
     defaultValues: {
-      confirmPassword: "",
-      email: "",
       name: "",
-      password: "",
+      email: "",
     },
   });
 
+  //check if form is updating state with each keystroke/selection
   console.log(form.watch());
+
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  //edit to mirror login function
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    //check if registration is successfull & promise fulfilled, our register fn extraReducers will update state prprty isSuccess to true
+    //also check if user is already logged in with token & other info
+    //if so navigate away from registration page to the dash
+    if (isSuccess || user) {
+      navigate("/dashboard");
+    }
+
+    //after checking for isSuccess/user, we want to reset the state, so dispatch the reset fn from authSlice & change State prpty's to false
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   function onSubmit(data: Input) {
     //alert with form's entered data as object to ensure submit is functioning
-    alert(JSON.stringify(data, null, 4));
-    //log form's data to console to ensure submit is functioning
-    // console.log(data);
+    // alert(JSON.stringify(data, null, 4) + 'tacking it on');
+    console.log(`attempting to dispatch login action from authSlice.ts, with following data as argument: ${data}`)
+    dispatch(login(data));  
   }
+
+  //console.log() prevents 'isLoading value never read' TS error until I find a tailwind Spinner.
+  if (isLoading) {
+    // return <Spinner />
+    console.log(isLoading);
+  }
+
   return (
     //center it
     <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Register</CardTitle>
-          <CardDescription>Get started today.</CardDescription>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>
+            Use your username and password to log in.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Username</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Enter your username"
-                        {...field}
-                        type="name"
-                        autoComplete="username"
-                      />
-                    </FormControl>
-                    <FormDescription>
-                      This is your account and display name.
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
               <FormField
                 control={form.control}
                 name="email"
@@ -104,33 +113,15 @@ export default function RegisterForm() {
                         placeholder="Enter your password"
                         {...field}
                         type="password"
-                        // for registration form (login page uses autoComplete="current-password")
-                        autoComplete="new-password"
+                        // for login forms, set autocomplete to current-password
+                        autoComplete="current-password"
                       />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <FormField
-                control={form.control}
-                name="confirmPassword"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Confirm Password</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Please confirm your password"
-                        {...field}
-                        type="confirmPassword"
-                        autoComplete="new-password"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Submit</Button>
+              <Button type="submit">Login</Button>
             </form>
           </Form>
         </CardContent>

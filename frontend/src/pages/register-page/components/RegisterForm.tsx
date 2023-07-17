@@ -17,36 +17,63 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { loginSchema } from "@/validators/loginSchema";
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
+import { useNavigate } from 'react-router-dom'
+import { register, reset } from "@/features/auth/authSlice";
+import { registerSchema } from "@/validators/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
-type Input = z.infer<typeof loginSchema>;
 
-export default function LoginForm() {
+type Input = z.infer<typeof registerSchema>;
+
+export default function RegisterForm() {
   const form = useForm<Input>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(registerSchema),
     defaultValues: {
-      confirmPassword: "",
-      email: "",
       name: "",
+      email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  console.log(form.watch());
+  //for checking form is updating state with each keystroke/selection
+  // console.log(form.watch());
+
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isSuccess || user) {
+        navigate('/dashboard');
+    }
+    dispatch(reset());
+}, [user, isError, isSuccess, message, navigate, dispatch]);
 
   function onSubmit(data: Input) {
-    alert(JSON.stringify(data, null, 4));
-    console.log(data);
+    //alert with form's entered data as object to ensure submit is functioning
+    // alert(JSON.stringify(data, null, 4) + 'tacking it on');
+    console.log(`attempting to dispatch register action from authSlice.ts, with following data as argument: ${data}`)
+    dispatch(register(data));  
   }
+
+  //console.log() prevents 'isLoading value never read' TS error unt il I find a tailwind Spinner.
+  if (isLoading) {
+    // return <Spinner />
+    console.log(isLoading)
+  }
+
   return (
     //center it
     <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
       <Card className="w-[350px]">
         <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Use your username and password to log in.</CardDescription>
+          <CardTitle>Register</CardTitle>
+          <CardDescription>Get started today.</CardDescription>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -101,8 +128,26 @@ export default function LoginForm() {
                         placeholder="Enter your password"
                         {...field}
                         type="password"
-                        // for login forms, set autocomplete to current-password
-                        autoComplete="current-password"
+                        // for registration form (login page uses autoComplete="current-password")
+                        autoComplete="new-password"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Confirm Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Please confirm your password"
+                        {...field}
+                        type="confirmPassword"
+                        autoComplete="new-password"
                       />
                     </FormControl>
                     <FormMessage />

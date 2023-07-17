@@ -6,14 +6,14 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix frontend",
+    "client": "npm run dev --prefix ../frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "format": "prettier --write .",
     "lint": "eslint --fix . --ext .js,.jsx"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Doug-Colin/build_buddy.git"
+    "url": "git+https://github.com/Doug-Colin/build_buddy_1.2"
   },
   "author": "Doug Colin",
   "license": "MIT",
@@ -25,6 +25,7 @@
     "assert": "^2.0.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.1.4",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.8.0",
