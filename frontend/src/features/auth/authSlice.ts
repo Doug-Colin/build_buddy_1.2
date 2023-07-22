@@ -102,12 +102,13 @@ export const authSlice = createSlice({
       .addCase(register.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        if (action.payload) {
-          state.user = action.payload;
-        } else {
-          state.isError = true;
-          state.message = "Unexpected error: No user data returned";
-        }
+        state.user = action.payload
+        // if (action.payload) {
+        //   state.user = action.payload;
+        // } else {
+        //   state.isError = true;
+        //   state.message = action.payload;
+        // }
       })
 
       .addCase(register.rejected, (state, action) => {
