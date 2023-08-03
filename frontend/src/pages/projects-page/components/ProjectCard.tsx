@@ -1,16 +1,15 @@
 import { useState, useEffect } from "react";
-import {
-  Card,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
+import { Card, CardTitle, CardDescription } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import { Textarea, Button } from "@/components/ui";
+import { Input, Button } from "@/components/ui";
+import DeletionAlertDialog from "@/components/DeletionAlertDialog";
+
 import StatusTabs from "@/pages/projects-page/components/StatusTabs";
 import { DueDatePicker } from "@/pages/projects-page/components/DueDatePicker";
 import { Project } from "@/features/projects/projectService";
 import { useAppDispatch } from "@/app/hooks";
-import { updateProject } from "@/features/projects/projectSlice";
+import { deleteProject, updateProject } from "@/features/projects/projectSlice";
+import { parseISO } from "date-fns";
 
 type ProjectCardProps = {
   project: Project;
@@ -23,7 +22,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   const [dueDate, setDueDate] = useState(project.dueDate);
   const [status, setStatus] = useState(project.status);
 
+
   const dispatch = useAppDispatch();
+
+  const dateObject = typeof dueDate === "string" ? parseISO(dueDate) : dueDate;
 
   useEffect(() => {
     setProjectName(project.projectName);
@@ -37,6 +39,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
   };
 
   const handleSave = () => {
+    if (!project._id) {
+      throw new Error("project.id is undefined.");
+    }
+
     setIsEditable(false);
     dispatch(
       updateProject({
@@ -46,12 +52,23 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     );
   };
 
+  const onDelete = () => {
+    //shouldn't be necessary, diagnose type issue after delete is functional.  
+    if (typeof project._id !== 'string') {
+      console.error('Project ID is not a string');
+      return;
+    }
+
+    
+    dispatch(deleteProject(project._id));
+  }
+
   return (
     <Card className="flex flex-col w-fit">
       <div className="relative flex justify-between items-center p-6">
         <div className="flex flex-col space-y-1.5">
           {isEditable ? (
-            <Textarea
+            <Input
               className="text-2xl font-semibold leading-none tracking-tight"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
@@ -60,7 +77,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <CardTitle>{project.projectName}</CardTitle>
           )}
           {isEditable ? (
-            <Textarea
+            <Input
               className="text-sm text-muted-foreground"
               value={client}
               onChange={(e) => setClient(e.target.value)}
@@ -90,7 +107,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       >
         {isEditable ? (
           <>
-            <DueDatePicker selected={dueDate} onChange={setDueDate} />
+            <DueDatePicker selected={dateObject} onChange={setDueDate} />
             <div className="flex flex-col mt-6">
               <Label className="text-muted-foreground pb-1">
                 Tasks can only be edited on the tasks page.
@@ -110,7 +127,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               Due{" "}
             </span>
             <span className="text-muted-foreground">
-              {dueDate.toDateString()}
+              {new Date(dueDate).toDateString()}
             </span>
             <span className="mx-1">•</span>
             <span className="font-semibold leading-none tracking-tight">
@@ -121,6 +138,15 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
       </div>
+      <DeletionAlertDialog
+        button={<Button variant='outline'>Delete</Button>}
+        alertDialogTitle={`Are you sure you want to delete this project, with projectId of ${project._id}?`}
+        alertDialogDescription={`If you delete ${project.projectName}, it cannot be undone.`}
+        alertDialogAction="Delete"
+        onDelete={onDelete}
+      ></DeletionAlertDialog>
+
+      <Button variant="secondary">Duplicate</Button>
     </Card>
   );
 }
