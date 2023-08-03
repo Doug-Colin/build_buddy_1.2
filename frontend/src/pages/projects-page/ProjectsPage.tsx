@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { reset } from "@/features/auth/authSlice";
@@ -14,7 +14,9 @@ import ProjectForm from "./components/ProjectForm";
 export default function ProjectsPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  
+  //state for closing FormDialog upon succesfull form submission
+  const [isFormDialogOpen, setIsFormDialogOpen] = useState(false)
   const { user } = useAppSelector((state) => state.auth);
 
   // useAuthenticationCheck() // attempting to convert below user auth check into a hook
@@ -27,6 +29,14 @@ export default function ProjectsPage() {
     };
   }, [user, navigate, dispatch]);
   const { projects } = useAppSelector((state) => state.projects);
+
+
+  //handler for closing FormDialog child component when form is succesfully submitted.
+  const handleFormDialogClose = (state: boolean) => {
+    setIsFormDialogOpen(state);
+  };
+  
+
 
   useEffect(() => {
     dispatch(getProjects());
@@ -53,8 +63,9 @@ export default function ProjectsPage() {
            <FormDialog
            title="Create Project"
            description="Fill out the form to create a new project. Click save when you're done."
-           formComponent={<ProjectForm />}
-           submitButtonText="Save Project"
+           isOpen={isFormDialogOpen}
+           onFormSubmissionCloseDialog={handleFormDialogClose}
+           formComponent={<ProjectForm onFormSubmit={handleFormDialogClose}/>}
            />
           </div>
           <div className="flex flex-wrap">
