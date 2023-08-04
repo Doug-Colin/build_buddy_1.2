@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux';
 import { store } from '@/app/store'
 import { ThemeProvider } from "@/components/theme-provider"
-import LandingPage from './pages/landing-page/LandingPage';
-import LoginPage from './pages/login-page/LoginPage';
-import RegisterPage from './pages/register-page/RegisterPage';
+import LandingPage from '@/pages/landing-page/LandingPage';
+import LoginPage from '@/pages/login-page/LoginPage';
+import RegisterPage from '@/pages/register-page/RegisterPage';
 import DashboardPage from '@/pages/dashboard-page/DashboardPage';
-
+import ProjectsPage from '@/pages/projects-page/ProjectsPage';
 
 
 export default function App() {
@@ -24,6 +24,7 @@ export default function App() {
               <Route path='/login' element={<LoginPage />} />
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/dashboard' element={<DashboardPage />} />
+              <Route path='/projects' element={<ProjectsPage />} />
               {/* <Route path='/task-setter' element={<TaskSetter />} />
             <Route path='/convert' element={<UnitConversion />} />
             <Route path='/calculate' element={<Calculations />} /> */}

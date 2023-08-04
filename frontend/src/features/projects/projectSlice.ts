@@ -61,6 +61,7 @@ export const getProjects = createTypedAsyncThunk(
         throw new Error("Token is missing");
       }
 
+      
       return await projectService.getProjects(token);
     } catch (error) {
       const message = getErrorMessage(error);
@@ -107,7 +108,7 @@ export const deleteProject = createTypedAsyncThunk(
       if (!token) {
         throw new Error("Token is missing");
       }
-
+      
       const response = await projectService.deleteProject(projectId, token);
       return { projectId, response };
     } catch (error) {
@@ -157,9 +158,13 @@ export const projectSlice = createSlice({
       })
       .addCase(updateProject.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.projects = state.projects.map((project: Project) =>
-          project._id !== action.payload._id ? project : action.payload
-        ); //loop through all project properties & replace the updated project
+        const index = state.projects.findIndex((project) =>
+          project._id === action.payload._id
+        )
+        //if findIndex() finds the project._id that is the update target, send that as the payload
+          if (index !== -1) {
+            state.projects[index] = action.payload
+          } 
       })
       .addCase(updateProject.rejected, (state, action) => {
         state.status = 'failed';

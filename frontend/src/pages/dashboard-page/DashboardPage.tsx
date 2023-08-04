@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
+
 // import and add Spinner for loading
 import { reset } from "@/features/auth/authSlice";
 import Header from "@/components/Header";
@@ -27,7 +28,7 @@ export default function DashboardPage() {
 
   const { user } = useAppSelector((state) => state.auth);
 
-  // useAuthenticationCheck() // attempting to conver below user auth check into a hook
+  // useAuthenticationCheck() converts below auth check into hook, but needs work
 
   useEffect(() => {
     if (!user) {

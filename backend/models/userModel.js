@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 
-//be sure to add admin role to userSchema later
+//Add admin role to userSchema if implementing admin feature
 const userSchema = mongoose.Schema(
   {
     name: {
@@ -23,5 +23,5 @@ const userSchema = mongoose.Schema(
   }
 )
 
-//export this model, pass in the name of the model and the relevant Schema 
+//Register the User model with Mongoose globally.  
 module.exports = mongoose.model('User', userSchema)

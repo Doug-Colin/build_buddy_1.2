@@ -7,29 +7,25 @@ const projectSchema = new mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    title: {
+    projectName: {
       type: String,
-      required: [true, 'Please add a project title'],
+      required: [true, 'Please add a project name'],
     },
     client: {
       type: String,
 
     },
     dueDate: {
-      type: Date,
+      type: Date, //actually sent in ISO string format; data's in JSON & there's no JSON Date object
+      //is optional on frontend for long-term projects like maintenance; consider changing requiered to false. 
       required: [true, 'Please add a due date'],
     },
     status: {
       type: String,
       //enum is Mongoose validation feature for defining specific string values
-      enum: ['In progress', 'Completed'],
+      enum: ['In progress', 'Completed', 'Long-Term'],
       default: 'In progress',
     },
-    recurring: {
-        type: Boolean,
-        default: false
-    }
-
   },
   {
     //automatically add createdAt and updatedAt fields with current date and time

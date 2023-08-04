@@ -26,12 +26,14 @@ import { z } from "zod";
 
 type Input = z.infer<typeof loginSchema>;
 
+
 export default function LoginForm() {
+  
   const form = useForm<Input>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      name: "",
       email: "",
+      password: "",
     },
   });
 

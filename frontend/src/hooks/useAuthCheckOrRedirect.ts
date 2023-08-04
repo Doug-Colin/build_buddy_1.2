@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
 import { reset } from "@/features/auth/authSlice";
 
-export default function useAuthOrRedirect() {
+export default function useAuthCheckOrRedirect() {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const {user} = useAppSelector((state) => state.auth)

@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { buttonVariants } from "@/components/ui/button";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, buttonVariants } from "@/components/ui";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
-import { useNavigate } from "react-router-dom";
 import { logout, reset } from "@/features/auth/authSlice";
 
 export default function Header() {

@@ -1,6 +1,6 @@
 import Header from "@/components/Header"
 import { Link } from 'react-router-dom'
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui"
 import FeatureCard from "@/pages/landing-page/components/FeatureCard"
 import { useTheme } from "@/components/theme-provider"
 

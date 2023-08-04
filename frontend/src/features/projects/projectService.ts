@@ -6,12 +6,11 @@ const API_URL = "/api/projects/";
 //define type for properties or data of individual projects
 export interface Project {
   _id?: string;
-  user: string;
-  title: string;
+  user?: string;
+  projectName: string;
   client?: string; //optional field
   dueDate: Date;
-  status?: 'In progress' | 'Completed'; //optional field
-  recurring?: boolean;
+  status: 'In progress' | 'Completed' | "Long-Term"; //optional field
 }
 
 //Request to create new project
@@ -22,6 +21,9 @@ const createProject = async (project: Project, token: string) => {
       Authorization: `Bearer ${token}`,
     },
   };
+  //debugging
+  console.log("Sending request with data:", project, "and config:", config);
+
   //respond to req with config, which has the token
   const response = await axios.post(API_URL, project, config);
 
@@ -39,8 +41,7 @@ const getProjects = async (token: string) => {
   //respond to req with config, which has the token
   const response = await axios.get(API_URL, config);
 
-  return response.data;
-  console.log(response.data)
+  return response.data
 };
 
 // Request to Update a Project

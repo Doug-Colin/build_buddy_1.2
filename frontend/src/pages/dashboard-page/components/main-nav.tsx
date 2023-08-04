@@ -12,49 +12,49 @@ export function MainNav({
       {...props}
     >
       <Link
-        to="/examples/dashboard"
+        to="/dashboard"
         className="text-sm font-medium transition-colors hover:text-primary"
       >
         Overview
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/projects"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Projects
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/examples/tasks"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Tasks
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/examples/notes"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Notes
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/examples/costs"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Costs
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/examples/estimates"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Estimates
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/examples/calculate"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Calculate
       </Link>
       <Link
-        to="/examples/dashboard"
+        to="/examples/convert"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Convert

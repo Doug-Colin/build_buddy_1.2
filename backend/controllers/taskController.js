@@ -28,7 +28,7 @@ const setTask = asyncHandler(async (req, res) => {
   
     const task = await Task.create({
       text: req.body.text,
-      user: req.user.id,
+      user: req.user._id,
     })
   
     res.status(200).json(task)

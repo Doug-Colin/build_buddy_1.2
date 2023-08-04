@@ -28,6 +28,7 @@ const registerUser = asyncHandler(async (req, res) => {  //mongoose and bcrypt b
     const hashedPassword = await bcrypt.hash(password, salt)
     
     //create User
+    //ES6 shorthand property names for when property and value are identical (equivalent to name: name)
     const user = await User.create({
         name,
         email,

@@ -32,7 +32,7 @@
   },
   "include": [
     "src"
-  ],
+, "project_notes/DialogDemo.tsx"  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
