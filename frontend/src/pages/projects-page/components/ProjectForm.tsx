@@ -21,8 +21,8 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { projectSchema } from "@/validators/projectSchema";
 import { createProject } from "@/features/projects/projectSlice"; 
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { ProjectFormType } from "@/types/types";
+import { useAppDispatch, } from "@/app/hooks";
+
 
 
 /*In parent component, declare state and handler to close FormDialog upon successful form submission:
