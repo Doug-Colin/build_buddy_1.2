@@ -61,7 +61,6 @@ export const getProjects = createTypedAsyncThunk(
         throw new Error("Token is missing");
       }
 
-      
       return await projectService.getProjects(token);
     } catch (error) {
       const message = getErrorMessage(error);
@@ -97,6 +96,28 @@ export const updateProject = createTypedAsyncThunk(
   }
 );
 
+// Duplicate Project
+export const duplicateProject = createTypedAsyncThunk(
+  "projects/duplicateProject",
+  async (originalProject: Project, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState() as RootState;
+      const token = state.auth.user?.token;
+
+      if (!token) {
+        throw new Error("Token is missing");
+      }
+     
+      const response = await projectService.duplicateProject(originalProject, token);
+
+      return response;
+    } catch (error) {
+      const message = getErrorMessage(error);
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //Delete user project
 export const deleteProject = createTypedAsyncThunk(
   "projects/deleteProject",
@@ -108,7 +129,7 @@ export const deleteProject = createTypedAsyncThunk(
       if (!token) {
         throw new Error("Token is missing");
       }
-      
+
       const response = await projectService.deleteProject(projectId, token);
       return { projectId, response };
     } catch (error) {
@@ -134,7 +155,7 @@ export const projectSlice = createSlice({
       })
       .addCase(createProject.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload as string // Use the error message from the rejected value
+        state.error = action.payload as string; // Use the error message from the rejected value
         state.message = "Failed to create project."; // Set an error message
       })
 
@@ -147,30 +168,46 @@ export const projectSlice = createSlice({
         state.projects = action.payload;
       })
       .addCase(getProjects.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.payload as string;
-        state.message = "Failed to fetch projects."
+        state.message = "Failed to fetch projects.";
       })
 
-      //Update Projects 
+      //Update Projects
       .addCase(updateProject.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(updateProject.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        const index = state.projects.findIndex((project) =>
-          project._id === action.payload._id
-        )
+        state.status = "succeeded";
+        const index = state.projects.findIndex(
+          (project) => project._id === action.payload._id
+        );
         //if findIndex() finds the project._id that is the update target, send that as the payload
-          if (index !== -1) {
-            state.projects[index] = action.payload
-          } 
+        if (index !== -1) {
+          state.projects[index] = action.payload;
+        }
       })
       .addCase(updateProject.rejected, (state, action) => {
-        state.status = 'failed';
-        state.error = action.payload as string // Use the error message from the rejected value
-        state.message = "Failed to create project."; // Set an error message
+        state.status = "failed";
+        state.error = action.payload as string; // Use the error message from the rejected value
+        state.message = "Failed to update project."; // Set an error message
       })
+
+      //Duplicate Project
+      .addCase(duplicateProject.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(duplicateProject.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.projects.push(action.payload);
+        
+      })
+      .addCase(duplicateProject.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload as string;
+        state.message = "Failed to duplicate project.";
+      })
+      
 
       //Delete Project
       .addCase(deleteProject.pending, (state) => {
@@ -185,8 +222,9 @@ export const projectSlice = createSlice({
       .addCase(deleteProject.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
+        state.message = "Failed to delete project"
       });
   },
 });
 
- export default projectSlice.reducer;
+export default projectSlice.reducer;
