@@ -44,7 +44,7 @@ export function DueDatePicker({selected, onChange}: DueDatePickerProps) {
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
-          {`Due ${date ? format(date, "PPP") : <span>Pick a due date</span>}`}
+          {`${date ? format(date, "PPP") : <span>Pick a due date</span>}`}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
