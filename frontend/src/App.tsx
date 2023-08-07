@@ -7,6 +7,7 @@ import LoginPage from '@/pages/login-page/LoginPage';
 import RegisterPage from '@/pages/register-page/RegisterPage';
 import DashboardPage from '@/pages/dashboard-page/DashboardPage';
 import ProjectsPage from '@/pages/projects-page/ProjectsPage';
+import TasksPage from './pages/tasks-page/TasksPage';
 
 
 export default function App() {
@@ -25,8 +26,8 @@ export default function App() {
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/dashboard' element={<DashboardPage />} />
               <Route path='/projects' element={<ProjectsPage />} />
-              {/* <Route path='/task-setter' element={<TaskSetter />} />
-            <Route path='/convert' element={<UnitConversion />} />
+              <Route path='/tasks' element={<TasksPage />} />
+            {/* <Route path='/convert' element={<UnitConversion />} />
             <Route path='/calculate' element={<Calculations />} /> */}
             </Routes>
         </Router>

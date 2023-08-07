@@ -24,37 +24,37 @@ export function MainNav({
         Projects
       </Link>
       <Link
-        to="/examples/tasks"
+        to="/tasks"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Tasks
       </Link>
       <Link
-        to="/examples/notes"
+        to="/notes"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Notes
       </Link>
       <Link
-        to="/examples/costs"
+        to="/costs"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Costs
       </Link>
       <Link
-        to="/examples/estimates"
+        to="/estimates"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Estimates
       </Link>
       <Link
-        to="/examples/calculate"
+        to="/calculate"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Calculate
       </Link>
       <Link
-        to="/examples/convert"
+        to="/convert"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Convert
