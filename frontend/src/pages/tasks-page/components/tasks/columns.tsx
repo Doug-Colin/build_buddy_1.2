@@ -52,15 +52,6 @@ export const columns: ColumnDef<Task>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  /*
-      projectName: 'Mission Desks',
-      client: "Design Within Reach",
-      taskName: "Source wood materials",
-      label: "Sourcing",
-      taskDescription: "Find and price out 10' x 4' quarter-sawn oak slabs",
-  */
-
- 
   {
     accessorKey: "projectName",
     header: "Project",
