@@ -60,12 +60,12 @@ const updateProject = asyncHandler(async (req, res) => {
   //get user before calling updating project via findByIdAndUpdate
   const user = await User.findById(req.user.id);
 
-  //Check for user
+  //Auth- user check
   if (!user) {
     res.status(401);
     throw new Error('User not found');
   }
-  //Authorization- check user that created project being updated against logged-in user
+  //Auth- check user that created project being updated against logged-in user
   if (project.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error('User not authorized');
