@@ -1,113 +1,116 @@
-//installed express-async-handler package (so we can use it instead of try-catch)
-const asyncHandler = require("express-async-handler") 
+const mongoose = require('mongoose');
+const asyncHandler = require('express-async-handler');
+const Task = require('../models/taskModel');
+const User = require('../models/userModel');
 
-const Task = require('../models/taskModel')
-const User = require('../models/userModel')
-
-//descr: Get task
-//route: GET /api/tasks
+//descr: Get tasks
+//route: GET /api/taskss
 //access: Private
 const getTasks = asyncHandler(async (req, res) => {
-    const tasks = await Task.find({ user: req.user.id })
+  const tasks = await Task.find({ user: req.user.id });
 
-    res.status(200).json(tasks)// 
-})
-
-   
-
+  res.status(200).json(tasks);
+});
 
 //descr: Set task
 //route: POST /api/tasks
 //access: Private
-////Express sends errors as html, so setup middleware.js so we can send JSON, & require/app.use it in server.js
 const setTask = asyncHandler(async (req, res) => {
-    if (!req.body.text) {
-      res.status(400)
-      throw new Error('Please add a text field')
-    }
-  
-    const task = await Task.create({
-      text: req.body.text,
-      user: req.user._id,
-    })
-  
-    res.status(200).json(task)
-  })
+  console.log('Received payload:', req.body);
+
+  if (!req.body.taskName) {
+    res.status(400);
+    throw new Error('Please add a task name');
+  }
+
+  const task = await Task.create({
+    user: req.user._id,
+    projectName: req.body.projectName,
+    client: req.body.client,
+    label: req.body.label || "General",  //use values from request or default
+    taskName: req.body.taskName,
+    taskDescription: req.body.taskDescription,
+    status: req.body.status || 'In Progress', 
+    priority: req.body.priority || 'Low', 
+  });
+
+  res.status(200).json(task);
+});
 
 //descr: Update task
 //route: PUT /api/tasks/:id
 //access: Private
 const updateTask = asyncHandler(async (req, res) => {
-    //get task by id in url
-    const task = await Task.findById(req.params.id) 
+  const task = await Task.findById(req.params.id);
 
-    //check for task
-    if (!task) {
-        res.status(400)
-        throw new Error('Task not found.')
-    }
+  if (!task) {
+    res.status(400);
+    throw new Error('Task not found.');
+  }
 
-    //get user before calling findByIdAndUpdate below
-    const user = await User.findById(req.user.id)
+  //get user before calling updateTask
+  const user = await User.findById(req.user.id);
 
-    //Check for user
-    if (!user) {
-        res.status(401)
-        throw new Error('User not found')
-    }
-    //Make sure the user that created the task we're updating matches the logged-in user
-    if (task.user.toString() !== req.user.id) {
-        res.status(401)
-        throw new Error ('User not authorized')
-    }
+  //Auth- user check
+  if (!user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+  //Auth- check logged-in user matches user calling updateTask
+  if (task.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
 
-    //update task via findByUpdate
-    const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  const updatedTask = await Task.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
-    res.status(200).json(updatedTask)
-})
+  res.status(200).json(updatedTask);
+});
 
 //descr: Delete task
 //route: DELETE /api/tasks/:id
 //access: Private
 const deleteTask = asyncHandler(async (req, res) => {
-    const task = await Task.findById(req.params.id)
+  const task = await Task.findById(req.params.id);
 
-    if (!task) {
-        res.status(400)
-        throw new Error('Task not found.')
-    }
-    //get user before sending req to delete task below
-    const user = await User.findById(req.user.id)
+  if (!task) {
+    res.status(400);
+    throw new Error('Task not found.');
+  }
+  //get user before sending req to delete
+  const user = await User.findById(req.user.id);
 
-    //Check for user
-    if (!user) {
-        res.status(401)
-        throw new Error('User not found')
-    }
-    //Make sure the user that created the task matches the logged-in user
-    //task has a user field on it, the value of that field is an object _id, so convert toString to compare
-    if (task.user.toString() !== req.user.id) {
-        res.status(401)
-        throw new Error ('User not authorized')
-    }
+  //user check
+  if (!user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+  //Check if user that created the task matches the logged-in user
+  //task user property is an object _id; convert toString for comparison
+  if (task.user.toString() !== req.user.id) {
+    res.status(401);
+    throw new Error('User not authorized');
+  }
+  console.log('Type of task._id:', typeof task._id);
+  console.log('Value of task._id:', task._id);
+  if (task._id instanceof mongoose.Types.ObjectId) {
+    console.log('task._id is an instance of mongoose.Types.ObjectId!!!');
+  }
 
-    await task.deleteOne()
 
-    res.status(200).json({ id: req.params.id })
-    //tried changing above as frontend delete functionality is not working... seems it may be due to 'not being to access action.payload.id in taskSlice .addCase(deleteTask.fulfilled)...., as I beleive that is the return from the controller fucntion... so trying to respond with the following instead to grant that access:
-    //res.status(200).json({ message: `Task ${req.params.id} deleted` })
-    //above did not work, trying this:
-    //return res.status(200).json({ id: req.params.id });
-    //above did not work, leaving first standard line. 
-})
+//   console.log(`attempting to delete task with id of ${task._id}`);
+//   console.log('Type of task._id:', typeof task._id);
+//   console.log('Value of task._id:', task._id);
+  await task.deleteOne();
 
+  res.status(200).json({ id: req.params.id });
+});
 
 module.exports = {
-    getTasks,
-    setTask,
-    updateTask,
-    deleteTask,
-}
-
-
+  getTasks,
+  setTask,
+  updateTask,
+  deleteTask,
+};

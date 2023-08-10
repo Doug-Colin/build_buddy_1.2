@@ -16,13 +16,13 @@ const taskSchema = new mongoose.Schema(
       type: String,
 
     },
-    taskName: {
-        type: String,
-        required: [true, 'Please add a task name'],
-    },
     label:{
         enum: ["General" | "Sourcing" | "Fabrication" | "Finishing" | "Shipping" | "Repair" | "Administrative" | "Maintenance"],
         default: 'General',
+    },
+    taskName: {
+        type: String,
+        required: [true, 'Please add a task name'],
     },
     taskDescription: {
         type: String,
@@ -32,7 +32,7 @@ const taskSchema = new mongoose.Schema(
       enum: ["Todo" | "In Progress" | "Done" | "Paused" | "Canceled"],
       default: 'Todo',
     },
-    Priority: {
+    priority: {
         type: String,
         enum: ["Low" | "Medium" | "High" | "Urgent"],
         default: 'Low',
