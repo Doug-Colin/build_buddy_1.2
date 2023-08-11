@@ -17,7 +17,8 @@ const taskSchema = new mongoose.Schema(
 
     },
     label:{
-        enum: ["General" | "Sourcing" | "Fabrication" | "Finishing" | "Shipping" | "Repair" | "Administrative" | "Maintenance"],
+      type: String,
+        enum: ["General" , "Sourcing" , "Fabrication" , "Finishing" , "Shipping" , "Repair" , "Administrative" , "Maintenance"],
         default: 'General',
     },
     taskName: {
@@ -29,12 +30,12 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Todo" | "In Progress" | "Done" | "Paused" | "Canceled"],
+      enum: ["Todo" , "In Progress" , "Done" , "Paused" , "Canceled"],
       default: 'Todo',
     },
     priority: {
         type: String,
-        enum: ["Low" | "Medium" | "High" | "Urgent"],
+        enum: ["Low" , "Medium" , "High" , "Urgent"],
         default: 'Low',
       },
   },
