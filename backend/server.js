@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
 const colors = require('colors')
-//For commented out production mode code below
-// const dotenv = require('dotenv').config()
+
+const dotenv = require('dotenv').config()
 const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 const port = process.env.port || 5050
