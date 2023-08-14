@@ -1,60 +1,23 @@
-//---------- Tables with shadcn table and tanstack table ------------------------
 
-//---------- page.tsx (server component) is where we'll fetch data and render our table. ------------------------
-
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "@/app/hooks";
-import { reset } from "@/features/auth/authSlice";
+import { useEffect } from "react";
+import { useAuthCheck } from "@/hooks/useAuthCheck";
 import Header from "@/components/Header";
 import { MainNav } from "@/pages/dashboard-page/components/main-nav";
 import { Search } from "@/pages/dashboard-page/components/search";
-import {
-  Task,
-  columns,
-} from "@/pages/tasks-page/components/tasks/columns";
-import { DataTable } from "@/pages/tasks-page/components/tasks/data-table";
-
-
-//mock function returns hardcoded array of Task object(s) 
-const getData = async (): Promise<Task[]> => {
-  // Fetch data from your API here.
-  return [
-    {
-      id: "728ed52f",
-      projectName: 'Mission Desks',
-      client: "Design Within Reach",
-      taskName: "Source wood materials",
-      label: "Sourcing",
-      taskDescription: "Find and price out 10' x 4' quarter-sawn oak slabs",
-      status: "In Progress",
-      priority: "Medium"
-
-    },
-    // ...
-  ];
-};
+import { columns } from "@/pages/tasks-page/components/tasks-table/columns";
+import { DataTable } from "@/pages/tasks-page/components/tasks-table/data-table";
+import { getTasks } from "@/features/tasks/taskSlice";
+import { useAppDispatch, useAppSelector } from "@/app/hooks";
 
 export default function TasksPage() {
-  const [data, setData] = useState<Task[]>([]);
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.auth);
+  useAuthCheck();
+  const dispatch = useAppDispatch()
+  const tasks = useAppSelector((state) => state.tasks.tasks) 
 
-//Auth
-useEffect(() => {
-  if (!user) {
-    navigate("/login");
-  }
-  return () => {
-    dispatch(reset());
-  };
-}, [user, navigate, dispatch]);
 
-// table Data Fetching
-useEffect(() => {
-  getData().then((fetchedData) => setData(fetchedData));
-}, []);
+  useEffect(() => {
+    dispatch(getTasks());
+  }, [dispatch]);
 
   return (
     <>
@@ -69,16 +32,9 @@ useEffect(() => {
           </div>
         </div>
 
-        <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2">
-            <h2 className="text-3xl font-bold tracking-tight">Tasks</h2>
+        <div className="">
+             <DataTable columns={columns} data={tasks} />
           </div>
-
-          <div className="">
-
-            <DataTable columns={columns} data={data} />
-          </div>
-        </div>
       </div>
     </>
   );
