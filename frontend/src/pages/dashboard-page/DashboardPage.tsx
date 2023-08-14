@@ -1,9 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "@/app/hooks";
-
-// import and add Spinner for loading
-import { reset } from "@/features/auth/authSlice";
 import Header from "@/components/Header";
 
 import {
@@ -16,28 +10,12 @@ import {
 
 import { MainNav } from "@/pages/dashboard-page/components/main-nav";
 import { Search } from "@/pages/dashboard-page/components/search";
+import { useAuthCheck } from "@/hooks/useAuthCheck";
 
-// export const metadata: Metadata = { // Redundant: Unused metadata
-//   title: "Dashboard",
-//   description: "Example dashboard app built using the components.",
-// }
 
 export default function DashboardPage() {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const { user } = useAppSelector((state) => state.auth);
-
-  // useAuthenticationCheck() converts below auth check into hook, but needs work
-
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-    return () => {
-      dispatch(reset());
-    };
-  }, [user, navigate, dispatch]);
+    // !user redirects to LandingPage
+    useAuthCheck()
 
   return (
     <>
