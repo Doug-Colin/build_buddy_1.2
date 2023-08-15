@@ -8,7 +8,6 @@ const taskSchema = new mongoose.Schema(
       required: true,
       ref: 'User',
     },
-    //When connecting to projects collection (add select for projects), may need to be modified
     projectName: {
       type: String,
     },
@@ -27,11 +26,12 @@ const taskSchema = new mongoose.Schema(
     },
     taskDescription: {
         type: String,
+        required: [true, 'Please add a description of your task'],
     },
     status: {
       type: String,
-      enum: ["Todo" , "In Progress" , "Done" , "Paused" , "Canceled"],
-      default: 'Todo',
+      enum: ["To Do" , "In Progress" , "Done" , "Paused" , "Canceled"],
+      default: "To Do",
     },
     priority: {
         type: String,
