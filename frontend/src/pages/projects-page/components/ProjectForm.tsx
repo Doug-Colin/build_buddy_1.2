@@ -14,44 +14,21 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Button } from "@/components/ui"
+import { Button } from "@/components/ui";
 import { DueDatePicker } from "@/pages/projects-page/components/DueDatePicker";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { projectSchema } from "@/validators/projectSchema";
-import { createProject } from "@/features/projects/projectSlice"; 
-import { useAppDispatch, } from "@/app/hooks";
+import { createProject } from "@/features/projects/projectSlice";
+import { useAppDispatch } from "@/app/hooks";
+import { ProjectFormType } from "@/types/types";
+import { ProjectFormProps} from "@/types/types"
 
 
 
-/*In parent component, declare state and handler to close FormDialog upon successful form submission:
-
-//state for closing FormDialog upon succesfull form submission:
-const [isFormDialogOpen, setIsFormDialogOpen] = useState(false)
-
-//handler for closing FormDialog child component when form is succesfully submitted:
-  const handleFormDialogClose = (state: boolean) => {
-    setIsFormDialogOpen(state);
-  };
-*/
-
-
-export interface ProjectFormType {
-  projectName: string;
-  client?: string;
-  dueDate: Date;
-  status?: 'In progress' | 'Completed' | "Long-Term";
-}
-interface ProjectFormProps {
-  onFormSubmit: () => void; // Replace with the actual type if different
-}
-
-export default function ProjectForm({onFormSubmit}: ProjectFormProps) {
-type Input = z.infer<typeof projectSchema>;
-
-
-
+export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
+  type Input = z.infer<typeof projectSchema>;
 
   const form = useForm<Input>({
     resolver: zodResolver(projectSchema),
@@ -63,18 +40,12 @@ type Input = z.infer<typeof projectSchema>;
     },
   });
 
-//check if form is updating state with each keystroke/selection
-console.log(form.watch());
-
-const dispatch = useAppDispatch();
-
-// const { status, error, message } = useAppSelector((state) => state.projects);
-
+  const dispatch = useAppDispatch();
 
   function onSubmit(data: ProjectFormType) {
-    dispatch(createProject(data))
+    dispatch(createProject(data));
     console.log(data);
-    onFormSubmit()
+    onFormSubmit(false);
   }
 
   return (
