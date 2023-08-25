@@ -13,4 +13,8 @@ export * from '@/components/ui/popover'
 export * from '@/components/ui/badge'
 export * from '@/components/ui/checkbox'
 export * from '@/components/ui/table'
+export * from '@/components/ui/scroll-area'
+export * from '@/components/ui/separator'
+export * from '@/components/ui/command'
+
 
