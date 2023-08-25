@@ -1,18 +1,9 @@
 import axios from "axios";
 
 const API_URL = "/api/projects/";
-
+import { Project } from "@/types/types";
 //define type for properties or data of individual projects
-export interface Project {
-  _id?: string;
-  user?: string;
-  projectName: string;
-  client?: string; //optional field
-  dueDate: Date;
-  status?: "In progress" | "Completed" | "Long-Term"; //optional field
-  createdAt?: string;
-  updatedAt?: string;
-}
+
 
 //Request to create new project
 //send token as Bearer token

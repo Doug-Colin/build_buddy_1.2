@@ -1,5 +1,5 @@
 
-import * as React from "react"
+
 import { format } from "date-fns"
 import { Calendar as CalendarIcon } from "lucide-react"
  
@@ -11,7 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
 interface DueDatePickerProps {
   selected: Date;
@@ -19,7 +19,9 @@ interface DueDatePickerProps {
 }
  
 export function DueDatePicker({selected, onChange}: DueDatePickerProps) {
-  const [date, setDate] = React.useState<Date>(selected)
+
+  const [date, setDate] = useState<Date>(selected)
+
 
   useEffect(() => {
     setDate(selected)
