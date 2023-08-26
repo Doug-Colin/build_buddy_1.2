@@ -1,41 +1,34 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { Provider } from 'react-redux';
-import { store } from '@/app/store'
-import { ThemeProvider } from "@/components/theme-provider"
-import LandingPage from '@/pages/landing-page/LandingPage';
-import LoginPage from '@/pages/login-page/LoginPage';
-import RegisterPage from '@/pages/register-page/RegisterPage';
-import DashboardPage from '@/pages/dashboard-page/DashboardPage';
-import ProjectsPage from '@/pages/projects-page/ProjectsPage';
-import TasksPage from './pages/tasks-page/TasksPage';
-
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import { store } from "@/app/store";
+import { ThemeProvider } from "@/components/theme-provider";
+import LandingPage from "@/pages/landing-page/LandingPage";
+import LoginPage from "@/pages/login-page/LoginPage";
+import RegisterPage from "@/pages/register-page/RegisterPage";
+import DashboardPage from "@/pages/dashboard-page/DashboardPage";
+import ProjectsPage from "@/pages/projects-page/ProjectsPage";
+import TasksPage from "./pages/tasks-page/TasksPage";
+import NotesPage from "./pages/notes-page/NotesPage";
 
 export default function App() {
-
   return (
     <Provider store={store}>
-    <Provider store={store}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        {/* wrap everything in <div> set to 'min-h-screen' so that card elements (forms, calculators etc) do not move around on the scree (otherwise they were shifting when the modal poppued up for theme setting) */}
+        {/* wrapping everything in <div> set to 'min-h-screen' prevents card components from moving on screen during modal/dialog/ etc popup */}
         <div className="min-h-screen">
-        <Router>
-            {/* Only routes can go inside route tag */}
+          <Router>
             <Routes>
-              <Route path='/' element={<LandingPage />} />
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='/register' element={<RegisterPage />} />
-              <Route path='/dashboard' element={<DashboardPage />} />
-              <Route path='/projects' element={<ProjectsPage />} />
-              <Route path='/tasks' element={<TasksPage />} />
-            {/* <Route path='/convert' element={<UnitConversion />} />
-            <Route path='/calculate' element={<Calculations />} /> */}
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/tasks" element={<TasksPage />} />
+              <Route path="/notes" element={<NotesPage />} />
             </Routes>
-        </Router>
+          </Router>
         </div>
       </ThemeProvider>
-      </Provider>
-      </Provider>
-  )
+    </Provider>
+  );
 }
-
-
