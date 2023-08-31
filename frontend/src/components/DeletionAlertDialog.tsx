@@ -10,8 +10,9 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
+// Use: In parent component, pass a <button> or <Button> with preferred props/styling as value of button prop
+
 interface DeletionAlertDialogProps {
-  //In parent component, pass a <button> or <Button> with preferred props/styling as value of alertDialogTriggerButton
   button: React.ReactNode;
   alertDialogTitle: string;
   alertDialogDescription: string;
