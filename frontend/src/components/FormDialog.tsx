@@ -17,40 +17,33 @@ interface FormDialogProps {
   formComponent: React.ReactNode;
 }
 
+/*  
+For use in parent component:
+ 
+State for closing FormDialog upon succesfull form submission
+ const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false);
 
-// State and handler fucntion to close dialog from parent component:
-// const [isFormDialogOpen, setIsFormDialogOpen] = useState(false); //state for closing FormDialog upon succesfull form submission
-//handler for closing FormDialog child component when form is succesfully submitted.
-// const handleFormDialogClose = (state: boolean) => {
-//   setIsFormDialogOpen(state);
-// };
-//In addition, make sure the onSubmit of the form that is FOrmDialog's child has a matching fn signature to handleFormDialogClose
-//interface ChildFormProps {
-//  onFormSubmit: (state: boolean) => void;
-//}
+Handler for closing FormDialog child component when form is succesfully submitted.
+ const handleFormDialogClose = (state: boolean) => {
+   setIsFormDialogOpen(state);
+ };
 
+Note on typing:  make sure the onSubmit of the form rendered by FormDialog has fn signature type that matches handleFormDialogClose
+interface ChildFormProps {
+  onFormSubmit: (state: boolean) => void;
+}
+*/
 export default function FormDialog({
   isOpen,
   onFormSubmissionCloseDialog,
   title,
   description,
   formComponent,
-}: FormDialogProps) 
-{
-  //debugging
-  // console.log("3) FormDialog isOpen:", isOpen)
+}: FormDialogProps) {
   return (
-    // debugging
-      <Dialog open={isOpen} onOpenChange={ onFormSubmissionCloseDialog }> 
-    {/* <Dialog open={isOpen} onOpenChange={(newState: boolean) => { 
-       console.log("6) onOpenChange triggered with state:", newState); 
-       onFormSubmissionCloseDialog(newState); 
-     }}> */}
+    <Dialog open={isOpen} onOpenChange={onFormSubmissionCloseDialog}>
       <DialogTrigger asChild>
-        <Button variant="outline">
-          {/* <PlusIcon className="mr-2 h-4 w-4" /> */}
-          {title}
-        </Button>
+        <Button variant="outline">{title}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
