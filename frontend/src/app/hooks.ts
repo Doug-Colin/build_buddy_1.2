@@ -16,9 +16,7 @@ export const createTypedAsyncThunk = createAsyncThunk.withTypes<{
   }>();
 
 
-/**
- * function to minimize AxiosError type checking code in thunk actions
- */
+//function to minimize AxiosError type checking code in thunk actions
 export function getErrorMessage(error: unknown): string {
     if (axios.isAxiosError<{ error?: { message: string } }>(error)) {
       return (
