@@ -1,19 +1,16 @@
-//Redux 'service' file: strictly for http reqs, sending data back, & setting relevant data in local storage.
+// Redux service for authentication-related HTTP requests and local storage operations.
 
-//to makie HTTP reqs from within app & send JWT if necessary
 import axios from "axios";
 import { User, LoginUserData, RegisterUserData } from "@/types/types";
 
-//define base url for making HTTP requests to the api endpoint for auth
-//add port to this path (backend) as proxy in vite config so http reqs look there, then @ this endpoint
+
 const API_URL = "/api/users/";
 
-//Register user
+// Registers user & stores the token in local storage.
 const register = async (userData: RegisterUserData): Promise<User> => {
   
   try {
-    const response = await axios.post(API_URL, userData); //store the response from the API
-    //response contains data(w/token)? reg. successful, store token locally to keep user authenticated
+    const response = await axios.post(API_URL, userData); 
     if (response.data) {
       localStorage.setItem("user", JSON.stringify(response.data));
     }
@@ -25,7 +22,7 @@ const register = async (userData: RegisterUserData): Promise<User> => {
   }
 };
 
-//Login user
+// Authenticates user & stores token in local storage.
 const login = async (userData: LoginUserData): Promise<User> => {
 
   try {
@@ -36,12 +33,12 @@ const login = async (userData: LoginUserData): Promise<User> => {
 
     return response.data;
   } catch (error) {
-    console.error("Error registering user:", error);
+    console.error("Error loggin in user:", error);
     throw error;
   }
 };
 
-//simple logout user - could later instead use server and add an http cookie
+//Logs out user by removing token from local storage
 const logout = () => {
   localStorage.removeItem("user");
 };
