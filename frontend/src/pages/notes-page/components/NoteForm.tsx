@@ -9,7 +9,6 @@ import { createNote } from '@/features/notes/noteSlice'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { noteSchema } from '@/validators/noteSchema'
-// import { NoteFormProps, NoteFormType, Project } from '@/types/types'
 import { Project, NoteFormProps, NoteDTO } from '@/types/types'
 
 
@@ -45,7 +44,7 @@ export default function NoteForm({ onFormSubmit }: NoteFormProps) {
 
   function onSubmit(data: NoteDTO ) {
     dispatch(createNote(data))
-    console.log(`Here is entered form data: ${data}`)
+    //console.log(`Here is entered form data: ${data}`)
     onFormSubmit(false)
   }
 

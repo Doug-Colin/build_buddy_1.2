@@ -62,10 +62,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   const onDelete = () => {
     //shouldn't be necessary, diagnose type issue after delete is functional.
-    if (typeof project._id !== 'string') {
-      console.error('Project ID is not a string')
-      return
-    }
+    // if (typeof project._id !== 'string') {
+    //   console.error('Project ID is not a string')
+    //   return
+    // }
 
     dispatch(deleteProject(project._id))
   }

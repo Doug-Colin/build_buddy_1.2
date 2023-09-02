@@ -23,7 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { projectSchema } from '@/validators/projectSchema'
 import { createProject } from '@/features/projects/projectSlice'
 import { useAppDispatch } from '@/app/hooks'
-import { ProjectFormType, ProjectFormProps } from '@/types/types'
+import { ProjectDTO, ProjectFormProps } from '@/types/types'
 
 export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
   type Input = z.infer<typeof projectSchema>
@@ -34,13 +34,13 @@ export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
       projectName: '',
       client: '',
       dueDate: new Date(),
-      status: 'In progress',
+      status: 'In Progress',
     },
   })
 
   const dispatch = useAppDispatch()
 
-  function onSubmit(data: ProjectFormType) {
+  function onSubmit(data: ProjectDTO) {
     dispatch(createProject(data))
     console.log(data)
     onFormSubmit(false)
@@ -115,7 +115,7 @@ export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
                       <SelectValue placeholder="Select Status" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="In progress">In progress</SelectItem>
+                      <SelectItem value="In Progress">In Progress</SelectItem>
                       <SelectItem value="Completed">Completed</SelectItem>
                       <SelectItem value="Long-Term">Long-Term</SelectItem>
                     </SelectContent>
