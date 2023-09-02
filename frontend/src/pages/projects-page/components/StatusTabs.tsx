@@ -1,10 +1,9 @@
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
-
 type StatusTabsProps = {
   isEditable: boolean
-  value: 'In progress' | 'Completed' | 'Long-Term'
-  onChange: (selectedStatus: 'In progress' | 'Completed' | 'Long-Term') => void
+  value: 'In Progress' | 'Completed' | 'Long-Term'
+  onChange: (selectedStatus: 'In Progress' | 'Completed' | 'Long-Term') => void
 }
 
 export default function StatusTabs({
@@ -18,10 +17,10 @@ export default function StatusTabs({
         {isEditable ? (
           <>
             <TabsTrigger
-              value="In progress"
-              onClick={() => onChange('In progress')}
+              value="In Progress"
+              onClick={() => onChange('In Progress')}
             >
-              In progress
+              In Progress
             </TabsTrigger>
             <TabsTrigger
               value="Completed"

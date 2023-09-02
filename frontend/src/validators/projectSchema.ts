@@ -11,7 +11,7 @@ export const projectSchema = z
     }),
     status: z
       .union([
-        z.literal('In progress'),
+        z.literal('In Progress'),
         z.literal('Completed'),
         z.literal('Long-Term'),
       ])
@@ -19,13 +19,13 @@ export const projectSchema = z
   })
   .refine(
     (data) => {
-      if (data.status === 'In progress') {
+      if (data.status === 'In Progress') {
         return data.dueDate !== undefined
       }
       return true
     },
     {
       path: ['dueDate'],
-      message: "Due date is required when status is 'In progress'",
+      message: "Due date is required when status is 'In Progress'",
     },
   )
