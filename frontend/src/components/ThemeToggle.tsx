@@ -8,9 +8,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+/*
+Component allows user to toggle between light/dark themes.
 
-// Pass a className prop to this component so that we can style it via props wherever we call it.
-// Use TypeScript's type definitions to specify the component can accept any properties an HTML <div> element would.
+Props:
+  - className: prop allows for styling via props when invoked.
+  - ...props: accepts any properties an HTML <div> element would.
+*/
 export function ThemeToggle({className, ...props}: React.HTMLAttributes<HTMLDivElement>) {
   const { setTheme } = useTheme()
 
@@ -31,7 +35,7 @@ export function ThemeToggle({className, ...props}: React.HTMLAttributes<HTMLDivE
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           Dark
         </DropdownMenuItem>
-        {/* currently disabled to accomodate for custom light/darkmode icons and diagrams.
+        {/* System theme currently disabled to accomodate for custom light/darkmode icons and diagrams.
         <DropdownMenuItem onClick={() => setTheme("system")}>
           System
         </DropdownMenuItem> */}
