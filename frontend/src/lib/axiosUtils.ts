@@ -1,6 +1,15 @@
 import axios from 'axios';
 
-//Function to minimize AxiosError type checking code in thunk actions
+
+// Reduce code in Redux service files by centralizing initialization of config (auth token is sent as a Bearer token in the config arg of the appropriate Axios req. method)
+export const getConfig = (token: string) => ({
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+
+// Minimize AxiosError type checking code in thunk actions
 export function getErrorMessage(error: unknown): string {
     if (axios.isAxiosError<{ error?: { message: string } }>(error)) {
       return (
