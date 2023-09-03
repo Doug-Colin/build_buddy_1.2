@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createTypedAsyncThunk } from "@/app/hooks";
-import projectService, { Project } from "@/features/projects/projectService";
+import projectService from "@/features/projects/projectService";
 import type { RootState } from "../../app/store";
-import axios from "axios";
+import { Project} from "@/types/types"
+import { getErrorMessage } from "@/lib/axiosUtils";
+
 
 interface ProjectState {
   projects: Project[];
@@ -18,18 +20,8 @@ const initialState: ProjectState = {
   message: null,
 };
 
-/**
- * fn to handle Axios errors and reduce boilerplate
- */
-function getErrorMessage(error: unknown): string {
-  if (axios.isAxiosError<{ error?: { message: string } }>(error)) {
-    return (
-      error.response?.data?.error?.message || error.message || error.toString()
-    );
-  }
-  return "An unknown error occurred.";
-}
 
+//Create project
 export const createProject = createTypedAsyncThunk(
   "projects/createProject",
   async (project: Project, thunkAPI) => {
@@ -50,6 +42,8 @@ export const createProject = createTypedAsyncThunk(
   }
 );
 
+
+//Get projects
 export const getProjects = createTypedAsyncThunk(
   "projects/getUserProjects",
   async (_, thunkAPI) => {
@@ -69,6 +63,7 @@ export const getProjects = createTypedAsyncThunk(
   }
 );
 
+//Update project
 export const updateProject = createTypedAsyncThunk(
   "projects/updateProject",
   async (
