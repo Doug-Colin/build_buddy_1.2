@@ -7,7 +7,6 @@ const API_URL = "/api/projects/";
 // HTTP requests to the backend made via appropriate Axios methods
 // Auth token is sent as a Bearer token in the config arg of the Axios req. method via getConfig()
 
-
 //Create project
 const createProject = async (project: Project, token: string) => {
   const response = await axios.post(API_URL, project, getConfig(token))
