@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createTypedAsyncThunk } from "@/app/hooks";
+import { getErrorMessage } from "@/lib/axiosUtils";
 import taskService from "@/features/tasks/taskService";
 import { Task } from "@/types/types";
 import type { RootState } from "../../app/store";
-import axios from "axios";
 
 interface TaskState {
   tasks: Task[];
@@ -19,18 +19,7 @@ const initialState: TaskState = {
   message: null,
 };
 
-/**
- * fn to handle Axios errors and reduce boilerplate
- */
-function getErrorMessage(error: unknown): string {
-  if (axios.isAxiosError<{ error?: { message: string } }>(error)) {
-    return (
-      error.response?.data?.error?.message || error.message || error.toString()
-    );
-  }
-  return "An unknown error occurred.";
-}
-
+//Create a task
 export const createTask = createTypedAsyncThunk(
   "tasks/createTask",
   async (task: Task, thunkAPI) => {
@@ -51,6 +40,8 @@ export const createTask = createTypedAsyncThunk(
   }
 );
 
+
+//Get Tasks
 export const getTasks = createTypedAsyncThunk(
   "tasks/getUserTasks",
   async (_, thunkAPI) => {
@@ -70,12 +61,10 @@ export const getTasks = createTypedAsyncThunk(
   }
 );
 
+//Update a task
 export const updateTask = createTypedAsyncThunk(
   "tasks/updateTask",
-  async (
-    args: { taskId: string; updatedData: Partial<Task> },
-    thunkAPI
-  ) => {
+  async (args: { taskId: string; updatedData: Partial<Task> }, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
       const token = state.auth.user?.token;
@@ -108,7 +97,7 @@ export const duplicateTask = createTypedAsyncThunk(
       if (!token) {
         throw new Error("Token is missing");
       }
-     
+
       const response = await taskService.duplicateTask(originalTask, token);
 
       return response;
@@ -146,6 +135,7 @@ export const taskSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+
       //Create Task
       .addCase(createTask.pending, (state) => {
         state.status = "loading";
@@ -190,8 +180,8 @@ export const taskSlice = createSlice({
       })
       .addCase(updateTask.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.payload as string; // Use the error message from the rejected value
-        state.message = "Failed to update task."; // Set an error message
+        state.error = action.payload as string; 
+        state.message = "Failed to update task."; 
       })
 
       //Duplicate Task
@@ -201,14 +191,12 @@ export const taskSlice = createSlice({
       .addCase(duplicateTask.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.tasks.push(action.payload);
-        
       })
       .addCase(duplicateTask.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
         state.message = "Failed to duplicate task.";
       })
-      
 
       //Delete Task
       .addCase(deleteTask.pending, (state) => {
@@ -223,7 +211,7 @@ export const taskSlice = createSlice({
       .addCase(deleteTask.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
-        state.message = "Failed to delete task"
+        state.message = "Failed to delete task";
       });
   },
 });
