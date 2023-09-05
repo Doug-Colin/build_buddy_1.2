@@ -1,9 +1,8 @@
 //Layout to centralize rendering of Header, MainNav, and Search on all feature pages
 
 import Header from "@/components/Header";
-import { MainNav } from "@/pages/dashboard-page/components/main-nav";
-import { Search } from "@/pages/dashboard-page/components/search";
-
+import { MainNav } from "@/components/MainNav";
+import { Search } from "@/components/Search";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -19,9 +18,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
         {/* For applying global styling/layout rules to all children components, if necessary */}
-        <div className="">
-          {children}
-        </div>
+        <div className="">{children}</div>
       </div>
     </>
   );
