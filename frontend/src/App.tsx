@@ -14,7 +14,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        {/* wrapping everything in <div> set to 'min-h-screen' prevents card components from moving on screen during modal/dialog/ etc popup */}
+        {/* wrap everything in <div> set to 'min-h-screen' to prevent components from moving on screen during modal/dialog/popup etc */}
         <div className="min-h-screen">
           <Router>
             <Routes>
