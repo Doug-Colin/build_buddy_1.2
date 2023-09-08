@@ -1,6 +1,4 @@
-'use client';
-
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import {
   MARK_BOLD,
   MARK_CODE,
