@@ -1,12 +1,4 @@
 import { useState, useEffect } from "react";
-import { Card, CardTitle, CardDescription } from "@/components/ui/card";
-
-import { Label, Input, Button, Badge } from "@/components/ui";
-import DeletionAlertDialog from "@/components/DeletionAlertDialog";
-
-import StatusTabs from "@/pages/projects-page/components/StatusTabs";
-import { DueDatePicker } from "@/pages/projects-page/components/DueDatePicker";
-import { Project } from "@/types/types";
 import { useAppDispatch } from "@/app/hooks";
 import {
   updateProject,
@@ -14,7 +6,12 @@ import {
   duplicateProject,
 } from "@/features/projects/projectSlice";
 import { parseISO } from "date-fns";
-
+import { Card, CardTitle, CardDescription } from "@/components/ui/card";
+import { Label, Input, Button, Badge } from "@/components/ui";
+import DeletionAlertDialog from "@/components/DeletionAlertDialog";
+import StatusTabs from "@/pages/projects-page/components/StatusTabs";
+import { DueDatePicker } from "@/pages/projects-page/components/DueDatePicker";
+import { Project } from "@/types/types";
 import {
   LucideCopyPlus,
   LucideTrash2,

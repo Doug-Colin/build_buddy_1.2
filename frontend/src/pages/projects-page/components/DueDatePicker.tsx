@@ -1,40 +1,35 @@
-
-
-import { format } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
- 
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Calendar } from "@/components/ui/calendar"
+import { useState, useEffect } from "react";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Calendar as CalendarIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
-import { useState, useEffect } from "react"
+} from "@/components/ui/popover";
+
 
 interface DueDatePickerProps {
   selected: Date;
   onChange: (date: Date) => void;
 }
- 
-export function DueDatePicker({selected, onChange}: DueDatePickerProps) {
 
-  const [date, setDate] = useState<Date>(selected)
-
+export function DueDatePicker({ selected, onChange }: DueDatePickerProps) {
+  const [date, setDate] = useState<Date>(selected);
 
   useEffect(() => {
-    setDate(selected)
-  }, [selected])
+    setDate(selected);
+  }, [selected]);
 
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
-    setDate(selectedDate)
-    onChange(selectedDate)
+      setDate(selectedDate);
+      onChange(selectedDate);
     }
-  }
-  
- 
+  };
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -58,5 +53,5 @@ export function DueDatePicker({selected, onChange}: DueDatePickerProps) {
         />
       </PopoverContent>
     </Popover>
-  )
+  );
 }

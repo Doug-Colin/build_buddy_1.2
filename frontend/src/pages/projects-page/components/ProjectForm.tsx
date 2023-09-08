@@ -23,9 +23,7 @@ import { projectSchema } from "@/validators/projectSchema";
 import { createProject } from "@/features/projects/projectSlice";
 import { useAppDispatch } from "@/app/hooks";
 import { ProjectFormType } from "@/types/types";
-import { ProjectFormProps} from "@/types/types"
-
-
+import { ProjectFormProps } from "@/types/types";
 
 export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
   type Input = z.infer<typeof projectSchema>;

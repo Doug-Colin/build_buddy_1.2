@@ -3,7 +3,7 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 type StatusTabsProps = {
   isEditable: boolean;
   value: "In progress" | "Completed" | "Long-Term";
-  onChange: (selectedStatus: "In progress" | "Completed" | "Long-Term") => void; //(necessary?)
+  onChange: (selectedStatus: "In progress" | "Completed" | "Long-Term") => void;
 };
 
 export default function StatusTabs({
