@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { useForm } from "react-hook-form";
+import { RootState } from "@/app/store";
+import { getProjects } from "@/features/projects/projectSlice";
+import { createTask } from "@/features/tasks/taskSlice";
 
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { taskSchema } from "@/validators/taskSchema";
-import { getProjects } from "@/features/projects/projectSlice";
-import { createTask } from "@/features/tasks/taskSlice";
 import { TaskFormProps, TaskFormType, Project } from "@/types/types";
 
 import { Button, Input } from "@/components/ui";
@@ -26,7 +27,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { RootState } from "@/app/store";
+
 
 type Input = z.infer<typeof taskSchema>;
 
@@ -59,8 +60,6 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
     dispatch(createTask(data));
     console.log(data);
     onFormSubmit(false);
-    //debugging
-    console.log("Dispatched task creation:", data);
   }
 
   const form = useForm<Input>({
@@ -77,39 +76,10 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
   return (
     //centered
     <div>
-      {/* spread attributes from r-h-f useForm() variable into form component */}
       <Form {...form}>
-        {/* define normal html form tag; pass onSubmit handler into the r-h-f form.handleSubmit utility */}
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-          {/* actual rendering of the form */}
 
-          {/*  */}
-          {/* <FormField
-                control={form.control}
-                name="projectName"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Project</FormLabel>
-                    <FormControl>
-                      <div className="w-full">
-                        <Controller
-                          name="projectName"
-                          control={form.control}
-                          render={({ field }) => (
-                            <ProjectNameCombobox
-                              selectedValue={field.value}
-                              onChange={field.onChange}
-                            />
-                          )}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              /> */}
-
-          {/* Select input for projectName*/}
+          {/* input for projectName so task can be associated with project*/}
           <FormField
             control={form.control}
             name="projectName"
@@ -147,7 +117,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
             )}
           />
 
-          {/* Select input for label*/}
+          {/* input for task's label*/}
           <FormField
             control={form.control}
             name="label"
@@ -202,7 +172,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
             )}
           />
 
-          {/* input for taskName*/}
+          {/* input for taskDescription*/}
           <FormField
             control={form.control}
             name="taskDescription"
@@ -223,7 +193,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
             )}
           />
 
-          {/* Select input for status*/}
+          {/* input for task's status*/}
           <FormField
             control={form.control}
             name="status"
@@ -255,7 +225,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
             )}
           />
 
-          {/* Select input for priority*/}
+          {/* input for task's priority*/}
           <FormField
             control={form.control}
             name="priority"

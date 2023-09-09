@@ -17,14 +17,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { useEffect } from 'react'
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 import { register, reset } from "@/features/auth/authSlice";
 import { registerSchema } from "@/validators/registerSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
 
 type Input = z.infer<typeof registerSchema>;
 
@@ -39,32 +38,22 @@ export default function RegisterForm() {
     },
   });
 
-  //for checking form is updating state with each keystroke/selection
-  // console.log(form.watch());
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { user, isLoading, isError, isSuccess, message } = useAppSelector(
+    (state) => state.auth
+  );
 
-  const navigate = useNavigate()
-  const dispatch = useAppDispatch()
-
-  const { user, isLoading, isError, isSuccess, message } = useAppSelector((state) => state.auth);
-
+  // Navigate to Dashboard upon successful registration
   useEffect(() => {
     if (isSuccess || user) {
-        navigate('/dashboard');
+      navigate("/dashboard");
     }
     dispatch(reset());
-}, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   function onSubmit(data: Input) {
-    //alert with form's entered data as object to ensure submit is functioning
-    // alert(JSON.stringify(data, null, 4) + 'tacking it on');
-    console.log(`attempting to dispatch register action from authSlice.ts, with following data as argument: ${data}`)
-    dispatch(register(data));  
-  }
-
-  //console.log() prevents 'isLoading value never read' TS error unt il I find a tailwind Spinner.
-  if (isLoading) {
-    // return <Spinner />
-    console.log(isLoading)
+    dispatch(register(data));
   }
 
   return (
