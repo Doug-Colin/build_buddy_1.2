@@ -1,5 +1,3 @@
-// src/features/auth
-
 //type for properties of data sent to backend when user registers or logs in via form
 export interface RegisterUserData {
   name: string;
@@ -24,15 +22,15 @@ export interface User {
 export interface Project {
   _id?: string;
   projectName: string;
-  client?: string; 
+  client?: string;
   dueDate: Date;
-  status?: "In progress" | "Completed" | "Long-Term"; 
+  status?: "In progress" | "Completed" | "Long-Term";
   createdAt?: string;
   updatedAt?: string;
 }
 
 export interface ProjectFormProps {
-  onFormSubmit: (state: boolean) => void; 
+  onFormSubmit: (state: boolean) => void;
 }
 
 export interface ProjectFormType {
@@ -64,7 +62,7 @@ export interface Task {
 }
 
 export interface TaskFormProps {
-  onFormSubmit: (state: boolean) => void; 
+  onFormSubmit: (state: boolean) => void;
 }
 export interface TaskFormType {
   projectName: string;
