@@ -2,33 +2,37 @@ const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 
-//This middleware protects our user routes
-const protect = asyncHandler(async (req, res, next) => {
-    let token //initialize token
+//Middleware to protect user routes by validating JWT.
 
-    //check for authorization header and make sure it starts with 'Bearer'
+const protect = asyncHandler(async (req, res, next) => {
+    //initialize token
+    let token 
+
+    //Validate authorization header, confirm it starts with 'Bearer'
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
         ) {
         try {
-            //Get token from header & assign to variable
-            token = req.headers.authorization.split(' ')[1] //.split this string by spaces into array (Bearer and token separate indices)
+            // Extracts the token from the Authorization header by separating it from the 'Bearer' prefix.
+            token = req.headers.authorization.split(' ')[1] 
             
-            //verify token and decode it so we can get the payload (which is the id)
+            //reverse jwt encoding process to access payload(id or user._id)
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
-
-            //Get user id from token and assign it to req.user so we can access it in any protected routes
-            req.user = await User.findById(decoded.id).select('-password') //.select('-') keeps PW from being returning as well 
-
-            next() //always call next piece of middleware
+            
+            //Fetch user with from DB that matches id decoded from token
+            //Add user property (w/o pw) to req object so it's accessible in subsequent middleware & protected route handlers
+            req.user = await User.findById(decoded.id).select('-password')
+            
+            //Proceed to next middleware
+            next()
         } catch (error) {
             console.log(error)
             res.status(401)
             throw new Error('Not authorized')
         }
     }
-        //if no token, msg 'not authorized'
+        //Handle missing token
         if (!token) {
             res.status(401)
             throw new Error('Not authorized, no token')
