@@ -14,13 +14,13 @@ const protect = asyncHandler(async (req, res, next) => {
         req.headers.authorization.startsWith('Bearer')
         ) {
         try {
-            // Extracts the token from the Authorization header by separating it from the 'Bearer' prefix.
+            // Extracts the token from Authorization header by separating it from the 'Bearer' prefix.
             token = req.headers.authorization.split(' ')[1] 
             
             //reverse jwt encoding process to access payload(id or user._id)
             const decoded = jwt.verify(token, process.env.JWT_SECRET)
             
-            //Fetch user with from DB that matches id decoded from token
+            //Fetch user from DB with id matching one decoded from token
             //Add user property (w/o pw) to req object so it's accessible in subsequent middleware & protected route handlers
             req.user = await User.findById(decoded.id).select('-password')
             

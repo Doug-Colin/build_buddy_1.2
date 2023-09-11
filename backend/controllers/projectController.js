@@ -78,7 +78,7 @@ const deleteProject = asyncHandler(async (req, res) => {
     throw new Error('User not found');
   }
   // Auth- check if user that created project being deleted matches logged-in user
-  // Value of project.user is _id (an object); convert toString to compare
+  // Value of project.user is _id, which is an object; convert toString to compare
   if (project.user.toString() !== req.user.id) {
     res.status(401);
     throw new Error('User not authorized');
