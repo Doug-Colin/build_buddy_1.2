@@ -16,19 +16,18 @@ const projectSchema = new mongoose.Schema(
 
     },
     dueDate: {
-      type: Date, //actually sent in ISO string format; data's in JSON & there's no JSON Date object
-      //is optional on frontend for long-term projects like maintenance; consider changing requiered to false. 
-      required: [true, 'Please add a due date'],
+      // Sent from frontend in ISO string format (JSON lacks Date object)
+      // Mongoose Date type automatically converts ISO string to MongoDB-compatible date  
+      type: Date, 
+      required: [true, 'Please add a due date']  // Optional on frontend for long-term projects like maintenance
     },
     status: {
       type: String,
-      //enum is Mongoose validation feature for defining specific string values
       enum: ['In progress', 'Completed', 'Long-Term'],
       default: 'In progress',
     },
   },
   {
-    //automatically add createdAt and updatedAt fields with current date and time
     timestamps: true,
   }
 );

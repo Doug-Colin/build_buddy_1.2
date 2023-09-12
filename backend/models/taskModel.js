@@ -40,7 +40,6 @@ const taskSchema = new mongoose.Schema(
       },
   },
   {
-    //automatically add createdAt and updatedAt fields with current date and time
     timestamps: true,
   }
 );
