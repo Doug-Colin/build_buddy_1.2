@@ -1,7 +1,7 @@
-import React from 'react';
-import { PlateElement, PlateElementProps } from '@udecode/plate-common';
+import React from 'react'
+import { PlateElement, PlateElementProps } from '@udecode/plate-common'
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 const ParagraphElement = React.forwardRef<
   React.ElementRef<typeof PlateElement>,
@@ -15,8 +15,8 @@ const ParagraphElement = React.forwardRef<
     >
       {children}
     </PlateElement>
-  );
-});
-ParagraphElement.displayName = 'ParagraphElement';
+  )
+})
+ParagraphElement.displayName = 'ParagraphElement'
 
-export { ParagraphElement };
+export { ParagraphElement }

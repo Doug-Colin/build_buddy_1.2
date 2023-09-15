@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef } from 'react'
 import {
   MARK_BOLD,
   MARK_CODE,
@@ -14,11 +14,11 @@ import {
   createSubscriptPlugin,
   createSuperscriptPlugin,
   createUnderlinePlugin,
-} from '@udecode/plate-basic-marks';
+} from '@udecode/plate-basic-marks'
 import {
   ELEMENT_BLOCKQUOTE,
   createBlockquotePlugin,
-} from '@udecode/plate-block-quote';
+} from '@udecode/plate-block-quote'
 import {
   Plate,
   PlateLeaf,
@@ -26,27 +26,27 @@ import {
   TEditableProps,
   createPlugins,
   withProps,
-} from '@udecode/plate-common';
+} from '@udecode/plate-common'
 import {
   ELEMENT_H1,
   ELEMENT_H2,
   ELEMENT_H3,
   createHeadingPlugin,
-} from '@udecode/plate-heading';
+} from '@udecode/plate-heading'
 import {
   ELEMENT_PARAGRAPH,
   createParagraphPlugin,
-} from '@udecode/plate-paragraph';
+} from '@udecode/plate-paragraph'
 
-import { cn } from '@/lib/utils';
-import { BlockquoteElement } from '@/components/plate-ui/blockquote-element';
-import { CodeLeaf } from '@/components/plate-ui/code-leaf';
-import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar';
-import { FixedToolbarButtons } from '@/components/plate-ui/fixed-toolbar-buttons';
-import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar';
-import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons';
-import { HeadingElement } from '@/components/plate-ui/heading-element';
-import { ParagraphElement } from '@/components/plate-ui/paragraph-element';
+import { cn } from '@/lib/utils'
+import { BlockquoteElement } from '@/components/plate-ui/blockquote-element'
+import { CodeLeaf } from '@/components/plate-ui/code-leaf'
+import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar'
+import { FixedToolbarButtons } from '@/components/plate-ui/fixed-toolbar-buttons'
+import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
+import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
+import { HeadingElement } from '@/components/plate-ui/heading-element'
+import { ParagraphElement } from '@/components/plate-ui/paragraph-element'
 
 const plugins = createPlugins(
   [
@@ -77,18 +77,18 @@ const plugins = createPlugins(
       [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
       [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
     },
-  }
-);
+  },
+)
 
 export default function Editor() {
-  const containerRef = useRef(null);
+  const containerRef = useRef(null)
 
   const initialValue = [
     {
       type: ELEMENT_PARAGRAPH,
       children: [{ text: 'Hello, World!' }],
     },
-  ];
+  ]
 
   return (
     <div className="relative">
@@ -107,7 +107,7 @@ export default function Editor() {
                 autoFocus: true,
                 className: cn(
                   'relative max-w-full leading-[1.4] outline-none [&_strong]:font-bold',
-                  '!min-h-[600px] w-[900px] px-[96px] py-16'
+                  '!min-h-[600px] w-[900px] px-[96px] py-16',
                 ),
               } as TEditableProps
             }
@@ -119,5 +119,5 @@ export default function Editor() {
         </div>
       </PlateProvider>
     </div>
-  );
+  )
 }

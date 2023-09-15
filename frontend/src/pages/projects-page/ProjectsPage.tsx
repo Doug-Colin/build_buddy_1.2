@@ -1,26 +1,26 @@
-import { useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "@/app/hooks";
-import { getProjects } from "@/features/projects/projectSlice";
-import { Project } from "@/types/types";
-import ProjectCard from "@/pages/projects-page/components/ProjectCard";
-import { useFormDialogState } from "@/hooks/useFormDialogState";
-import { useAuthCheck } from "@/hooks/useAuthCheck";
-import FormDialog from "@/components/FormDialog";
-import ProjectForm from "./components/ProjectForm";
-import Layout from "@/components/Layout";
+import { useEffect } from 'react'
+import { useAppSelector, useAppDispatch } from '@/app/hooks'
+import { getProjects } from '@/features/projects/projectSlice'
+import { Project } from '@/types/types'
+import ProjectCard from '@/pages/projects-page/components/ProjectCard'
+import { useFormDialogState } from '@/hooks/useFormDialogState'
+import { useAuthCheck } from '@/hooks/useAuthCheck'
+import FormDialog from '@/components/FormDialog'
+import ProjectForm from './components/ProjectForm'
+import Layout from '@/components/Layout'
 
 export default function ProjectsPage() {
   // !user redirects to LandingPage
-  useAuthCheck();
+  useAuthCheck()
 
-  const dispatch = useAppDispatch();
-  const { projects } = useAppSelector((state) => state.projects);
-  const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false);
+  const dispatch = useAppDispatch()
+  const { projects } = useAppSelector((state) => state.projects)
+  const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
 
   //get user's projects array so they can be mapped to ProjectCards
   useEffect(() => {
-    dispatch(getProjects());
-  }, [dispatch]);
+    dispatch(getProjects())
+  }, [dispatch])
 
   return (
     <Layout>
@@ -44,5 +44,5 @@ export default function ProjectsPage() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "@/app/store";
-import { ThemeProvider } from "@/components/theme-provider";
-import LandingPage from "@/pages/landing-page/LandingPage";
-import LoginPage from "@/pages/login-page/LoginPage";
-import RegisterPage from "@/pages/register-page/RegisterPage";
-import DashboardPage from "@/pages/dashboard-page/DashboardPage";
-import ProjectsPage from "@/pages/projects-page/ProjectsPage";
-import TasksPage from "./pages/tasks-page/TasksPage";
-import NotesPage from "./pages/notes-page/NotesPage";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { store } from '@/app/store'
+import { ThemeProvider } from '@/components/theme-provider'
+import LandingPage from '@/pages/landing-page/LandingPage'
+import LoginPage from '@/pages/login-page/LoginPage'
+import RegisterPage from '@/pages/register-page/RegisterPage'
+import DashboardPage from '@/pages/dashboard-page/DashboardPage'
+import ProjectsPage from '@/pages/projects-page/ProjectsPage'
+import TasksPage from './pages/tasks-page/TasksPage'
+import NotesPage from './pages/notes-page/NotesPage'
 
 export default function App() {
   return (
@@ -30,5 +30,5 @@ export default function App() {
         </div>
       </ThemeProvider>
     </Provider>
-  );
+  )
 }

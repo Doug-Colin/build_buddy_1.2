@@ -1,23 +1,23 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { useForm } from "react-hook-form";
-import { RootState } from "@/app/store";
-import { getProjects } from "@/features/projects/projectSlice";
-import { createTask } from "@/features/tasks/taskSlice";
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useForm } from 'react-hook-form'
+import { RootState } from '@/app/store'
+import { getProjects } from '@/features/projects/projectSlice'
+import { createTask } from '@/features/tasks/taskSlice'
 
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { taskSchema } from "@/validators/taskSchema";
-import { TaskFormProps, TaskFormType, Project } from "@/types/types";
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { taskSchema } from '@/validators/taskSchema'
+import { TaskFormProps, TaskFormType, Project } from '@/types/types'
 
-import { Button, Input } from "@/components/ui";
+import { Button, Input } from '@/components/ui'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select'
 import {
   Form,
   FormControl,
@@ -26,59 +26,55 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 
-
-type Input = z.infer<typeof taskSchema>;
+type Input = z.infer<typeof taskSchema>
 
 export default function TaskForm({ onFormSubmit }: TaskFormProps) {
-  const dispatch = useAppDispatch();
-  const projects = useAppSelector(
-    (state: RootState) => state.projects.projects
-  );
+  const dispatch = useAppDispatch()
+  const projects = useAppSelector((state: RootState) => state.projects.projects)
 
   const taskLabelOptions: string[] = [
-    "General",
-    "Sourcing",
-    "Fabrication",
-    "Finishing",
-    "Shipping",
-    "Repair",
-    "Administrative",
-    "Maintenance",
-  ];
+    'General',
+    'Sourcing',
+    'Fabrication',
+    'Finishing',
+    'Shipping',
+    'Repair',
+    'Administrative',
+    'Maintenance',
+  ]
   const taskStatusOptions: string[] = [
-    "To Do",
-    "In Progress",
-    "Done",
-    "Paused",
-    "Canceled",
-  ];
-  const taskPriorityOptions: string[] = ["Low", "Medium", "High", "Urgent"];
+    'To Do',
+    'In Progress',
+    'Done',
+    'Paused',
+    'Canceled',
+  ]
+  const taskPriorityOptions: string[] = ['Low', 'Medium', 'High', 'Urgent']
 
   function onSubmit(data: TaskFormType) {
-    dispatch(createTask(data));
-    console.log(data);
-    onFormSubmit(false);
+    dispatch(createTask(data))
+    console.log(data)
+    onFormSubmit(false)
   }
 
   const form = useForm<Input>({
     resolver: zodResolver(taskSchema),
     defaultValues: {},
-  });
+  })
 
-  console.log(form.watch());
+  console.log(form.watch())
 
   useEffect(() => {
-    dispatch(getProjects());
-  }, [dispatch]);
+    dispatch(getProjects())
+  }, [dispatch])
 
   return (
     //centered
     <div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-
           {/* input for projectName so task can be associated with project*/}
           <FormField
             control={form.control}
@@ -104,7 +100,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
                         >
                           {project.projectName}
                         </SelectItem>
-                      );
+                      )
                     })}
                   </SelectContent>
                 </Select>
@@ -139,7 +135,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
                         <SelectItem key={index} value={label}>
                           {label}
                         </SelectItem>
-                      );
+                      )
                     })}
                   </SelectContent>
                 </Select>
@@ -215,7 +211,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
                         <SelectItem key={index} value={status}>
                           {status}
                         </SelectItem>
-                      );
+                      )
                     })}
                   </SelectContent>
                 </Select>
@@ -247,7 +243,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
                         <SelectItem key={index} value={priority}>
                           {priority}
                         </SelectItem>
-                      );
+                      )
                     })}
                   </SelectContent>
                 </Select>
@@ -260,5 +256,5 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
         </form>
       </Form>
     </div>
-  );
+  )
 }

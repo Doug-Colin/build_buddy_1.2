@@ -6,10 +6,10 @@
 
 //With tanstack table, you import ColumnDef, then create a type for your data schema (you can use zod schema), export const columns: ColumnDef<dataTypeOrSchema>[] = []...
 
-import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ColumnDef } from '@tanstack/react-table'
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
 
-import { Button, Checkbox } from "@/components/ui";
+import { Button, Checkbox } from '@/components/ui'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,21 +17,19 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 
-import { z } from "zod";
+import { z } from 'zod'
 
 //May need for creating new project
 //import { projectSchema } from "@/validators/projectSchema";
 //import { createProject } from "@/features/projects/projectSlice";
-import { taskSchema } from "@/validators/taskSchema";
-
-
+import { taskSchema } from '@/validators/taskSchema'
 
 export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
   //checkbox select to select invididual or all tasks
   {
-    id: "select",
+    id: 'select',
     header: ({ table }) => (
       <Checkbox
         checked={table.getIsAllPageRowsSelected()}
@@ -50,56 +48,56 @@ export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "projectName",
-    header: "Project",
+    accessorKey: 'projectName',
+    header: 'Project',
   },
   {
-    accessorKey: "client",
-    header: "Client",
+    accessorKey: 'client',
+    header: 'Client',
   },
   {
-    accessorKey: "taskName",
-    header: "Task",
+    accessorKey: 'taskName',
+    header: 'Task',
   },
   {
-    accessorKey: "taskDescription",
-    header: "Description",
+    accessorKey: 'taskDescription',
+    header: 'Description',
   },
   {
-    accessorKey: "status",
+    accessorKey: 'status',
     header: ({ column }) => {
       //automatically sorts table asc or desc when user toggles header cell & sort icon
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      );
-      },
+      )
     },
+  },
   {
-    accessorKey: "priority",
+    accessorKey: 'priority',
     header: ({ column }) => {
       //automatically sorts table asc or desc when user toggles header cell & sort icon
       return (
         <Button
           variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           Priority
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      );
+      )
     },
   },
   {
-    id: "actions",
+    id: 'actions',
     //access the row data using row.original in the cell function. Use this to handle actions for your row eg. use the id to make a DELETE call to your API.
     cell: ({ row }) => {
-      const task = row.original;
+      const task = row.original
 
       return (
         <DropdownMenu>
@@ -122,7 +120,7 @@ export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
             <DropdownMenuItem>View task details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      );
+      )
     },
   },
-];
+]

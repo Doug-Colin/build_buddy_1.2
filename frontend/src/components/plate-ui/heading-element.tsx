@@ -1,6 +1,6 @@
-import React from 'react';
-import { PlateElement, PlateElementProps } from '@udecode/plate-common';
-import { cva, VariantProps } from 'class-variance-authority';
+import React from 'react'
+import { PlateElement, PlateElementProps } from '@udecode/plate-common'
+import { cva, VariantProps } from 'class-variance-authority'
 
 const headingVariants = cva('', {
   variants: {
@@ -17,7 +17,7 @@ const headingVariants = cva('', {
       false: '',
     },
   },
-});
+})
 
 export function HeadingElement({
   className,
@@ -26,9 +26,9 @@ export function HeadingElement({
   children,
   ...props
 }: PlateElementProps & VariantProps<typeof headingVariants>) {
-  const { element, editor } = props;
+  const { element, editor } = props
 
-  const Element = variant!;
+  const Element = variant!
 
   return (
     <PlateElement
@@ -42,5 +42,5 @@ export function HeadingElement({
     >
       <Element>{children}</Element>
     </PlateElement>
-  );
+  )
 }

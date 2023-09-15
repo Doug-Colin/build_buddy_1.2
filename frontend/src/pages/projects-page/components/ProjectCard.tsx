@@ -1,84 +1,85 @@
-import { useState, useEffect } from "react";
-import { useAppDispatch } from "@/app/hooks";
-import {
-  updateProject,
-  deleteProject,
-  duplicateProject,
-} from "@/features/projects/projectSlice";
-import { parseISO } from "date-fns";
-import { Card, CardTitle, CardDescription } from "@/components/ui/card";
-import { Label, Input, Button, Badge } from "@/components/ui";
-import DeletionAlertDialog from "@/components/DeletionAlertDialog";
-import StatusTabs from "@/pages/projects-page/components/StatusTabs";
-import { DueDatePicker } from "@/pages/projects-page/components/DueDatePicker";
-import { Project } from "@/types/types";
+import { parseISO } from 'date-fns'
 import {
   LucideCopyPlus,
-  LucideTrash2,
   LucideEdit,
   LucideSave,
-} from "lucide-react";
+  LucideTrash2,
+} from 'lucide-react'
+import { useEffect, useState } from 'react'
+
+import { useAppDispatch } from '@/app/hooks'
+import DeletionAlertDialog from '@/components/DeletionAlertDialog'
+import { Badge, Button, Input, Label } from '@/components/ui'
+import { Card, CardDescription, CardTitle } from '@/components/ui/card'
+import {
+  deleteProject,
+  duplicateProject,
+  updateProject,
+} from '@/features/projects/projectSlice'
+import { DueDatePicker } from '@/pages/projects-page/components/DueDatePicker'
+import StatusTabs from '@/pages/projects-page/components/StatusTabs'
+import { Project } from '@/types/types'
 
 type ProjectCardProps = {
-  project: Project;
-};
+  project: Project
+}
 
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const [isEditable, setIsEditable] = useState(false);
-  const [projectName, setProjectName] = useState(project.projectName);
-  const [client, setClient] = useState(project.client);
-  const [dueDate, setDueDate] = useState(project.dueDate);
-  const [status, setStatus] = useState(project.status);
+  const [isEditable, setIsEditable] = useState(false)
+  const [projectName, setProjectName] = useState(project.projectName)
+  const [client, setClient] = useState(project.client)
+  const [dueDate, setDueDate] = useState(project.dueDate)
+  const [status, setStatus] = useState(project.status)
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const dateObject = typeof dueDate === "string" ? parseISO(dueDate) : dueDate;
+  const dateObject = typeof dueDate === 'string' ? parseISO(dueDate) : dueDate
 
   useEffect(() => {
-    setProjectName(project.projectName);
-    setClient(project.client);
-    setDueDate(project.dueDate);
-    setStatus(project.status);
-  }, [project]);
+    setProjectName(project.projectName)
+    setClient(project.client)
+    setDueDate(project.dueDate)
+    setStatus(project.status)
+  }, [project])
 
   const handleEditToggle = () => {
-    setIsEditable(!isEditable);
-  };
+    setIsEditable(!isEditable)
+  }
 
   const handleSave = () => {
     if (!project._id) {
-      throw new Error("project.id is undefined.");
+      throw new Error('project.id is undefined.')
     }
 
-    setIsEditable(false);
+    setIsEditable(false)
     dispatch(
       updateProject({
         projectId: project._id,
         updatedData: { projectName, client, dueDate, status },
-      })
-    );
-  };
+      }),
+    )
+  }
 
   const onDelete = () => {
     //shouldn't be necessary, diagnose type issue after delete is functional.
-    if (typeof project._id !== "string") {
-      console.error("Project ID is not a string");
-      return;
+    if (typeof project._id !== 'string') {
+      console.error('Project ID is not a string')
+      return
     }
 
-    dispatch(deleteProject(project._id));
-  };
+    dispatch(deleteProject(project._id))
+  }
 
   const handleDuplicate = () => {
-    dispatch(duplicateProject(project));
-  };
+    dispatch(duplicateProject(project))
+  }
 
   return (
     <Card
       className={
         isEditable
-          ? "flex flex-col w-fit z-10 border-4 border-double border-gray-400 outline-4 absolute"
-          : "flex flex-col w-fit relative"
+          ? 'flex flex-col w-fit z-10 border-4 border-double border-gray-400 outline-4 absolute'
+          : 'flex flex-col w-fit relative'
       }
     >
       <div className="relative flex justify-between items-center p-6">
@@ -132,8 +133,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       <div
         className={
           isEditable
-            ? "flex flex-col space-y-2 p-6"
-            : "pt-3 pb-6 pl-6 pr-6 flex justify-center"
+            ? 'flex flex-col space-y-2 p-6'
+            : 'pt-3 pb-6 pl-6 pr-6 flex justify-center'
         }
       >
         {isEditable ? (
@@ -149,7 +150,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         ) : (
           <div className="flex items-center space-x-2">
             <span className=" font-semibold leading-none tracking-tight">
-              Due{" "}
+              Due{' '}
             </span>
             <span className="text-muted-foreground">
               {new Date(dueDate).toDateString()}
@@ -200,5 +201,5 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         )}
       </div>
     </Card>
-  );
+  )
 }

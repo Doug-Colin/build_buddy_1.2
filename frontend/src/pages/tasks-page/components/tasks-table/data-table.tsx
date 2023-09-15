@@ -5,7 +5,7 @@
 //Note: The <DataTable /> component renders our table.
 
 //Tip: If you find yourself using <DataTable /> in multiple places, this is the component you could make reusable by extracting it to components/ui/data-table.tsx. For example: <DataTable columns={columns} data={data} />
-import { useState } from "react";
+import { useState } from 'react'
 import {
   ColumnDef,
   SortingState,
@@ -17,14 +17,14 @@ import {
   getFilteredRowModel,
   useReactTable,
   ColumnFiltersState,
-} from "@tanstack/react-table";
+} from '@tanstack/react-table'
 
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from '@/components/ui/dropdown-menu'
 import {
   Table,
   TableBody,
@@ -32,26 +32,26 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button, Input } from "@/components/ui";
-import FormDialog from "@/components/FormDialog";
-import TaskForm from "@/pages/tasks-page/components/TaskForm";
-import { useFormDialogState } from "@/hooks/useFormDialogState";
+} from '@/components/ui/table'
+import { Button, Input } from '@/components/ui'
+import FormDialog from '@/components/FormDialog'
+import TaskForm from '@/pages/tasks-page/components/TaskForm'
+import { useFormDialogState } from '@/hooks/useFormDialogState'
 
 interface DataTableProps<TData, TValue> {
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
-  const [rowSelection, setRowSelection] = useState({});
-  const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false);
+  const [sorting, setSorting] = useState<SortingState>([])
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = useState({})
+  const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
 
   const table = useReactTable({
     data,
@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
     },
-  });
+  })
 
   return (
     <div className="space-y-4">
@@ -90,9 +90,11 @@ export function DataTable<TData, TValue>({
         {/* Filter by projectName column (can enable for other columns as well)  */}
         <Input
           placeholder="Filter tasks by Project..."
-          value={(table.getColumn("projectName")?.getFilterValue() as string) ?? ""}
+          value={
+            (table.getColumn('projectName')?.getFilterValue() as string) ?? ''
+          }
           onChange={(event) =>
-            table.getColumn("projectName")?.setFilterValue(event.target.value)
+            table.getColumn('projectName')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -126,7 +128,7 @@ export function DataTable<TData, TValue>({
                     >
                       {column.id}
                     </DropdownMenuCheckboxItem>
-                  );
+                  )
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -145,10 +147,10 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
-                  );
+                  )
                 })}
               </TableRow>
             ))}
@@ -158,13 +160,13 @@ export function DataTable<TData, TValue>({
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
+                  data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </TableCell>
                   ))}
@@ -201,5 +203,5 @@ export function DataTable<TData, TValue>({
         </Button>
       </div>
     </div>
-  );
+  )
 }

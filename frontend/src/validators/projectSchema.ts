@@ -1,31 +1,31 @@
-import { z } from "zod";
+import { z } from 'zod'
 
-const today = new Date();
+const today = new Date()
 
 export const projectSchema = z
   .object({
     projectName: z.string().min(3).max(100),
     client: z.string().min(3).max(150),
     dueDate: z.date().refine((date) => date > today, {
-      message: "Due date must be in the future",
+      message: 'Due date must be in the future',
     }),
     status: z
       .union([
-        z.literal("In progress"),
-        z.literal("Completed"),
-        z.literal("Long-Term"),
+        z.literal('In progress'),
+        z.literal('Completed'),
+        z.literal('Long-Term'),
       ])
       .optional(),
   })
   .refine(
     (data) => {
-      if (data.status === "In progress") {
-        return data.dueDate !== undefined;
+      if (data.status === 'In progress') {
+        return data.dueDate !== undefined
       }
-      return true;
+      return true
     },
     {
-      path: ["dueDate"],
+      path: ['dueDate'],
       message: "Due date is required when status is 'In progress'",
-    }
-  );
+    },
+  )

@@ -4,13 +4,13 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { useAuthCheck } from "@/hooks/useAuthCheck";
-import Layout from "@/components/Layout";
+} from '@/components/ui/card'
+import { useAuthCheck } from '@/hooks/useAuthCheck'
+import Layout from '@/components/Layout'
 
 export default function DashboardPage() {
   // !user redirects to LandingPage
-  useAuthCheck();
+  useAuthCheck()
 
   return (
     <Layout>
@@ -60,5 +60,5 @@ export default function DashboardPage() {
         </div>
       </div>
     </Layout>
-  );
+  )
 }

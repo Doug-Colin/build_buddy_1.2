@@ -1,47 +1,49 @@
-import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { getProjects } from "@/features/projects/projectSlice";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui";
+import { useState, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { getProjects } from '@/features/projects/projectSlice'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui'
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "@/components/ui/command";
+} from '@/components/ui/command'
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Check, ChevronsUpDown } from "lucide-react";
+} from '@/components/ui/popover'
+import { Check, ChevronsUpDown } from 'lucide-react'
 
 interface ProjectNameComboBoxProps {
-  selectedValue: string;
-  onChange: (selectedValue: string) => void;
+  selectedValue: string
+  onChange: (selectedValue: string) => void
 }
- 
 
-export function ProjectNameCombobox({selectedValue, onChange}: ProjectNameComboBoxProps) {
+export function ProjectNameCombobox({
+  selectedValue,
+  onChange,
+}: ProjectNameComboBoxProps) {
   //local states
-  const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [open, setOpen] = useState(false)
+  const [value, setValue] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
 
   //get projects array from redux global state
-  const dispatch = useAppDispatch();
-  const projects = useAppSelector((state) => state.projects.projects);
+  const dispatch = useAppDispatch()
+  const projects = useAppSelector((state) => state.projects.projects)
 
   useEffect(() => {
-    dispatch(getProjects());
-  }, [dispatch]);
+    dispatch(getProjects())
+  }, [dispatch])
 
   useEffect(() => {
     if (selectedValue) {
-      setValue(selectedValue);
+      setValue(selectedValue)
     }
-  }, [selectedValue]);
+  }, [selectedValue])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -58,7 +60,7 @@ export function ProjectNameCombobox({selectedValue, onChange}: ProjectNameComboB
           {value
             ? projects.find((project) => project.projectName === value)
                 ?.projectName
-            : "Select project..."}
+            : 'Select project...'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -78,14 +80,14 @@ export function ProjectNameCombobox({selectedValue, onChange}: ProjectNameComboB
                 key={project.projectName}
                 value={value}
                 onSelect={() => {
-                  onChange(project.projectName);
-                  setOpen(false);
+                  onChange(project.projectName)
+                  setOpen(false)
                 }}
               >
                 {/* Show check icon upon user selection, otherwise hide by reducing opacity to 0.*/}
                 <Check
                   className={cn(
-                    value === project.projectName ? "opacity-100" : "opacity-0"
+                    value === project.projectName ? 'opacity-100' : 'opacity-0',
                   )}
                 />
                 {project.projectName}
@@ -95,5 +97,5 @@ export function ProjectNameCombobox({selectedValue, onChange}: ProjectNameComboB
         </Command>
       </PopoverContent>
     </Popover>
-  );
+  )
 }

@@ -1,17 +1,15 @@
-'use client';
-
-import React from 'react';
+import React from 'react'
 import {
   useMarkToolbarButton,
   useMarkToolbarButtonState,
-} from '@udecode/plate-common';
+} from '@udecode/plate-common'
 
-import { ToolbarButton, ToolbarButtonProps } from './toolbar';
+import { ToolbarButton, ToolbarButtonProps } from './toolbar'
 
 export interface MarkToolbarButtonProps
   extends Pick<ToolbarButtonProps, 'tooltip' | 'children'> {
-  nodeType: string;
-  clear?: string | string[];
+  nodeType: string
+  clear?: string | string[]
 }
 
 /**
@@ -22,8 +20,8 @@ export function MarkToolbarButton({
   nodeType,
   ...props
 }: MarkToolbarButtonProps) {
-  const state = useMarkToolbarButtonState({ clear, nodeType });
-  const { props: buttonProps } = useMarkToolbarButton(state);
+  const state = useMarkToolbarButtonState({ clear, nodeType })
+  const { props: buttonProps } = useMarkToolbarButton(state)
 
-  return <ToolbarButton {...buttonProps} {...props} />;
+  return <ToolbarButton {...buttonProps} {...props} />
 }

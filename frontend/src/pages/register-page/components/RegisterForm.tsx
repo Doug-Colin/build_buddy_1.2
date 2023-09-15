@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -15,45 +15,45 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { useNavigate } from "react-router-dom";
-import { register, reset } from "@/features/auth/authSlice";
-import { registerSchema } from "@/validators/registerSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+} from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useNavigate } from 'react-router-dom'
+import { register, reset } from '@/features/auth/authSlice'
+import { registerSchema } from '@/validators/registerSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
-type Input = z.infer<typeof registerSchema>;
+type Input = z.infer<typeof registerSchema>
 
 export default function RegisterForm() {
   const form = useForm<Input>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
-  });
+  })
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
-    (state) => state.auth
-  );
+    (state) => state.auth,
+  )
 
   // Navigate to Dashboard upon successful registration
   useEffect(() => {
     if (isSuccess || user) {
-      navigate("/dashboard");
+      navigate('/dashboard')
     }
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   function onSubmit(data: Input) {
-    dispatch(register(data));
+    dispatch(register(data))
   }
 
   return (
@@ -149,5 +149,5 @@ export default function RegisterForm() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

@@ -1,9 +1,7 @@
-'use client';
+import React from 'react'
+import { PlateElement, PlateElementProps } from '@udecode/plate-common'
 
-import React from 'react';
-import { PlateElement, PlateElementProps } from '@udecode/plate-common';
-
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils'
 
 const BlockquoteElement = React.forwardRef<
   React.ElementRef<typeof PlateElement>,
@@ -18,8 +16,8 @@ const BlockquoteElement = React.forwardRef<
     >
       <blockquote>{children}</blockquote>
     </PlateElement>
-  );
-});
-BlockquoteElement.displayName = 'BlockquoteElement';
+  )
+})
+BlockquoteElement.displayName = 'BlockquoteElement'
 
-export { BlockquoteElement };
+export { BlockquoteElement }

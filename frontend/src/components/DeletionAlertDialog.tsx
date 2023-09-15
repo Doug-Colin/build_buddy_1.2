@@ -8,16 +8,16 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from '@/components/ui/alert-dialog'
 
 // Use: In parent component, pass a <button> or <Button> with preferred props/styling as value of button prop
 
 interface DeletionAlertDialogProps {
-  button: React.ReactNode;
-  alertDialogTitle: string;
-  alertDialogDescription: string;
-  alertDialogAction: string;
-  onDelete: () => void;
+  button: React.ReactNode
+  alertDialogTitle: string
+  alertDialogDescription: string
+  alertDialogAction: string
+  onDelete: () => void
 }
 
 export default function DeletionAlertDialog({
@@ -29,9 +29,7 @@ export default function DeletionAlertDialog({
 }: DeletionAlertDialogProps) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        {button}
-      </AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{button}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{alertDialogTitle}</AlertDialogTitle>
@@ -47,5 +45,5 @@ export default function DeletionAlertDialog({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  );
+  )
 }

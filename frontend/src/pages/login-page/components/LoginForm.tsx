@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -14,63 +14,63 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { useNavigate } from "react-router-dom";
-import { login, reset } from "@/features/auth/authSlice";
-import { loginSchema } from "@/validators/loginSchema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+} from '@/components/ui/form'
+import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useNavigate } from 'react-router-dom'
+import { login, reset } from '@/features/auth/authSlice'
+import { loginSchema } from '@/validators/loginSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { z } from 'zod'
 
-type Input = z.infer<typeof loginSchema>;
-
+type Input = z.infer<typeof loginSchema>
 
 export default function LoginForm() {
-  
   const form = useForm<Input>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
-  });
+  })
 
   //check if form is updating state with each keystroke/selection
-  console.log(form.watch());
+  console.log(form.watch())
 
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   //edit to mirror login function
   const { user, isLoading, isError, isSuccess, message } = useAppSelector(
-    (state) => state.auth
-  );
+    (state) => state.auth,
+  )
 
   useEffect(() => {
     //check if registration is successfull & promise fulfilled, our register fn extraReducers will update state prprty isSuccess to true
     //also check if user is already logged in with token & other info
     //if so navigate away from registration page to the dash
     if (isSuccess || user) {
-      navigate("/dashboard");
+      navigate('/dashboard')
     }
 
     //after checking for isSuccess/user, we want to reset the state, so dispatch the reset fn from authSlice & change State prpty's to false
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(reset())
+  }, [user, isError, isSuccess, message, navigate, dispatch])
 
   function onSubmit(data: Input) {
     //alert with form's entered data as object to ensure submit is functioning
     // alert(JSON.stringify(data, null, 4) + 'tacking it on');
-    console.log(`attempting to dispatch login action from authSlice.ts, with following data as argument: ${data}`)
-    dispatch(login(data));  
+    console.log(
+      `attempting to dispatch login action from authSlice.ts, with following data as argument: ${data}`,
+    )
+    dispatch(login(data))
   }
 
   //console.log() prevents 'isLoading value never read' TS error until I find a tailwind Spinner.
   if (isLoading) {
     // return <Spinner />
-    console.log(isLoading);
+    console.log(isLoading)
   }
 
   return (
@@ -129,5 +129,5 @@ export default function LoginForm() {
         </CardContent>
       </Card>
     </div>
-  );
+  )
 }

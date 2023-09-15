@@ -1,4 +1,4 @@
-import { Input } from "@/components/ui/input";
+import { Input } from '@/components/ui/input'
 import {
   Form,
   FormControl,
@@ -6,44 +6,44 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui";
-import { DueDatePicker } from "@/pages/projects-page/components/DueDatePicker";
-import { useForm, Controller } from "react-hook-form";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { projectSchema } from "@/validators/projectSchema";
-import { createProject } from "@/features/projects/projectSlice";
-import { useAppDispatch } from "@/app/hooks";
-import { ProjectFormType } from "@/types/types";
-import { ProjectFormProps } from "@/types/types";
+} from '@/components/ui/select'
+import { Button } from '@/components/ui'
+import { DueDatePicker } from '@/pages/projects-page/components/DueDatePicker'
+import { useForm, Controller } from 'react-hook-form'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import { projectSchema } from '@/validators/projectSchema'
+import { createProject } from '@/features/projects/projectSlice'
+import { useAppDispatch } from '@/app/hooks'
+import { ProjectFormType, ProjectFormProps } from '@/types/types'
 
 export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
-  type Input = z.infer<typeof projectSchema>;
+  type Input = z.infer<typeof projectSchema>
 
   const form = useForm<Input>({
     resolver: zodResolver(projectSchema),
     defaultValues: {
-      projectName: "",
-      client: "",
+      projectName: '',
+      client: '',
       dueDate: new Date(),
-      status: "In progress",
+      status: 'In progress',
     },
-  });
+  })
 
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
   function onSubmit(data: ProjectFormType) {
-    dispatch(createProject(data));
-    console.log(data);
-    onFormSubmit(false);
+    dispatch(createProject(data))
+    console.log(data)
+    onFormSubmit(false)
   }
 
   return (
@@ -129,5 +129,5 @@ export default function ProjectForm({ onFormSubmit }: ProjectFormProps) {
         </form>
       </Form>
     </div>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -7,14 +7,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog'
 
 interface FormDialogProps {
-  isOpen: boolean;
-  onFormSubmissionCloseDialog: (state: boolean) => void;
-  title: string;
-  description: string;
-  formComponent: React.ReactNode;
+  isOpen: boolean
+  onFormSubmissionCloseDialog: (state: boolean) => void
+  title: string
+  description: string
+  formComponent: React.ReactNode
 }
 
 /*  
@@ -54,5 +54,5 @@ export default function FormDialog({
         <DialogFooter></DialogFooter>
       </DialogContent>
     </Dialog>
-  );
+  )
 }
