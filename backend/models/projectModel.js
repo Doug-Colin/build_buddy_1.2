@@ -13,13 +13,12 @@ const projectSchema = new mongoose.Schema(
     },
     client: {
       type: String,
-
     },
     dueDate: {
       // Sent from frontend in ISO string format (JSON lacks Date object)
-      // Mongoose Date type automatically converts ISO string to MongoDB-compatible date  
-      type: Date, 
-      required: [true, 'Please add a due date']  // Optional on frontend for long-term projects like maintenance
+      // Mongoose Date type automatically converts ISO string to MongoDB-compatible date
+      type: Date,
+      required: [true, 'Please add a due date'], // Optional on frontend for long-term projects like maintenance
     },
     status: {
       type: String,

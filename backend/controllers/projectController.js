@@ -84,9 +84,9 @@ const deleteProject = asyncHandler(async (req, res) => {
     throw new Error('User not authorized');
   }
 
-  if (project._id instanceof mongoose.Types.ObjectId) {
-    console.log('project._id is an instance of mongoose.Types.ObjectId!!!');
-  }
+  // if (project._id instanceof mongoose.Types.ObjectId) {
+  //   console.log('project._id is an instance of mongoose.Types.ObjectId!!!');
+  // }
 
   await project.deleteOne();
 
