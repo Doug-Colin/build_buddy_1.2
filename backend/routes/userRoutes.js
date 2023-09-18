@@ -1,4 +1,3 @@
-//three routes here: register/create user, login, and get user info
 const express = require('express');
 const router = express.Router();
 const {

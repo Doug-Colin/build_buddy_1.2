@@ -1,4 +1,3 @@
-//note- JS syntax here, syntax will be different for frontend if using Typescript/ts2015
 const express = require('express');
 const router = express.Router();
 const {
@@ -14,6 +13,6 @@ const { protect } = require('../middleware/authMiddleware');
 router.route('/').get(protect, getProjects).post(protect, setProject);
 
 //protected & combined route for put and delete requests (update/delete)
-router.route('/:id').delete(protect, deleteProject).put(protect, updateProject);
+router.route('/:id').put(protect, updateProject).delete(protect, deleteProject);
 
 module.exports = router;
