@@ -1,0 +1,41 @@
+Date : 2023-10-12 17:27:25
+Directory : c:\dev\build_buddy_1.2\frontend\src\hooks
+Total : 10 files,  -760 codes, -74 comments, -116 blanks, all -950 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| TypeScript |         10 |       -760 |        -74 |       -116 |       -950 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                    | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                       |         10 |       -760 |        -74 |       -116 |       -950 |
+| . (Files)                                                               |          2 |         24 |          0 |          8 |         32 |
+| ..                                                                      |          8 |       -784 |        -74 |       -124 |       -982 |
+| ..\features                                                             |          8 |       -784 |        -74 |       -124 |       -982 |
+| ..\features\auth                                                        |          2 |       -130 |        -16 |        -24 |       -170 |
+| ..\features\notes                                                       |          2 |       -191 |        -15 |        -29 |       -235 |
+| ..\features\projects                                                    |          2 |       -234 |        -21 |        -35 |       -290 |
+| ..\features\tasks                                                       |          2 |       -229 |        -22 |        -36 |       -287 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\dev\build_buddy_1.2\frontend\src\features\auth\authService.ts        | TypeScript |        -36 |         -4 |        -10 |        -50 |
+| c:\dev\build_buddy_1.2\frontend\src\features\auth\authSlice.ts          | TypeScript |        -94 |        -12 |        -14 |       -120 |
+| c:\dev\build_buddy_1.2\frontend\src\features\notes\noteService.ts       | TypeScript |        -35 |         -6 |         -9 |        -50 |
+| c:\dev\build_buddy_1.2\frontend\src\features\notes\noteSlice.ts         | TypeScript |       -156 |         -9 |        -20 |       -185 |
+| c:\dev\build_buddy_1.2\frontend\src\features\projects\projectService.ts | TypeScript |        -46 |        -10 |        -10 |        -66 |
+| c:\dev\build_buddy_1.2\frontend\src\features\projects\projectSlice.ts   | TypeScript |       -188 |        -11 |        -25 |       -224 |
+| c:\dev\build_buddy_1.2\frontend\src\features\tasks\taskService.ts       | TypeScript |        -47 |        -11 |        -10 |        -68 |
+| c:\dev\build_buddy_1.2\frontend\src\features\tasks\taskSlice.ts         | TypeScript |       -182 |        -11 |        -26 |       -219 |
+| c:\dev\build_buddy_1.2\frontend\src\hooks\useAuthCheck.ts               | TypeScript |         18 |          0 |          5 |         23 |
+| c:\dev\build_buddy_1.2\frontend\src\hooks\useFormDialogState.ts         | TypeScript |          6 |          0 |          3 |          9 |
+| Total                                                                   |            |       -760 |        -74 |       -116 |       -950 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+

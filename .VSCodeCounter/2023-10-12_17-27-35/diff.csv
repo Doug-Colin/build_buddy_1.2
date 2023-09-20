@@ -1,0 +1,7 @@
+"filename", "language", "TypeScript", "comment", "blank", "total"
+"c:\dev\build_buddy_1.2\frontend\src\hooks\useAuthCheck.ts", "TypeScript", -18, 0, -5, -23
+"c:\dev\build_buddy_1.2\frontend\src\hooks\useFormDialogState.ts", "TypeScript", -6, 0, -3, -9
+"c:\dev\build_buddy_1.2\frontend\src\lib\assetUtils.ts", "TypeScript", 9, 1, 3, 13
+"c:\dev\build_buddy_1.2\frontend\src\lib\axiosUtils.ts", "TypeScript", 14, 2, 3, 19
+"c:\dev\build_buddy_1.2\frontend\src\lib\utils.ts", "TypeScript", 5, 3, 4, 12
+"Total", "-", 4, 6, 2, 12

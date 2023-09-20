@@ -12,7 +12,7 @@ import Layout from '@/components/Layout'
 export default function ProjectsPage() {
   // !user redirects to LandingPage
   useAuthCheck()
-
+  
   const dispatch = useAppDispatch()
   const { projects } = useAppSelector((state) => state.projects)
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)

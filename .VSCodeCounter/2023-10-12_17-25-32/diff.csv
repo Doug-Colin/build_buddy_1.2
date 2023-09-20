@@ -1,0 +1,12 @@
+"filename", "language", "TypeScript", "comment", "blank", "total"
+"c:\dev\build_buddy_1.2\frontend\src\app\hooks.ts", "TypeScript", -9, -3, -3, -15
+"c:\dev\build_buddy_1.2\frontend\src\app\store.ts", "TypeScript", -25, -2, -4, -31
+"c:\dev\build_buddy_1.2\frontend\src\features\auth\authService.ts", "TypeScript", 36, 4, 10, 50
+"c:\dev\build_buddy_1.2\frontend\src\features\auth\authSlice.ts", "TypeScript", 94, 12, 14, 120
+"c:\dev\build_buddy_1.2\frontend\src\features\notes\noteService.ts", "TypeScript", 35, 6, 9, 50
+"c:\dev\build_buddy_1.2\frontend\src\features\notes\noteSlice.ts", "TypeScript", 156, 9, 20, 185
+"c:\dev\build_buddy_1.2\frontend\src\features\projects\projectService.ts", "TypeScript", 46, 10, 10, 66
+"c:\dev\build_buddy_1.2\frontend\src\features\projects\projectSlice.ts", "TypeScript", 188, 11, 25, 224
+"c:\dev\build_buddy_1.2\frontend\src\features\tasks\taskService.ts", "TypeScript", 47, 11, 10, 68
+"c:\dev\build_buddy_1.2\frontend\src\features\tasks\taskSlice.ts", "TypeScript", 182, 11, 26, 219
+"Total", "-", 750, 69, 117, 936

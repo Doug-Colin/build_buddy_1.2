@@ -1,4 +1,8 @@
-import { useRef } from 'react'
+
+import { useRef, useState, useEffect } from 'react'
+import { useEditorRef } from '@udecode/plate-common'
+import { createNote } from '@/features/notes/noteSlice'
+
 import {
   MARK_BOLD,
   MARK_CODE,
@@ -47,6 +51,8 @@ import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
 import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
 import { HeadingElement } from '@/components/plate-ui/heading-element'
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element'
+import { MyValue } from '@/types/plate-types'
+
 
 const plugins = createPlugins(
   [
@@ -80,15 +86,34 @@ const plugins = createPlugins(
   },
 )
 
+//--------------This actually worked to get the updated content logged to the console via the 'save' button. 
+
+const SaveLogic = () => {
+  const editor = useEditorRef();  // Use the hook to get editor reference
+
+  // Function to log editor content to the console
+  const getSaveValue = () => {
+    if (editor) {
+      console.info("editor.children", editor.children);
+      const jsonString = JSON.stringify(editor.children, null, 2);
+      console.log(jsonString);
+    }
+  };
+
+  // Render the button within the Plate component
+  return <button onClick={getSaveValue}>Save</button>;
+};
+
+
 export default function Editor() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
   const initialValue = [
     {
       type: ELEMENT_PARAGRAPH,
       children: [{ text: 'Hello, World!' }],
     },
-  ]
+  ];
 
   return (
     <div className="relative">
@@ -108,10 +133,11 @@ export default function Editor() {
                 className: cn(
                   'relative max-w-full leading-[1.4] outline-none [&_strong]:font-bold',
                   '!min-h-[600px] w-[900px] px-[96px] py-16',
-                ),
+                )
               } as TEditableProps
             }
           >
+            <SaveLogic />
             <FloatingToolbar>
               <FloatingToolbarButtons />
             </FloatingToolbar>
@@ -119,5 +145,76 @@ export default function Editor() {
         </div>
       </PlateProvider>
     </div>
-  )
+  );
 }
+
+// ------------------------------- Old Code- problematic ---------------------------------
+
+// export default function Editor() {
+//   const containerRef = useRef(null)
+//   const editor = useEditorRef();  // Use the hook to get editor reference
+
+
+//   const initialValue = [
+//     {
+//       type: ELEMENT_PARAGRAPH,
+//       children: [{ text: 'Hello, World!' }],
+//     },
+//   ]
+
+//  // Function to log editor content to the console
+//  const getSaveValue = () => {
+//   if (editor) {
+//     console.info("editor.children", editor.children);
+//   }
+// };
+  
+
+//   return (
+//     <div className="relative">
+//       <PlateProvider plugins={plugins} initialValue={initialValue}>
+//         <FixedToolbar>
+//           <FixedToolbarButtons />
+//         </FixedToolbar>
+//         {/* Save Button */}
+//         <button onClick={getSaveValue}>Save</button>
+
+//         <div
+//           ref={containerRef}
+//           className={cn('relative flex max-w-[900px] overflow-x-auto')}
+//         >
+//           <Plate
+//             editableProps={
+//               {
+//                 autoFocus: true,
+//                 className: cn(
+//                   'relative max-w-full leading-[1.4] outline-none [&_strong]:font-bold',
+//                   '!min-h-[600px] w-[900px] px-[96px] py-16',
+//                 ),
+//               } as TEditableProps
+//             }
+         
+            // onChange={(value) => {
+            //   console.log(value)
+            // }}
+            // onChange={(value) => {
+            //   if (editor) {  // Check if editor is available
+            //     const isAstChange = editor.operations.some(
+            //       (op: any) => "set_selection" !== op.type  // Added type any to avoid TS error
+            //     );
+            //     if (isAstChange) {
+            //       setJson(JSON.stringify(value, null, 2));
+            //       localStorage.setItem('content', json);
+            //     }
+            //   }
+            // }}
+//           >
+//             <FloatingToolbar>
+//               <FloatingToolbarButtons />
+//             </FloatingToolbar>
+//           </Plate>
+//         </div>
+//       </PlateProvider>
+//     </div>
+//   )
+// }

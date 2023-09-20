@@ -4,6 +4,7 @@ const User = require('../models/userModel');
 
 //Middleware to protect user routes by validating JWT.
 
+
 const protect = asyncHandler(async (req, res, next) => {
   //initialize token
   let token;

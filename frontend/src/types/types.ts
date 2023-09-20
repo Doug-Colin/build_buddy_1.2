@@ -87,7 +87,7 @@ export interface Note {
   _id?: string
   user: string
   noteTitle: string
-  noteContent: string
+  noteContent: Object
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
   projectId?: string
   taskId?: string

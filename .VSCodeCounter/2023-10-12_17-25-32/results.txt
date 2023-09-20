@@ -1,0 +1,36 @@
+Date : 2023-10-12 17:25:32
+Directory : c:\dev\build_buddy_1.2\frontend\src\features
+Total : 8 files,  784 codes, 74 comments, 124 blanks, all 982 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| TypeScript |          8 |        784 |         74 |        124 |        982 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                    | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                       |          8 |        784 |         74 |        124 |        982 |
+| auth                                                                    |          2 |        130 |         16 |         24 |        170 |
+| notes                                                                   |          2 |        191 |         15 |         29 |        235 |
+| projects                                                                |          2 |        234 |         21 |         35 |        290 |
+| tasks                                                                   |          2 |        229 |         22 |         36 |        287 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                | language   | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\dev\build_buddy_1.2\frontend\src\features\auth\authService.ts        | TypeScript |         36 |          4 |         10 |         50 |
+| c:\dev\build_buddy_1.2\frontend\src\features\auth\authSlice.ts          | TypeScript |         94 |         12 |         14 |        120 |
+| c:\dev\build_buddy_1.2\frontend\src\features\notes\noteService.ts       | TypeScript |         35 |          6 |          9 |         50 |
+| c:\dev\build_buddy_1.2\frontend\src\features\notes\noteSlice.ts         | TypeScript |        156 |          9 |         20 |        185 |
+| c:\dev\build_buddy_1.2\frontend\src\features\projects\projectService.ts | TypeScript |         46 |         10 |         10 |         66 |
+| c:\dev\build_buddy_1.2\frontend\src\features\projects\projectSlice.ts   | TypeScript |        188 |         11 |         25 |        224 |
+| c:\dev\build_buddy_1.2\frontend\src\features\tasks\taskService.ts       | TypeScript |         47 |         11 |         10 |         68 |
+| c:\dev\build_buddy_1.2\frontend\src\features\tasks\taskSlice.ts         | TypeScript |        182 |         11 |         26 |        219 |
+| Total                                                                   |            |        784 |         74 |        124 |        982 |
++-------------------------------------------------------------------------+------------+------------+------------+------------+------------+
