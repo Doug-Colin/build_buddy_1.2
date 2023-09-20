@@ -79,3 +79,38 @@
   }
   
 }
+
+
+
+.custom-editor-theme h1 {
+  font-size: 2em;
+  font-weight: bold;
+  color: white;
+}
+.custom-editor-theme h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+}
+.custom-editor-theme h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  color: white;
+}
+.custom-editor-theme h4 {
+  font-weight: bold;
+  color: white;
+}
+.custom-editor-theme h5 {
+  font-size: .93em;
+  font-weight: bold;
+  color: white;
+}
+.custom-editor-theme h6 {
+  font-size: .67em;
+  font-weight: bold;
+  color: white;
+}
+.custom-editor-theme a {
+  color: blue;
+}
