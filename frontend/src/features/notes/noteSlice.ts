@@ -64,6 +64,7 @@ export const getNotes = createTypedAsyncThunk(
 export const updateNote = createTypedAsyncThunk(
   'notes/updateNote',
   async (
+    // Had first arg type as 'editorState: EditorState', check if required when adhering to data model. 
     args: { noteId: string; updatedData: Partial<Note> },
     thunkAPI,
   ) => {
