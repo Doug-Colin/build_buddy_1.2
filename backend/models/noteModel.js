@@ -7,7 +7,7 @@ const noteSchema = new mongoose.Schema(
         required: true
     },
     noteContent: {
-        type: String,
+        type: Object,
         required: true,
       },
     user: {
