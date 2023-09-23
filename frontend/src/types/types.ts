@@ -1,3 +1,4 @@
+// import { user } from '@/app/store';
 /* Auth Types. */
 
 export interface RegisterUserData {
@@ -19,7 +20,7 @@ export interface User {
 
 /* Projects feature. */
 export interface Project {
-  _id?: string
+  _id: string
   projectName: string
   client?: string
   dueDate: Date
@@ -41,7 +42,7 @@ export interface ProjectFormType {
 
 /* Tasks feature. */
 export interface Task {
-  _id?: string
+  _id: string
   projectName: string
   client?: string
   label:
@@ -84,10 +85,23 @@ export interface TaskFormType {
 
 /* Notes feature. */
 export interface Note {
-  _id?: string
-  user: string
+  _id: string
   noteTitle: string
-  noteContent: Object
+  // noteContent?: null | Object
+  noteLabel: 'Project' | 'Task' | 'Client' | 'General'
+  projectId?: string
+  taskId?: string
+  client?: string
+  createdAt?: string
+  updatedAt?: string
+}
+export interface NoteFormProps {
+  onFormSubmit: (state: boolean) => void
+}
+
+export interface NoteDTO {
+  noteTitle: string
+  // noteContent?: null | Object
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
   projectId?: string
   taskId?: string
