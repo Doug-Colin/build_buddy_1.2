@@ -3,6 +3,8 @@ import Editor from '@/pages/notes-page/plate/editor'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
 import Layout from '@/components/Layout'
 
+
+
 export default function ProjectsPage() {
   // !user redirects to LandingPage
   useAuthCheck()
