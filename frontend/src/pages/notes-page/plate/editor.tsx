@@ -1,4 +1,6 @@
 import { useRef } from 'react'
+import { useEditorRef } from '@udecode/plate-common'
+
 import {
   MARK_BOLD,
   MARK_CODE,
@@ -48,6 +50,8 @@ import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-b
 import { HeadingElement } from '@/components/plate-ui/heading-element'
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element'
 
+
+
 const plugins = createPlugins(
   [
     createParagraphPlugin(),
@@ -80,15 +84,34 @@ const plugins = createPlugins(
   },
 )
 
+//--------------This actually worked to get the updated content logged to the console via the 'save' button. 
+
+const SaveLogic = () => {
+  const editor = useEditorRef();  // Use the hook to get editor reference
+
+  // Function to log editor content to the console
+  const getSaveValue = () => {
+    if (editor) {
+      console.info("editor.children", editor.children);
+      const jsonString = JSON.stringify(editor.children, null, 2); 
+      localStorage.setItem('note', jsonString);
+    }
+  };
+
+  // Render the button within the Plate component
+  return <button onClick={getSaveValue}>Save</button>;
+};
+
+
 export default function Editor() {
-  const containerRef = useRef(null)
+  const containerRef = useRef(null);
 
   const initialValue = [
     {
       type: ELEMENT_PARAGRAPH,
       children: [{ text: 'Hello, World!' }],
     },
-  ]
+  ];
 
   return (
     <div className="relative">
@@ -108,10 +131,11 @@ export default function Editor() {
                 className: cn(
                   'relative max-w-full leading-[1.4] outline-none [&_strong]:font-bold',
                   '!min-h-[600px] w-[900px] px-[96px] py-16',
-                ),
+                )
               } as TEditableProps
             }
           >
+            <SaveLogic />
             <FloatingToolbar>
               <FloatingToolbarButtons />
             </FloatingToolbar>
@@ -119,5 +143,5 @@ export default function Editor() {
         </div>
       </PlateProvider>
     </div>
-  )
+  );
 }
