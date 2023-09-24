@@ -12,18 +12,14 @@ const getNotes = asyncHandler(async (req, res) => {
 });
 
 // descr: Set note | route: POST /api/note | access: Private
-const setNote = asyncHandler(async (req, res) => {
+const createNote = asyncHandler(async (req, res) => {
   console.log('Received payload:', req.body);
 
-  if (!req.body.noteContent) {
-    res.status(400);
-    throw new Error('Please add note content');
-  }
 
   const note = await Note.create({
     user: req.user._id,
     noteTitle: req.body.noteTitle,
-    noteContent: req.body.noteContent,
+    noteContent: null,
     noteLabel: req.body.label || 'General', //use value from request or default
     projectId: req.body.projectId,
     taskId: req.body.taskId,
@@ -97,7 +93,7 @@ const deleteNote = asyncHandler(async (req, res) => {
 
 module.exports = {
   getNotes,
-  setNote,
+  createNote,
   updateNote,
   deleteNote,
 };

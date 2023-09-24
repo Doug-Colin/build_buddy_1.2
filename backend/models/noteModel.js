@@ -8,7 +8,7 @@ const noteSchema = new mongoose.Schema(
     },
     noteContent: {
         type: Object,
-        required: true,
+        // required: true *note necessary for creation of note, only adding noteContent
       },
     user: {
       type: mongoose.Schema.Types.ObjectId,
