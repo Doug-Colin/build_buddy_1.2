@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Note } from '@/types/types'
+import { Note, NoteDTO } from '@/types/types'
 import { getConfig } from '@/lib/axiosUtils'
 
 const API_URL = '/api/notes/'
@@ -8,7 +8,7 @@ const API_URL = '/api/notes/'
 // Auth token is sent as a Bearer token in the config arg of the Axios req. method via getConfig()
 
 //Create note
-const createNote = async (note: Note, token: string) => {
+const createNote = async (note: NoteDTO, token: string) => {
   const response = await axios.post(API_URL, note, getConfig(token))
   return response.data
 }
