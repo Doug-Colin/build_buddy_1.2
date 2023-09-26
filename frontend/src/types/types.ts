@@ -24,7 +24,7 @@ export interface Project {
   projectName: string
   client?: string
   dueDate: Date
-  status?: 'In progress' | 'Completed' | 'Long-Term'
+  status: 'In Progress' | 'Completed' | 'Long-Term'
   createdAt?: string
   updatedAt?: string
 }
@@ -33,11 +33,11 @@ export interface ProjectFormProps {
   onFormSubmit: (state: boolean) => void
 }
 
-export interface ProjectFormType {
+export interface ProjectDTO {
   projectName: string
   client?: string
   dueDate: Date
-  status?: 'In progress' | 'Completed' | 'Long-Term'
+  status?: 'In Progress' | 'Completed' | 'Long-Term'
 }
 
 /* Tasks feature. */
@@ -65,7 +65,7 @@ export interface Task {
 export interface TaskFormProps {
   onFormSubmit: (state: boolean) => void
 }
-export interface TaskFormType {
+export interface TaskDTO {
   projectName: string
   client?: string
   label:
@@ -87,7 +87,7 @@ export interface TaskFormType {
 export interface Note {
   _id: string
   noteTitle: string
-  // noteContent?: null | Object
+  noteContent?: null | Object
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
   projectId?: string
   taskId?: string
@@ -101,7 +101,6 @@ export interface NoteFormProps {
 
 export interface NoteDTO {
   noteTitle: string
-  // noteContent?: null | Object
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
   projectId?: string
   taskId?: string
