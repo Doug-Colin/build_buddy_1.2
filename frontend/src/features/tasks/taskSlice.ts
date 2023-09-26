@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { createTypedAsyncThunk } from '@/app/hooks'
 import { getErrorMessage } from '@/lib/axiosUtils'
 import taskService from '@/features/tasks/taskService'
-import { Task } from '@/types/types'
+import { Task, TaskDTO } from '@/types/types'
 import type { RootState } from '../../app/store'
 
 interface TaskState {
@@ -22,7 +22,7 @@ const initialState: TaskState = {
 //Create a task
 export const createTask = createTypedAsyncThunk(
   'tasks/createTask',
-  async (task: Task, thunkAPI) => {
+  async (task: TaskDTO, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState
       const token = state.auth.user?.token

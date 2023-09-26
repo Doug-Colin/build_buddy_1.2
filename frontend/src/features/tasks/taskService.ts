@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Task } from '@/types/types'
+import { Task, TaskDTO } from '@/types/types'
 import { getConfig } from '@/lib/axiosUtils'
 
 const API_URL = '/api/tasks/'
@@ -8,7 +8,7 @@ const API_URL = '/api/tasks/'
 // Auth token is sent as a Bearer token in the config arg of the Axios req. method via getConfig()
 
 //Request to create new task
-const createTask = async (task: Task, token: string) => {
+const createTask = async (task: TaskDTO, token: string) => {
   const response = await axios.post(API_URL, task, getConfig(token))
   return response.data
 }
@@ -34,18 +34,44 @@ const updateTask = async (
 }
 
 /* Req to duplicate task 
-    -Initializes a copy of the original task locally- "Copy" is appended to taskName,  and status of copiedTask is set to "In progress".
+    -Initializes a copy of the original task locally- "Copy" is appended to taskName,  and status of copiedTask is set to "In Progress".
     -Deletes the copiedTask's _id, createdAt, and updatedAt properties so they can be generated anew.
     -Sends the copiedTask in a post req to the backend, where Mongoose will create _id, createdAt, and updatedAt properties as if it was a new task.*/
+// const duplicateTask = async (originalTask: Task, token: string) => {
+//   const copiedTask: Task = {
+//     ...originalTask,
+//     taskName: `${originalTask.taskName} (Copy)`,
+//     //populate
+//     status: 'In Progress',
+//     priority: 'Low',
+//   }
+//   delete copiedTask._id, copiedTask.createdAt, copiedTask.updatedAt
+//   const response = await axios.post(API_URL, copiedTask, getConfig(token))
+//   return response.data
+// }
+
+//version with all properties but _id/created added to copiedTask manually:
+// const duplicateTask = async (originalTask: Task, token: string) => {
+//   const copiedTask = {
+//     projectName: originalTask.projectName,
+//     taskName: `${originalTask.taskName} (Copy)`,
+//     taskDesctiption: originalTask.taskDescription,
+//     client: originalTask.client,
+//     label: originalTask.label,
+//     status: 'In Progress', //Assume default for copiedTask.
+//     priority: 'Low',       //Assume default for copiedTask.
+//   }
+//   // delete copiedTask._id, copiedTask.createdAt, copiedTask.updatedAt
+//   const response = await axios.post(API_URL, copiedTask, getConfig(token))
+//   return response.data
+// }
+
 const duplicateTask = async (originalTask: Task, token: string) => {
-  const copiedTask: Task = {
-    ...originalTask,
-    taskName: `${originalTask.taskName} (Copy)`,
-    //populate
-    status: 'In Progress',
-    priority: 'Low',
-  }
-  delete copiedTask._id, copiedTask.createdAt, copiedTask.updatedAt
+  const { _id, createdAt, updatedAt, ...copiedTask } = originalTask;
+    copiedTask.taskName = `${originalTask.taskName} (Copy)`
+    copiedTask.status = 'In Progress' //Assume default for copiedTask.
+    copiedTask.priority = 'Low'       //Assume default for copiedTask.
+
   const response = await axios.post(API_URL, copiedTask, getConfig(token))
   return response.data
 }
