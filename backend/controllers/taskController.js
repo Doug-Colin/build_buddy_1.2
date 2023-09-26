@@ -11,7 +11,7 @@ const getTasks = asyncHandler(async (req, res) => {
 });
 
 // descr: Set task | route: POST /api/tasks | access: Private
-const setTask = asyncHandler(async (req, res) => {
+const createTask = asyncHandler(async (req, res) => {
   console.log('Received payload:', req.body);
 
   if (!req.body.taskName) {
@@ -95,7 +95,7 @@ const deleteTask = asyncHandler(async (req, res) => {
 
 module.exports = {
   getTasks,
-  setTask,
+  createTask,
   updateTask,
   deleteTask,
 };

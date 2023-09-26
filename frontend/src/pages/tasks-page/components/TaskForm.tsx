@@ -8,7 +8,7 @@ import { createTask } from '@/features/tasks/taskSlice'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { taskSchema } from '@/validators/taskSchema'
-import { TaskFormProps, TaskFormType, Project } from '@/types/types'
+import { TaskFormProps, TaskDTO, Project } from '@/types/types'
 
 import { Button, Input } from '@/components/ui'
 import {
@@ -53,7 +53,7 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
   ]
   const taskPriorityOptions: string[] = ['Low', 'Medium', 'High', 'Urgent']
 
-  function onSubmit(data: TaskFormType) {
+  function onSubmit(data: TaskDTO) {
     dispatch(createTask(data))
     console.log(data)
     onFormSubmit(false)
