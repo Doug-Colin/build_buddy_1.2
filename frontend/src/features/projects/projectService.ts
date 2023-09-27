@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Project } from '@/types/types'
+import { Project, ProjectDTO } from '@/types/types'
 import { getConfig } from '@/lib/axiosUtils'
 
 const API_URL = '/api/projects/'
@@ -8,7 +8,7 @@ const API_URL = '/api/projects/'
 // Auth token is sent as a Bearer token in the config arg of the Axios req. method via getConfig()
 
 //Create project
-const createProject = async (project: Project, token: string) => {
+const createProject = async (project: ProjectDTO, token: string) => {
   const response = await axios.post(API_URL, project, getConfig(token))
   return response.data
 }
@@ -33,17 +33,12 @@ const updateProject = async (
   return response.data
 }
 
-/* Duplicate project 
-    -Initializes a copy of the original project locally- "Copy" is appended to projectName,  and status of copiedProject is set to "In progress".
-    -Deletes the copiedProject's _id, createdAt, and updatedAt properties so they can be generated anew.
-    -Sends the copiedProject in a post req to the backend, where Mongoose will create _id, createdAt, and updatedAt properties as if it was a new project.*/
+
 const duplicateProject = async (originalProject: Project, token: string) => {
-  const copiedProject: Project = {
-    ...originalProject,
-    projectName: `${originalProject.projectName} (Copy)`,
-    status: 'In progress',
-  }
-  delete copiedProject._id, copiedProject.createdAt, copiedProject.updatedAt
+  const { _id, createdAt, updatedAt, ...copiedProject } = originalProject;
+    copiedProject.projectName = `${originalProject.projectName} (Copy)`
+    copiedProject.status = 'In Progress' //Assume default for copiedProject's status.
+
   const response = await axios.post(API_URL, copiedProject, getConfig(token))
   return response.data
 }

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { createTypedAsyncThunk } from '@/app/hooks'
 import projectService from '@/features/projects/projectService'
 import type { RootState } from '../../app/store'
-import { Project } from '@/types/types'
+import { Project, ProjectDTO } from '@/types/types'
 import { getErrorMessage } from '@/lib/axiosUtils'
 
 interface ProjectState {
@@ -22,7 +22,7 @@ const initialState: ProjectState = {
 //Create project
 export const createProject = createTypedAsyncThunk(
   'projects/createProject',
-  async (project: Project, thunkAPI) => {
+  async (project: ProjectDTO, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState
       const token = state.auth.user?.token
