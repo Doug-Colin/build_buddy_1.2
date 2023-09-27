@@ -22,8 +22,8 @@ const projectSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ['In progress', 'Completed', 'Long-Term'],
-      default: 'In progress',
+      enum: ['In Progress', 'Completed', 'Long-Term'],
+      default: 'In Progress',
     },
   },
   {

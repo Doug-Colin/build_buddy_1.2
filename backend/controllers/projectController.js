@@ -12,7 +12,7 @@ const getProjects = asyncHandler(async (req, res) => {
 });
 
 // descr: Set project | route: POST /api/project | access: Private
-const setProject = asyncHandler(async (req, res) => {
+const createProject = asyncHandler(async (req, res) => {
   console.log('Received payload:', req.body);
 
   if (!req.body.projectName) {
@@ -25,7 +25,7 @@ const setProject = asyncHandler(async (req, res) => {
     projectName: req.body.projectName,
     client: req.body.client,
     dueDate: req.body.dueDate,
-    status: req.body.status || 'In progress', //use value from request or default
+    status: req.body.status || 'In Progress', //use value from request or default
   });
 
   res.status(200).json(project);
@@ -95,7 +95,7 @@ const deleteProject = asyncHandler(async (req, res) => {
 
 module.exports = {
   getProjects,
-  setProject,
+  createProject,
   updateProject,
   deleteProject,
 };
