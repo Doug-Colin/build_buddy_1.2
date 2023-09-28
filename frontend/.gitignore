@@ -28,5 +28,8 @@ dist-ssr
 project_notes.md
 /project_notes
 
+# Sample data
+/sample_data
+
 # Example redux service and slice files from previous JS project 
 /frontend/src/features/examples

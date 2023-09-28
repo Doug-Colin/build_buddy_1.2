@@ -18,13 +18,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-
+// Use Zod task schema.
 import { z } from 'zod'
+import { taskSchema } from '@/validators/taskSchema'
 
 //May need for creating new project
 //import { projectSchema } from "@/validators/projectSchema";
 //import { createProject } from "@/features/projects/projectSlice";
-import { taskSchema } from '@/validators/taskSchema'
+
 
 export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
   //checkbox select to select invididual or all tasks

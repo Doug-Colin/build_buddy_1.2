@@ -5,7 +5,8 @@
 //Note: The <DataTable /> component renders our table.
 
 //Tip: If you find yourself using <DataTable /> in multiple places, this is the component you could make reusable by extracting it to components/ui/data-table.tsx. For example: <DataTable columns={columns} data={data} />
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import {
   ColumnDef,
   SortingState,
@@ -37,6 +38,7 @@ import { Button, Input } from '@/components/ui'
 import FormDialog from '@/components/FormDialog'
 import TaskForm from '@/pages/tasks-page/components/TaskForm'
 import { useFormDialogState } from '@/hooks/useFormDialogState'
+import { getTasks } from '@/features/tasks/taskSlice'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -52,6 +54,20 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
+
+/* --------------- *Adjust this an other features if nec.; get it right for Notes Table* ----------------------------
+The best practice in React and Redux applications is to keep data fetching and state management as close to the top-level component as possible, which in your case would be TasksPage. This approach aligns with the principle of lifting state up, where you manage state in parent components and pass it down to child components as props. This makes your components more reusable and easier to manage.
+
+In TasksPage, you're correctly dispatching getTasks() and selecting tasks from the global state. Passing these tasks as a prop to DataTable is a good approach. If DataTable doesn't display tasks when passed as props, the issue might be elsewhere, such as how columns are defined or how data is being used within DataTable.
+
+Yes, this approach should be used for other features like Notes. It keeps components decoupled from specific data sources, promoting reusability and maintainability. Manage state in feature pages like NotesPage, and pass it down to components like tables or lists. This top-down data flow is indeed a fundamental concept in React.
+ -------------------------------------------------------------- */
+
+
+  //get user's tasks o array can be mapped to table
+  // useEffect(() => {
+  //   dispatch(getTasks())
+  // }, [dispatch])
 
   const table = useReactTable({
     data,
@@ -87,9 +103,9 @@ export function DataTable<TData, TValue>({
         </div> 
         */}
 
-        {/* Filter by projectName column (can enable for other columns as well)  */}
+        {/* Search Component to filter by projectName column (can enable for other columns as well)  */}
         <Input
-          placeholder="Filter tasks by Project..."
+          placeholder="Filter tasks by <insert filter criteria here>..."
           value={
             (table.getColumn('projectName')?.getFilterValue() as string) ?? ''
           }

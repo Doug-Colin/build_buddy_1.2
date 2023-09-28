@@ -30,28 +30,30 @@ import {
 
 type Input = z.infer<typeof taskSchema>
 
+
+export const taskLabelOptions: string[] = [
+  'General',
+  'Sourcing',
+  'Fabrication',
+  'Finishing',
+  'Shipping',
+  'Repair',
+  'Administrative',
+  'Maintenance',
+]
+export const taskStatusOptions: string[] = [
+  'To Do',
+  'In Progress',
+  'Done',
+  'Paused',
+  'Canceled',
+]
+export const taskPriorityOptions: string[] = ['Low', 'Medium', 'High', 'Urgent']
+
 export default function TaskForm({ onFormSubmit }: TaskFormProps) {
   const dispatch = useAppDispatch()
   const projects = useAppSelector((state: RootState) => state.projects.projects)
 
-  const taskLabelOptions: string[] = [
-    'General',
-    'Sourcing',
-    'Fabrication',
-    'Finishing',
-    'Shipping',
-    'Repair',
-    'Administrative',
-    'Maintenance',
-  ]
-  const taskStatusOptions: string[] = [
-    'To Do',
-    'In Progress',
-    'Done',
-    'Paused',
-    'Canceled',
-  ]
-  const taskPriorityOptions: string[] = ['Low', 'Medium', 'High', 'Urgent']
 
   function onSubmit(data: TaskDTO) {
     dispatch(createTask(data))
