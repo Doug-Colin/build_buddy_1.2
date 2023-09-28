@@ -1,11 +1,3 @@
-//---------- Tables with shadcn table and tanstack table ------------------------
-
-//---------- columns.tsx (client component) will contain our column definitions. ------------------------
-
-//Note: Columns are where you define the core of what your table will look like. They define the data that will be displayed, how it will be formatted, sorted and filtered.
-
-//With tanstack table, you import ColumnDef, then create a type for your data schema (you can use zod schema), export const columns: ColumnDef<dataTypeOrSchema>[] = []...
-
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
 
@@ -21,7 +13,7 @@ import {
 
 import { z } from 'zod'
 
-//May need for creating new project
+//Use when adding steps to task form enabling creation of new projects if project for task does not exist
 //import { projectSchema } from "@/validators/projectSchema";
 //import { createProject } from "@/features/projects/projectSlice";
 import { taskSchema } from '@/validators/taskSchema'

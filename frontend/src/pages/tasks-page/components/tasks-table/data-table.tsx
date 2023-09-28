@@ -1,10 +1,3 @@
-//---------- Tables with shadcn table and tanstack table ------------------------
-
-//---------- data-table.tsx (client component) will contain our <DataTable /> component. ------------------------
-
-//Note: The <DataTable /> component renders our table.
-
-//Tip: If you find yourself using <DataTable /> in multiple places, this is the component you could make reusable by extracting it to components/ui/data-table.tsx. For example: <DataTable columns={columns} data={data} />
 import { useState } from 'react'
 import {
   ColumnDef,
@@ -87,7 +80,7 @@ export function DataTable<TData, TValue>({
         </div> 
         */}
 
-        {/* Filter by projectName column (can enable for other columns as well)  */}
+        {/* Search & Filter by projectName column (can enable for other columns as well)  */}
         <Input
           placeholder="Filter tasks by Project..."
           value={
