@@ -28,5 +28,9 @@ dist-ssr
 project_notes.md
 /project_notes
 
+# sample data and test components
+/sample_data
+/alt-components
+
 # Example redux service and slice files from previous JS project 
 /frontend/src/features/examples
