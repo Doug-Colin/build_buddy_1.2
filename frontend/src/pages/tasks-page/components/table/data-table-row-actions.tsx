@@ -28,8 +28,6 @@ import {
 } from "@radix-ui/react-icons"
 import { PauseCircle } from "lucide-react"
 
-
-// import { labels } from "../data/data"
 import { taskSchema } from "@/validators/taskSchema"
 
 export const taskLabels = [
