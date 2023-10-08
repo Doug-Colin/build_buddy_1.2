@@ -5,12 +5,25 @@ import Layout from '@/components/Layout'
 import FormDialog from '@/components/FormDialog'
 import { useFormDialogState } from '@/hooks/useFormDialogState'
 import NoteForm from './components/NoteForm'
+import { NotesDataTable} from '@/pages/notes-page/components/table/NotesDataTable'
+import { Note } from '@/types/types'
+import { columns } from './components/table/columns'
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { getNotes } from '@/features/notes/noteSlice'
+import { useEffect } from 'react'
 
 export default function NotesPage() {
   // !user redirects to LandingPage
   useAuthCheck()
 
+  const dispatch = useAppDispatch()
+  const notes = useAppSelector((state) => state.notes.notes )
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
+
+  useEffect(() => {
+    dispatch(getNotes())
+  }, [dispatch])
+
 
   return (
     <Layout>
@@ -31,6 +44,7 @@ export default function NotesPage() {
           </div>
           <div className="max-w-[1336px] rounded-lg border bg-background shadow">
             <Editor />
+            <NotesDataTable<Note, any> columns={columns} data={notes} />
           </div>
         </section>
       </TooltipProvider>
