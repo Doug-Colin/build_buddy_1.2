@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { useForm } from 'react-hook-form'
 import { RootState } from '@/app/store'
 import { getProjects } from '@/features/projects/projectSlice'
-import { getTasks } from '@/features/tasks/taskSlice'
+import { getNotes } from '@/features/notes/noteSlice'
 import { createNote } from '@/features/notes/noteSlice'
 
 import { z } from 'zod'
@@ -60,7 +60,7 @@ export default function NoteForm({ onFormSubmit }: NoteFormProps) {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(getTasks())
+    dispatch(getNotes())
   }, [dispatch])
 
   return (
