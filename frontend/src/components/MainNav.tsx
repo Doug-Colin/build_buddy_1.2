@@ -35,28 +35,10 @@ export function MainNav({
         Notes
       </Link>
       <Link
-        to="/costs"
+        to="/clients"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Costs
-      </Link>
-      <Link
-        to="/estimates"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Estimates
-      </Link>
-      <Link
-        to="/calculate"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Calculate
-      </Link>
-      <Link
-        to="/convert"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Convert
+        Clients
       </Link>
     </nav>
   )

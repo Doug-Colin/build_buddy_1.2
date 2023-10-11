@@ -84,7 +84,7 @@ const plugins = createPlugins(
   },
 )
 
-//--------------This actually worked to get the updated content logged to the console via the 'save' button. 
+//--- get the updated content logged to the console & set in localstorage via temporary 'save' button. -------------
 
 const SaveLogic = () => {
   const editor = useEditorRef();  // Use the hook to get editor reference
