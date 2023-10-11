@@ -40,6 +40,12 @@ export function MainNav({
       >
         Clients
       </Link>
+      <Link
+        to="/new-notes"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      >
+        Notes (New Layout/Structure)
+      </Link>
     </nav>
   )
 }

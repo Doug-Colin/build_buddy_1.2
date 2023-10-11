@@ -6,14 +6,14 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
-import Layout from '@/components/Layout'
+import AppLayout from '@/components/AppLayout'
 
 export default function DashboardPage() {
   // !user redirects to LandingPage
   useAuthCheck()
 
   return (
-    <Layout>
+    <AppLayout>
       <div className="flex-1 space-y-4 p-8 pt-6">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">Overview</h2>
@@ -59,6 +59,6 @@ export default function DashboardPage() {
           </Card>
         </div>
       </div>
-    </Layout>
+    </AppLayout>
   )
 }

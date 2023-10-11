@@ -7,7 +7,7 @@ import { useFormDialogState } from '@/hooks/useFormDialogState'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
 import FormDialog from '@/components/FormDialog'
 import ProjectForm from './components/ProjectForm'
-import Layout from '@/components/Layout'
+import AppLayout from '@/components/AppLayout'
 
 export default function ProjectsPage() {
   // !user redirects to LandingPage
@@ -23,7 +23,7 @@ export default function ProjectsPage() {
   }, [dispatch])
 
   return (
-    <Layout>
+    <AppLayout>
       <div className="flex-1 space-y-4 p-12">
         <div className="flex justify-between items-center mx-">
           <h1 className="text-4xl font-bold tracking-tight">Projects</h1>
@@ -43,6 +43,6 @@ export default function ProjectsPage() {
           ))}
         </div>
       </div>
-    </Layout>
+    </AppLayout>
   )
 }

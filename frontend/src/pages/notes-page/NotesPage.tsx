@@ -1,11 +1,11 @@
 import { TooltipProvider } from '@/components/plate-ui/tooltip'
 import Editor from '@/pages/notes-page/components/editor'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
-import Layout from '@/components/Layout'
+import AppLayout from '@/components/AppLayout'
 import FormDialog from '@/components/FormDialog'
 import { useFormDialogState } from '@/hooks/useFormDialogState'
 import NoteForm from './components/NoteForm'
-import { NotesDataTable} from '@/pages/notes-page/components/table/NotesDataTable'
+import { NotesDataTable } from '@/pages/notes-page/components/table/NotesDataTable'
 import { Note } from '@/types/types'
 import { columns } from './components/table/columns'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
@@ -17,16 +17,15 @@ export default function NotesPage() {
   useAuthCheck()
 
   const dispatch = useAppDispatch()
-  const notes = useAppSelector((state) => state.notes.notes )
+  const notes = useAppSelector((state) => state.notes.notes)
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
 
   useEffect(() => {
     dispatch(getNotes())
   }, [dispatch])
 
-
   return (
-    <Layout>
+    <AppLayout>
       <TooltipProvider
         disableHoverableContent
         delayDuration={500}
@@ -42,12 +41,14 @@ export default function NotesPage() {
               formComponent={<NoteForm onFormSubmit={handleFormDialogClose} />}
             />
           </div>
+          {/* <div className="container mx-auto p-4"> */}
+          {/* above subbed for below */}
           <div className="max-w-[1336px] rounded-lg border bg-background shadow">
             <Editor />
             <NotesDataTable<Note, any> columns={columns} data={notes} />
           </div>
         </section>
       </TooltipProvider>
-    </Layout>
+    </AppLayout>
   )
 }
