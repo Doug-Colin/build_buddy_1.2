@@ -1,7 +1,6 @@
 import { ColumnDef } from '@tanstack/react-table'
-// import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
-import { MoreHorizontal } from 'lucide-react'
-
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
+import { MoreHorizontal, ArrowUpDown } from 'lucide-react'
 import { Button, Checkbox } from '@/components/ui'
 import {
   DropdownMenu,
@@ -11,9 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+//import { Link } from 'react-router-dom'
 // Use Zod task schema.
 import { z } from 'zod'
-import { taskSchema } from '@/validators/taskSchema'
+import { noteSchema } from '@/validators/noteSchema'
 
 export interface Note {
   _id: string
@@ -27,8 +27,8 @@ export interface Note {
   updatedAt?: string
 }
 
-export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
-  //checkbox select to select invididual or all notessssss
+export const columns: ColumnDef<z.infer<typeof noteSchema>>[] = [
+  //checkbox to select invididual or all notes
   {
     id: 'select',
     header: ({ table }) => (
@@ -51,7 +51,11 @@ export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
   {
     accessorKey: 'noteTitle',
     header: 'Title',
+    // cell: ({ row }) => (
+    //   <Link to={`/notes/${row.original.note._id}`} className='' > {row.getValue('noteTitle')} </Link>
+    // ),
   },
+  
   // {
   //   accessorKey: 'client',
   //   header: 'Client',

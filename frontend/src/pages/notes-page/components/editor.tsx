@@ -1,6 +1,8 @@
 import { useRef } from 'react'
 import { useEditorRef } from '@udecode/plate-common'
 
+
+
 import {
   MARK_BOLD,
   MARK_CODE,
@@ -45,8 +47,8 @@ import { BlockquoteElement } from '@/components/plate-ui/blockquote-element'
 import { CodeLeaf } from '@/components/plate-ui/code-leaf'
 import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar'
 import { FixedToolbarButtons } from '@/components/plate-ui/fixed-toolbar-buttons'
-import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
-import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
+// import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
+// import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
 import { HeadingElement } from '@/components/plate-ui/heading-element'
 import { ParagraphElement } from '@/components/plate-ui/paragraph-element'
 
@@ -129,16 +131,16 @@ export default function Editor() {
               {
                 autoFocus: true,
                 className: cn(
-                  'relative max-w-full leading-[1.4] outline-none [&_strong]:font-bold',
-                  '!min-h-[600px] w-[900px] px-[96px] py-16',
+                  'relative max-w-full max-h-full leading-[1.4] outline-none [&_strong]:font-bold',
+                  'min-h-[550px] px-[96px] py-16',
                 )
               } as TEditableProps
             }
           >
-            <SaveLogic />
-            <FloatingToolbar>
+            {/* <SaveLogic /> */}
+            {/* <FloatingToolbar>
               <FloatingToolbarButtons />
-            </FloatingToolbar>
+            </FloatingToolbar> */}
           </Plate>
         </div>
       </PlateProvider>

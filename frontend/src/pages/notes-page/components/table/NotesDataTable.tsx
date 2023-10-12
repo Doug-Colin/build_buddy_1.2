@@ -39,15 +39,18 @@ import { Button, Input } from '@/components/ui'
 // import NoteForm from '@/pages/notes-page/components/NoteForm'
 // import { useFormDialogState } from '@/hooks/useFormDialogState'
 // import { getNotes } from '@/features/notes/noteSlice'
+import { Note } from '@/types/types'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  onNoteSelect: (note: Note) => void
 }
 
 export function NotesDataTable<TData, TValue>({
   columns,
   data,
+  onNoteSelect
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
@@ -60,7 +63,7 @@ The best practice in React and Redux applications is to keep data fetching and s
 
 In NotesPage, you're correctly dispatching getNotes() and selecting notes from the global state. Passing these notes as a prop to DataTable is a good approach. If DataTable doesn't display notes when passed as props, the issue might be elsewhere, such as how columns are defined or how data is being used within DataTable.
 
-Yes, this approach should be used for other features like Notes. It keeps components decoupled from specific data sources, promoting reusability and maintainability. Manage state in feature pages like NotesPage, and pass it down to components like tables or lists. This top-down data flow is indeed a fundamental concept in React.
+This approach  keeps components decoupled from specific data sources, making them more reusabile and maintainable. Manage state in feature pages like NotesPage, and pass it down to components like tables or lists. Remember, top-down data flow is indeed a fundamental concept in React.
  -------------------------------------------------------------- */
 
 

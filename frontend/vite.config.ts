@@ -31,5 +31,8 @@ export default defineConfig({
         },
       }
     }
+  },
+  optimizeDeps: {
+    exclude: ["react-resizable-panels"]
   }
 });
