@@ -1,13 +1,13 @@
-import React from 'react'
-import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu'
+import React from 'react';
+import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
 import {
   focusEditor,
-  usePlateEditorState,
-  usePlateReadOnly,
+  useEditorReadOnly,
+  useEditorRef,
   usePlateStore,
-} from '@udecode/plate-common'
+} from '@udecode/plate-common';
 
-import { Icons } from '@/components/icons'
+import { Icons } from '@/components/icons';
 
 import {
   DropdownMenu,
@@ -16,75 +16,75 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu'
-import { ToolbarButton } from './toolbar'
+} from './dropdown-menu';
+import { ToolbarButton } from './toolbar';
 
 export function ModeDropdownMenu(props: DropdownMenuProps) {
-  const editor = usePlateEditorState()
-  const setReadOnly = usePlateStore().set.readOnly()
-  const readOnly = usePlateReadOnly()
-  const openState = useOpenState()
+  const editor = useEditorRef();
+  const setReadOnly = usePlateStore().set.readOnly();
+  const readOnly = useEditorReadOnly();
+  const openState = useOpenState();
 
-  let value = 'editing'
-  if (readOnly) value = 'viewing'
+  let value = 'editing';
+  if (readOnly) value = 'viewing';
 
   const item: any = {
     editing: (
       <>
-        <Icons.editing className="mr-2 h-5 w-5" />
-        <span className="hidden lg:inline">Editing</span>
+        <Icons.editing className='mr-2 h-5 w-5' />
+        <span className='hidden lg:inline'>Editing</span>
       </>
     ),
     viewing: (
       <>
-        <Icons.viewing className="mr-2 h-5 w-5" />
-        <span className="hidden lg:inline">Viewing</span>
+        <Icons.viewing className='mr-2 h-5 w-5' />
+        <span className='hidden lg:inline'>Viewing</span>
       </>
     ),
-  }
+  };
 
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
         <ToolbarButton
           pressed={openState.open}
-          tooltip="Editing mode"
+          tooltip='Editing mode'
           isDropdown
-          className="min-w-[auto] lg:min-w-[130px]"
+          className='min-w-[auto] lg:min-w-[130px]'
         >
           {item[value]}
         </ToolbarButton>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="start" className="min-w-[180px]">
+      <DropdownMenuContent align='start' className='min-w-[180px]'>
         <DropdownMenuRadioGroup
-          className="flex flex-col gap-0.5"
+          className='flex flex-col gap-0.5'
           value={value}
           onValueChange={(newValue) => {
             if (newValue !== 'viewing') {
-              setReadOnly(false)
+              setReadOnly(false);
             }
 
             if (newValue === 'viewing') {
-              setReadOnly(true)
-              return
+              setReadOnly(true);
+              return;
             }
 
             if (newValue === 'editing') {
-              focusEditor(editor)
-              return
+              focusEditor(editor);
+              return;
             }
           }}
         >
-          <DropdownMenuRadioItem value="editing">
+          <DropdownMenuRadioItem value='editing'>
             {item.editing}
           </DropdownMenuRadioItem>
 
-          <DropdownMenuRadioItem value="viewing">
+          <DropdownMenuRadioItem value='viewing'>
             {item.viewing}
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
