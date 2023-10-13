@@ -22,12 +22,12 @@ const getNotes = async (token: string) => {
 // Update Note
 const updateNote = async (
   noteId: string,
-  updatedNote: Partial<Note>,
+  updatedNoteContent: string,
   token: string,
 ) => {
   const response = await axios.put(
     API_URL + noteId,
-    updatedNote,
+    updatedNoteContent,
     getConfig(token),
   )
   return response.data

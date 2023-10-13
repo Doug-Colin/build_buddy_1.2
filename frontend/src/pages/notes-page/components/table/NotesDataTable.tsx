@@ -104,27 +104,6 @@ Yes, this approach should be used for other features like Notes. It keeps compon
         </div> 
         */}
 
-        {/* Search Component to filter by projectName column (can enable for other columns as well)  */}
-        <Input
-          placeholder="Filter notes by <insert filter criteria here>..."
-          value={
-            (table.getColumn('projectName')?.getFilterValue() as string) ?? ''
-          }
-          onChange={(event) =>
-            table.getColumn('projectName')?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-
-        {/* <div className="ml-auto space-">
-          <FormDialog
-            title="Create Note"
-            description="Fill out the form to create a new Note. Click save when you're done."
-            isOpen={isFormDialogOpen}
-            onFormSubmissionCloseDialog={handleFormDialogClose}
-            formComponent={<NoteForm onFormSubmit={handleFormDialogClose} />}
-          /> */}
-
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline">View Columns</Button>

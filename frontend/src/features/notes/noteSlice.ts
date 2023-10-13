@@ -1,25 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { createTypedAsyncThunk } from '@/app/hooks'
 import noteService from '@/features/notes/noteService'
 import type { RootState } from '../../app/store'
 import { Note, NoteDTO } from '@/types/types'
 import { getErrorMessage } from '@/lib/axiosUtils'
 
+//Type for the initialState.
 interface NoteState {
   notes: Note[]
+  currentNote: null | Note
   status: 'idle' | 'loading' | 'succeeded' | 'failed'
   error: string | null
   message: string | null
 }
 
+// The initialState.
 const initialState: NoteState = {
   notes: [],
+  currentNote: null,
   status: 'idle',
   error: null,
   message: null,
 }
 
-//Create note
+// Async Thunk function to create a note.
 export const createNote = createTypedAsyncThunk(
   'notes/createNote',
   async (note: NoteDTO, thunkAPI) => {
@@ -40,7 +44,7 @@ export const createNote = createTypedAsyncThunk(
   },
 )
 
-//Get notes
+// Async Thunk function to get user' s note's.
 export const getNotes = createTypedAsyncThunk(
   'notes/getUserNotes',
   async (_, thunkAPI) => {
@@ -64,8 +68,8 @@ export const getNotes = createTypedAsyncThunk(
 export const updateNote = createTypedAsyncThunk(
   'notes/updateNote',
   async (
-    // Had first arg type as 'editorState: EditorState', check if required when adhering to data model. 
-    args: { noteId: string; updatedData: Partial<Note> },
+    // Had first arg type as 'editorState: EditorState', check if required when adhering to data model.
+    args: { noteId: string; updatedNoteContent: string },
     thunkAPI,
   ) => {
     try {
@@ -78,7 +82,7 @@ export const updateNote = createTypedAsyncThunk(
 
       const response = await noteService.updateNote(
         args.noteId,
-        args.updatedData,
+        args.updatedNoteContent,
         token,
       )
       return response
@@ -113,7 +117,17 @@ export const deleteNote = createTypedAsyncThunk(
 export const noteSlice = createSlice({
   name: 'note',
   initialState,
-  reducers: {},
+
+  reducers: {
+    setCurrentNote: (state, action: PayloadAction<Note>) => {
+      state.currentNote = action.payload;
+      console.log(state.currentNote)
+    },
+    clearCurrentNote: (state) => {
+      state.currentNote = null
+    },
+  },
+
   extraReducers: (builder) => {
     builder
       //Create Note
@@ -181,5 +195,7 @@ export const noteSlice = createSlice({
       })
   },
 })
+
+export const { setCurrentNote, clearCurrentNote } = noteSlice.actions;
 
 export default noteSlice.reducer

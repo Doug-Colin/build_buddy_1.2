@@ -1,8 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
 // import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
 import { MoreHorizontal } from 'lucide-react'
-
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { setCurrentNote, clearCurrentNote } from '@/features/notes/noteSlice'
 import { Button, Checkbox } from '@/components/ui'
+import { Note } from '@/types/types'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,23 +13,24 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-// Use Zod task schema.
+// Use Zod note schema.
 import { z } from 'zod'
-import { taskSchema } from '@/validators/taskSchema'
+import { noteSchema } from '@/validators/noteSchema'
 
-export interface Note {
-  _id: string
-  noteTitle: string
-  noteContent?: null | Object
-  noteLabel: 'Project' | 'Task' | 'Client' | 'General'
-  projectId?: string
-  taskId?: string
-  client?: string
-  createdAt?: string
-  updatedAt?: string
-}
+// export interface Note {
+//   _id: string
+//   noteTitle: string
+//   noteContent?: null | Object | string
+//   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
+//   projectId?: string
+//   taskId?: string
+//   client?: string
+//   createdAt?: string
+//   updatedAt?: string
+// }
 
-export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
+//export const columns: ColumnDef<z.infer<typeof noteSchema>>[] = [
+export const columns: ColumnDef<Note, any>[] = [
   //checkbox select to select invididual or all notessssss
   {
     id: 'select',
@@ -51,49 +54,19 @@ export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
   {
     accessorKey: 'noteTitle',
     header: 'Title',
+    cell: ({ row }) => {
+      const dispatch = useAppDispatch()
+      const title = row.original.noteTitle
+     // const noteID = row.original._id
+
+      return (
+        <Button variant="ghost" onClick={() => dispatch(setCurrentNote(row.original))}>
+          {title}
+        </Button>
+      )
+    },
   },
-  // {
-  //   accessorKey: 'client',
-  //   header: 'Client',
-  // },
-  // {
-  //   accessorKey: 'taskName',
-  //   header: 'Task',
-  // },
-  // {
-  //   accessorKey: 'taskDescription',
-  //   header: 'Description',
-  // },
-  // {
-  //   accessorKey: 'status',
-  //   header: ({ column }) => {
-  //     //automatically sorts table asc or desc when user toggles header cell & sort icon
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-  //       >
-  //         Status
-  //         <ArrowUpDown className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     )
-  //   },
-  // },
-  // {
-  //   accessorKey: 'priority',
-  //   header: ({ column }) => {
-  //     //automatically sorts table asc or desc when user toggles header cell & sort icon
-  //     return (
-  //       <Button
-  //         variant="ghost"
-  //         onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-  //       >
-  //         Priority
-  //         <ArrowUpDown className="ml-2 h-4 w-4" />
-  //       </Button>
-  //     )
-  //   },
-  // },
+
   {
     id: 'actions',
     //access the row data using row.original in the cell function. Use this to handle actions for your row eg. use the id to make a DELETE call to your API.
@@ -110,6 +83,7 @@ export const columns: ColumnDef<z.infer<typeof taskSchema>>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            {/* DEFINITELY HAVE TO ADJUST THIS SHIT */}
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(task.taskName)}
             >

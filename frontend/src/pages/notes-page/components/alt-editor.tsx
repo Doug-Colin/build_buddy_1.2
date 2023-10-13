@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Nullable, useEditorRef } from '@udecode/plate-common'
+import { useEditorRef } from '@udecode/plate-common'
 import { Note, NoteDTO } from '@/types/types'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { updateNote } from '@/features/notes/noteSlice'
@@ -87,61 +87,49 @@ const plugins = createPlugins(
   },
 )
 
-
-
 interface EditorProps {
   currentNoteId?: string | null
   currentNoteContent?: string | null
 }
 
 
-export default function Editor(
-  currentNoteId?: string | null,
-  currentNoteContent?: string | null
-) {
-  const containerRef = useRef(null)
+//--- get the updated content logged to the console & set in localstorage via temporary 'save' button. -------------
 
-  //--- get the updated content logged to the console & set in localstorage via temporary 'save' button. -------------
-const SaveLogic = (currentNoteId: string | null | {}, currentNoteContent: string | null | {}) => {
+interface SaveLogicProps {
+  currentNoteId: string | null | undefined,
+  updatedNoteContent: string | null | {}
+}
+
+const SaveLogic = ({currentNoteId, updatedNoteContent}: SaveLogicProps) => {
   const dispatch = useAppDispatch()
   const editor = useEditorRef() // Use the hook to get editor reference
-
-  //const currentNote = useAppSelector((state) => state.notes.currentNote)
-  const stringified = JSON.stringify(editor.children)
-  const parsed = JSON.parse(stringified)
+  //const updatedNoteContent =  editor.children
+  // const stringified = JSON.stringify(editor.children)
+  // const parsed = JSON.parse(stringified)
 
   // Function to log editor content to the console
-  const handleSaveClick = (currentNoteId, currentNoteContent) => {
-
+  const handleSaveClick = ({currentNoteId, updatedNoteContent}: SaveLogicProps) => {
+    console.log(`currentNoteId value is ${currentNoteId}`)
+    console.log(`updatedNoteContent value is ${updatedNoteContent}`)
+    
+    
+    //dispatch(updateNote(currentNoteId, updatedNoteContent))
     if (editor) {
-      console.log(
-        `Currently accessing editor via var editor = useEditorRef().
-   editor.children value is currently:
-    ${editor.children}
-    
-    After being passed into JSON.stringify(), editor.children value is now 
-    ${stringified} 
-    
-    
-    After stringified version is passed into JSON.parse(), editor.children value is now 
-    ${parsed}
-    
-    The value of currentNote is currently ${currentNote}
-    
-    The value of currentNote.noteContent is currently ${currentNote.noteContent}
-    
-    The value of currentNote._id is currently ${currentNote?._id}
-    `,
-      )
-
-      const editorContent = editor.children
-      dispatch(updateNote(currentNoteId, currentNoteContent));
+      const updatedNoteContent = editor.children
+      dispatch(updateNote(currentNoteId, updatedNoteContent))
     }
   }
 
-  return <button onClick={handleSaveClick(currentNoteId, currentNoteContent)}>Save</button>
+  return (
+    <button onClick={() => handleSaveClick(currentNoteId, updatedNoteContent)}>
+      Save
+    </button>
+  )
 }
 
+export default function AltEditor({ currentNoteId, previousNoteContent }: EditorProps) {
+  const containerRef = useRef(null)
+  //const editor = useEditorRef()
   const initialValue = [
     {
       type: ELEMENT_PARAGRAPH,
@@ -175,7 +163,7 @@ const SaveLogic = (currentNoteId: string | null | {}, currentNoteContent: string
             <FloatingToolbar>
               <FloatingToolbarButtons />
             </FloatingToolbar>
-            <SaveLogic currentNoteId={currentNoteId} onClick/>
+            <SaveLogic currentNoteId={currentNoteId} previousNoteContent={previousNoteContent} />
             {/* <SaveLogic /> */}
           </Plate>
         </div>
@@ -183,3 +171,25 @@ const SaveLogic = (currentNoteId: string | null | {}, currentNoteContent: string
     </div>
   )
 }
+
+/*
+console.log(
+  `Currently accessing editor via var editor = useEditorRef().
+editor.children value is currently:
+${editor.children}
+
+After being passed into JSON.stringify(), editor.children value is now 
+${stringified} 
+
+
+After stringified version is passed into JSON.parse(), editor.children value is now 
+${parsed}
+
+The value of currentNote is currently ${currentNote}
+
+The value of currentNote.noteContent is currently ${currentNote.noteContent}
+
+The value of currentNote._id is currently ${currentNote?._id}
+`,
+)
+*/

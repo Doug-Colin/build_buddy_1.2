@@ -87,7 +87,7 @@ export interface TaskDTO {
 export interface Note {
   _id: string
   noteTitle: string
-  noteContent?: null | Object
+  noteContent?: null | string
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
   projectId?: string
   taskId?: string
@@ -101,6 +101,7 @@ export interface NoteFormProps {
 
 export interface NoteDTO {
   noteTitle: string
+  noteContent?: null | string
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
   projectId?: string
   taskId?: string
