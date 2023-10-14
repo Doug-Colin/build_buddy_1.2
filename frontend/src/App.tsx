@@ -8,7 +8,7 @@ import RegisterPage from '@/pages/register-page/RegisterPage'
 import DashboardPage from '@/pages/dashboard-page/DashboardPage'
 import ProjectsPage from '@/pages/projects-page/ProjectsPage'
 import TasksPage from './pages/tasks-page/TasksPage'
-import NotesPage from './pages/notes-page/NotesPage'
+import PrevNotesPage from './pages/notes-page/PrevNotesPage'
 
 export default function App() {
   return (
@@ -24,7 +24,7 @@ export default function App() {
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/tasks" element={<TasksPage />} />
-              <Route path="/notes" element={<NotesPage />} />
+              <Route path="/notes" element={<PrevNotesPage />} />
             </Routes>
           </Router>
         </div>
