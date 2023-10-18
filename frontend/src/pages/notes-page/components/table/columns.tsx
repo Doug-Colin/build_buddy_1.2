@@ -85,7 +85,7 @@ export const columns: ColumnDef<Note, any>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             {/* DEFINITELY HAVE TO ADJUST THIS SHIT */}
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(task.taskName)}
+              // onClick={() => navigator.clipboard.writeText(task.taskName)}
             >
               Update Note
             </DropdownMenuItem>
