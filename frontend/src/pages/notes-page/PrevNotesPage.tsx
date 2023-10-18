@@ -11,7 +11,7 @@ import { Note } from '@/types/types'
 import { columns } from './components/table/columns'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { getNotes } from '@/features/notes/noteSlice'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { Plate } from '@udecode/plate-common'
 
 export default function PrevNotesPage() {
@@ -21,6 +21,7 @@ export default function PrevNotesPage() {
   const dispatch = useAppDispatch()
   const notes = useAppSelector((state) => state.notes.notes)
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
+  const [currentNote, setCurrentNote] = useState('null')
 
   useEffect(() => {
     dispatch(getNotes())
