@@ -24,13 +24,8 @@ dist-ssr
 *.sw?
 
 
-# Personal project notes
-project_notes.md
+# Project notes
 /project_notes
 
-# sample data and test components
-/sample_data
-/alt-components
-
-# Example redux service and slice files from previous JS project 
-/frontend/src/features/examples
+# RTE (Plate) editor and NotesPage from initial Plate version 23 (now updated to 30)
+/alt-prev
