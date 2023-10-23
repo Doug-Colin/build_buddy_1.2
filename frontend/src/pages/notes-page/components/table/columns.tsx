@@ -71,7 +71,7 @@ export const columns: ColumnDef<Note, any>[] = [
     id: 'actions',
     //access the row data using row.original in the cell function. Use this to handle actions for your row eg. use the id to make a DELETE call to your API.
     cell: ({ row }) => {
-      const task = row.original
+   
 
       return (
         <DropdownMenu>
