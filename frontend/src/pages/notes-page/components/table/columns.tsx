@@ -14,20 +14,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 // Use Zod note schema.
-import { z } from 'zod'
-import { noteSchema } from '@/validators/noteSchema'
-
-// export interface Note {
-//   _id: string
-//   noteTitle: string
-//   noteContent?: null | Object | string
-//   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
-//   projectId?: string
-//   taskId?: string
-//   client?: string
-//   createdAt?: string
-//   updatedAt?: string
-// }
+// import { z } from 'zod'
+// import { noteSchema } from '@/validators/noteSchema'
 
 //export const columns: ColumnDef<z.infer<typeof noteSchema>>[] = [
 export const columns: ColumnDef<Note, any>[] = [
@@ -57,7 +45,6 @@ export const columns: ColumnDef<Note, any>[] = [
     cell: ({ row }) => {
       const dispatch = useAppDispatch()
       const title = row.original.noteTitle
-     // const noteID = row.original._id
 
       return (
         <Button variant="ghost" onClick={() => dispatch(setCurrentNote(row.original))}>
