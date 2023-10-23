@@ -1,12 +1,5 @@
-//---------- Tables with shadcn table and tanstack table ------------------------
 
-//---------- data-table.tsx (client component) will contain our <DataTable /> component. ------------------------
-
-//Note: The <DataTable /> component renders our table.
-
-//Tip: If you find yourself using <DataTable /> in multiple places, this is the component you could make reusable by extracting it to components/ui/data-table.tsx. For example: <DataTable columns={columns} data={data} />
 import { useState } from 'react'
-//import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import {
   ColumnDef,
   SortingState,
@@ -35,10 +28,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { Button, Input } from '@/components/ui'
-// import FormDialog from '@/components/FormDialog'
-// import NoteForm from '@/pages/notes-page/components/NoteForm'
-// import { useFormDialogState } from '@/hooks/useFormDialogState'
-// import { getNotes } from '@/features/notes/noteSlice'
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -53,21 +43,6 @@ export function NotesDataTable<TData, TValue>({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = useState({})
-  // const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
-
-/* --------------- *Adjust this an other features if nec.; get it right for Notes Table* ----------------------------
-The best practice in React and Redux applications is to keep data fetching and state management as close to the top-level component as possible, which in your case would be NotesPage. This approach aligns with the principle of lifting state up, where you manage state in parent components and pass it down to child components as props. This makes your components more reusable and easier to manage.
-
-In NotesPage, you're correctly dispatching getNotes() and selecting notes from the global state. Passing these notes as a prop to DataTable is a good approach. If DataTable doesn't display notes when passed as props, the issue might be elsewhere, such as how columns are defined or how data is being used within DataTable.
-
-Yes, this approach should be used for other features like Notes. It keeps components decoupled from specific data sources, promoting reusability and maintainability. Manage state in feature pages like NotesPage, and pass it down to components like tables or lists. This top-down data flow is indeed a fundamental concept in React.
- -------------------------------------------------------------- */
-
-
-  //get user's notes o array can be mapped to table
-  // useEffect(() => {
-  //   dispatch(getNotes())
-  // }, [dispatch])
 
   const table = useReactTable({
     data,
