@@ -1,6 +1,5 @@
 import { TooltipProvider } from '@/components/plate-ui/tooltip'
 import { PlateEditor } from './components/PlateEditor'
-// import PreviousEditor from './prev-editor'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
 import Layout from '@/components/Layout'
 import FormDialog from '@/components/FormDialog'
@@ -11,18 +10,21 @@ import { Note } from '@/types/types'
 import { columns } from './components/table/columns'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { getNotes } from '@/features/notes/noteSlice'
-import { useState, useEffect } from 'react'
-import { Plate } from '@udecode/plate-common'
+import { useEffect } from 'react'
 
 export default function PrevNotesPage() {
   // !user redirects to LandingPage
   useAuthCheck()
 
   const dispatch = useAppDispatch()
-  const notes = useAppSelector((state) => state.notes.notes)
-  const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
-  const [currentNote, setCurrentNote] = useState('null')
 
+  // Redux global state for notes.
+  const notes = useAppSelector((state) => state.notes.notes)
+
+  // FormDialog state.
+  const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
+
+  // Retrieve notes from backend on page load.
   useEffect(() => {
     dispatch(getNotes())
   }, [dispatch])
@@ -44,12 +46,10 @@ export default function PrevNotesPage() {
               formComponent={<NoteForm onFormSubmit={handleFormDialogClose} />}
             />
           </div>
-          {/* <div className="container mx-auto p-4"> */}
-          {/* <div className="max-w-[1336px] rounded-lg border bg-background shadow">
-            <PreviousEditor /> */}
+          <div className="max-w-[1336px] rounded-lg border bg-background shadow">
             <PlateEditor />
-            <NotesDataTable<Note, any> columns={columns} data={notes} />
-          {/* </div> */}
+          </div>
+          <NotesDataTable<Note, any> columns={columns} data={notes} />
         </section>
       </TooltipProvider>
     </Layout>
