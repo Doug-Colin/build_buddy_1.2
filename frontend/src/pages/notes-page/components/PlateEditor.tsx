@@ -1,3 +1,5 @@
+import { useAppDispatch, useAppSelector } from '@/app/hooks'
+
 import { withProps } from '@udecode/cn'
 import {
   createPlugins,
@@ -217,16 +219,42 @@ const initialValue = [
 ]
 
 export function PlateEditor() {
-  const [editorContent, setEditorContent] = useState<MyValue>(initialValue)
+
+
+  // setEditorContent(newContent)
+  // console.log(
+  //   `After running setEditorContent(newContent), variable newContent is now ${JSON.stringify(
+  //     newContent,
+  //   )}`,
+  // )
+  // console.log(
+  //   `state variable editorContent is now ${JSON.stringify(
+  //     editorContent,
+  //   )}`,
+  // )
+
+/* 
+Where I'm at : figuring out how to load the .noteContent property from selectedNote (redux state value set when user clicked on note in NotesDataTable) into the editor, if it is not null. Running into Type issues because initalValue prop of Plate expects MyValue, which is an array of objects. So it seems I need to JSON.stringify it. That outpy
+*/
+
+  const dispatch = useAppDispatch()
+  const currentNote = useAppSelector((state) => state.notes.currentNote)
+  //const initialContent = currentNote && currentNote.noteContent ? JSON.parse(currentNote.noteContent) : initialValue
+  // Attempting localStorage to persist editorContent; refactor code to send to backend afterwards
+  const mockDbNoteContent = localStorage.getItem('mockCurrentNoteContent')
+  const initialContent = mockDbNoteContent ? JSON.parse(mockDbNoteContent) : initialValue
+  //const [editorContent, setEditorContent] = useState<MyValue>(initialContent)
 
   return (
     <Plate
       plugins={plugins}
-      initialValue={initialValue}
-      onChange={(newContent) => {
-        setEditorContent(newContent)
-        console.log(`After running setEditorContent(newContent), variable newContent is now ${JSON.stringify(newContent)}`)
-        console.log(`state variable editorContent is now ${JSON.stringify(editorContent)}`)
+      initialValue={initialContent}
+      onChange={(editorContent) => {
+        console.log(`Value of current editorContent is now is now ${JSON.stringify(
+              editorContent,
+            )}`)
+
+            localStorage.setItem('mockCurrentNoteContent', JSON.stringify(editorContent))
       }}
     >
       <FixedToolbar>
