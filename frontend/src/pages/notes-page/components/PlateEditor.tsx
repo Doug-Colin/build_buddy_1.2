@@ -214,28 +214,11 @@ const initialValue = [
   {
     id: '1',
     type: 'p',
-    children: [{ text: 'Hello, World!' }],
+    children: [{ text: 'Type here to start your note here' }],
   },
 ]
 
 export function PlateEditor() {
-
-
-  // setEditorContent(newContent)
-  // console.log(
-  //   `After running setEditorContent(newContent), variable newContent is now ${JSON.stringify(
-  //     newContent,
-  //   )}`,
-  // )
-  // console.log(
-  //   `state variable editorContent is now ${JSON.stringify(
-  //     editorContent,
-  //   )}`,
-  // )
-
-/* 
-Where I'm at : figuring out how to load the .noteContent property from selectedNote (redux state value set when user clicked on note in NotesDataTable) into the editor, if it is not null. Running into Type issues because initalValue prop of Plate expects MyValue, which is an array of objects. So it seems I need to JSON.stringify it. That outpy
-*/
 
   const dispatch = useAppDispatch()
   const currentNote = useAppSelector((state) => state.notes.currentNote)
