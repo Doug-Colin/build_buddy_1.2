@@ -1,29 +1,17 @@
-//import { useAppDispatch, useAppSelector } from '@/app/hooks'
-
 import {
   Plate,
 } from '@udecode/plate-common'
-
+// Plate components.
 import { Editor } from '@/components/plate-ui/editor'
 import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar'
 import { FixedToolbarButtons } from '@/components/plate-ui/fixed-toolbar-buttons'
 import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
 import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
-
-//import { useState } from 'react'
-//import { MyValue } from '@/types/plate-types'
-
-
-
-
-//-------------------------------------------
+// Plate plugins.
 import plugins from '../plugins/plugins'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-// import { Editor } from '@/components/plate-ui/editor'
-// import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar'
-// import { FixedToolbarButtons } from '@/components/plate-ui/fixed-toolbar-buttons'
-// import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
-// import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
+//import { useState } from 'react'
+//import { MyValue } from '@/types/plate-types'
 
 const initialValue = [
   {
