@@ -64,7 +64,7 @@ export const getProjects = createTypedAsyncThunk(
 export const updateProject = createTypedAsyncThunk(
   'projects/updateProject',
   async (
-    args: { projectId: string; updatedData: Partial<Project> },
+    args: { projectId: string; updatedProject: Partial<Project> },
     thunkAPI,
   ) => {
     try {
@@ -77,7 +77,7 @@ export const updateProject = createTypedAsyncThunk(
 
       const response = await projectService.updateProject(
         args.projectId,
-        args.updatedData,
+        args.updatedProject,
         token,
       )
       return response
