@@ -55,7 +55,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     dispatch(
       updateProject({
         projectId: project._id,
-        updatedData: { projectName, client, dueDate, status },
+        updatedProject: { projectName, client, dueDate, status },
       }),
     )
   }
