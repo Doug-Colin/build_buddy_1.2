@@ -7,7 +7,7 @@ const noteSchema = new mongoose.Schema(
         required: true
     },
     noteContent: {
-        type: Object,
+        type: String,
         // required: true *note necessary for creation of note, only adding noteContent
       },
     user: {
