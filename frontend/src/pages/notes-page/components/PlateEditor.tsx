@@ -1,6 +1,4 @@
-import {
-  Plate,
-} from '@udecode/plate-common'
+import { Plate } from '@udecode/plate-common'
 // Plate components.
 import { Editor } from '@/components/plate-ui/editor'
 import { FixedToolbar } from '@/components/plate-ui/fixed-toolbar'
@@ -9,9 +7,14 @@ import { FloatingToolbar } from '@/components/plate-ui/floating-toolbar'
 import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-buttons'
 // Plate plugins.
 import plugins from '../plugins/plugins'
+// Redux.
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-//import { useState } from 'react'
-//import { MyValue } from '@/types/plate-types'
+import { updateNote } from '@/features/notes/noteSlice'
+// React.
+import { useState } from 'react'
+// Types.
+import { MyValue } from '@/types/plate-types'
+import { set } from 'date-fns'
 
 const initialValue = [
   {
@@ -22,19 +25,25 @@ const initialValue = [
 ]
 
 export function PlateEditor() {
-
   const dispatch = useAppDispatch()
   const currentNote = useAppSelector((state) => state.notes.currentNote)
-  //const initialContent = currentNote && currentNote.noteContent ? JSON.parse(currentNote.noteContent) : initialValue
-  // Attempting localStorage to persist editorContent; refactor code to send to backend afterwards
-  const mockDbNoteContent = localStorage.getItem('mockCurrentNoteContent')
-  const initialContent = mockDbNoteContent ? JSON.parse(mockDbNoteContent) : initialValue
-  //const [editorContent, setEditorContent] = useState<MyValue>(initialContent)
 
-  
+  // If user has setCurrentNote by clicking in table, load currentNote's content into editor. Otherwise display placeolder text (may want to refactor this to be a useEffect hook, and to use less confusing variable names).
+  // const initialContent =
+  //   currentNote && currentNote.noteContent
+  //     ? JSON.parse(currentNote.noteContent)
+  //     : initialValue
+
+  // Local storage mockup of noteContent persistence.
+  // const mockDbNoteContent = localStorage.getItem('mockCurrentNoteContent')
+  // const initialContent = mockDbNoteContent ? JSON.parse(mockDbNoteContent) : initialValue
+
+  // State for content of currentNote.
+  const [currentEditorContent, setCurrentEditorContent] = useState<MyValue>(initialValue)
+
   /* Pseudocode 
   1. Sending editorContent to backend
-    - create local state to hold editorContent
+   X - create local state to hold editorContent
     - Plate already has onChange prop watching for content changes
     - update onChange to setEditorContent
     - confirm that editorContent is being updated in state
@@ -50,27 +59,47 @@ export function PlateEditor() {
     - load editorContent state into editor
     - confirm that editorContent is being loaded into editor
     - confirm that editorContent will load upon clicking of any notes in NotesDataTable.
-     
-  */
 
+  */
 
   return (
     <Plate
       plugins={plugins}
-      initialValue={initialContent}
+      initialValue={initialValue}
       onChange={(editorContent) => {
-        console.log(`Value of current editorContent is now is now ${JSON.stringify(
-              editorContent,
-            )}`)
+        setCurrentEditorContent(editorContent)
+        JSON.stringify(editorContent)
+        console.log(
+          `Value of current editorContent is now ${JSON.stringify(editorContent)}`,
+          `Value of currentEditorContent is now ${currentEditorContent}`
+        )
+        //setCurrentEditorContent(editorContent)
+        if (currentNote && currentEditorContent) {
+          dispatch(
+            updateNote({
+              noteId: currentNote._id,
+              newNoteContent: {noteContent: editorContent}
+            }),
+          )
+        }
+        
+      //const noteContent = JSON.parse(response.data);
 
-            localStorage.setItem('mockCurrentNoteContent', JSON.stringify(editorContent))
+        //localStorage.setItem('mockCurrentNoteContent', JSON.stringify(editorContent))
       }}
+      // onChange={(editorContent) => {
+      //   console.log(`Value of current editorContent is now is now ${JSON.stringify(
+      //         editorContent,
+      //       )}`)
+
+      //       localStorage.setItem('mockCurrentNoteContent', JSON.stringify(editorContent))
+      // }}
     >
       <FixedToolbar>
         <FixedToolbarButtons />
       </FixedToolbar>
 
-      <Editor/>
+      <Editor />
 
       <FloatingToolbar>
         <FloatingToolbarButtons />
