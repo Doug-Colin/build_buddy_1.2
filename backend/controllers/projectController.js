@@ -33,6 +33,7 @@ const createProject = asyncHandler(async (req, res) => {
 
 // descr: Update project | route: PUT /api/projects/:id | access: Private
 const updateProject = asyncHandler(async (req, res) => {
+  console.log('Received payload:', req.body);
   const project = await Project.findById(req.params.id);
 
   if (!project) {
