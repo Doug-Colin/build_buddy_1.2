@@ -22,7 +22,7 @@ const getNotes = async (token: string) => {
 // Update Note
 const updateNote = async (
   noteId: string,
-  newNoteContent: String,
+  newNoteContent: string,
   token: string,
 ) => {
   const response = await axios.put(
