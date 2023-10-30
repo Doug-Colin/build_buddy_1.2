@@ -15,7 +15,6 @@ const getNotes = asyncHandler(async (req, res) => {
 const createNote = asyncHandler(async (req, res) => {
   console.log('Received payload:', req.body);
 
-
   const note = await Note.create({
     user: req.user._id,
     noteTitle: req.body.noteTitle,
@@ -31,6 +30,10 @@ const createNote = asyncHandler(async (req, res) => {
 
 // descr: Update note | route: PUT /api/notes/:id | access: Private
 const updateNote = asyncHandler(async (req, res) => {
+  // console.log(`req.body is ${req.body}`);
+ console.log(`type of req.body is ${typeof req.body}`);
+
+
   const note = await Note.findById(req.params.id);
 
   if (!note) {
