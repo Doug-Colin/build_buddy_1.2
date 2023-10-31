@@ -46,11 +46,11 @@ export function PlateEditor() {
   /* Pseudocode 
   1. Sending editorContent to backend
    X - create local state to hold editorContent
-    - Plate already has onChange prop watching for content changes
-    - update onChange to setEditorContent
-    - confirm that editorContent is being updated in state
-    - in onChange, add dispatch to send editorContent to backend
-    - confirm content is being sent to backend
+   X - Plate already has onChange prop watching for content changes
+   X - update onChange to setEditorContent
+   X - confirm that editorContent is being updated in state
+   X - in onChange, add dispatch to send editorContent to backend
+   X - confirm content is being sent to backend
     - revisit how to write a debouncing function to prevent too many calls to backend
     - implement debouncing function
 
