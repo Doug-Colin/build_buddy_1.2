@@ -14,7 +14,7 @@ import { updateNote } from '@/features/notes/noteSlice'
 import { useState } from 'react'
 // Types.
 import { MyValue } from '@/types/plate-types'
-import { set } from 'date-fns'
+// import { set } from 'date-fns'
 
 const initialValue = [
   {
@@ -27,7 +27,8 @@ const initialValue = [
 export function PlateEditor() {
   const dispatch = useAppDispatch()
   const currentNote = useAppSelector((state) => state.notes.currentNote)
-
+  const currentNoteId = currentNote?._id
+  console.log(currentNote?._id)
   // If user has setCurrentNote by clicking in table, load currentNote's content into editor. Otherwise display placeolder text (may want to refactor this to be a useEffect hook, and to use less confusing variable names).
   // const initialContent =
   //   currentNote && currentNote.noteContent
@@ -39,7 +40,8 @@ export function PlateEditor() {
   // const initialContent = mockDbNoteContent ? JSON.parse(mockDbNoteContent) : initialValue
 
   // State for content of currentNote.
-  const [currentEditorContent, setCurrentEditorContent] = useState<MyValue>(initialValue)
+  const [currentEditorContent, setCurrentEditorContent] =
+    useState<MyValue>(initialValue)
 
   /* Pseudocode 
   1. Sending editorContent to backend
@@ -60,6 +62,8 @@ export function PlateEditor() {
     - confirm that editorContent is being loaded into editor
     - confirm that editorContent will load upon clicking of any notes in NotesDataTable.
 
+
+     - currentNote.noteContent will be loaded into the editor upon selecting a note. Otherwise the editor should have a 'type here to start your note' that dissapears upon entering text. 
   */
 
   return (
@@ -67,23 +71,45 @@ export function PlateEditor() {
       plugins={plugins}
       initialValue={initialValue}
       onChange={(editorContent) => {
-        setCurrentEditorContent(editorContent)
-        JSON.stringify(editorContent)
         console.log(
-          `Value of current editorContent is now ${JSON.stringify(editorContent)}`,
-          `Value of currentEditorContent is now ${currentEditorContent}`
+          `Value of current editorContent, stringified is now ${JSON.stringify(
+            editorContent,
+          )}`,
         )
-        //setCurrentEditorContent(editorContent)
+        setCurrentEditorContent(editorContent)
+        JSON.stringify(currentEditorContent)
+        // dispatch(
+        //   updateNote({
+        //     noteId: currentNoteId,
+        //     newNoteContent: JSON.stringify(editorContent),
+        //   }),
+        // )
+        // console.log(
+        //   `Value of local state currentEditorContent is  ${currentEditorContent}, and when stringified, it is ${JSON.stringify(
+        //     currentEditorContent,
+        //   )}`,
+        // )
+        // console.log(
+        //   `The type of state currentEditorContent stringified is ${typeof JSON.stringify(
+        //     currentEditorContent,
+        //   )}`,
+        // )
+
         if (currentNote && currentEditorContent) {
+          console.log(`dispatching updateNote action with args (noteId, newNoteContent).
+          Value of arg noteId: currentNote._id is ${currentNote._id}.
+          Value of arg newNoteContent: editorContent is ${JSON.stringify(editorContent)}.`)
           dispatch(
             updateNote({
               noteId: currentNote._id,
-              newNoteContent: {noteContent: editorContent}
+            newNoteContent: JSON.stringify(editorContent)
+            //Works. consider adjusting updateNOte async thunk in noteSlice to expect an Object instead of a string, may alos make sense to use Partial<Note> type in case you want to later allow users to change other things when duplicating (name, etc), esp. if you create a UI that has more info about each note in eleljments above the note. )
+            //newNoteContent: {noteContent: (JSON.stringify(editorContent))}
             }),
           )
         }
-        
-      //const noteContent = JSON.parse(response.data);
+
+        //const noteContent = JSON.parse(response.data);
 
         //localStorage.setItem('mockCurrentNoteContent', JSON.stringify(editorContent))
       }}
