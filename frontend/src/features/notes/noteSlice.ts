@@ -69,7 +69,7 @@ export const updateNote = createTypedAsyncThunk(
   'notes/updateNote',
   async (
     // Had first arg type as 'editorState: EditorState', check if required when adhering to data model.
-    args: { noteId: string; newNoteContent: String },
+    args: { noteId: string; newNoteContent: string },
     thunkAPI,
   ) => {
     try {
@@ -82,7 +82,8 @@ export const updateNote = createTypedAsyncThunk(
       // Stringify the new content of the note so it can be sent over HTTP.  
       const response = await noteService.updateNote(
         args.noteId,
-        JSON.stringify(args.newNoteContent),
+        //JSON.stringify(args.newNoteContent),
+        args.newNoteContent,
         token,
       )
       return response
