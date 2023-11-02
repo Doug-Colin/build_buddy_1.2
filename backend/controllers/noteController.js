@@ -30,8 +30,8 @@ const createNote = asyncHandler(async (req, res) => {
 
 // descr: Update note | route: PUT /api/notes/:id | access: Private
 const updateNote = asyncHandler(async (req, res) => {
-  // console.log(`req.body is ${req.body}`);
- console.log(`type of req.body is ${typeof req.body}`);
+  console.log(`Backend- Received following for updating note:`, req.body);
+  console.log(`Backend- The type of req.body is ${typeof req.body}`);
 
 
   const note = await Note.findById(req.params.id);
@@ -54,11 +54,13 @@ const updateNote = asyncHandler(async (req, res) => {
   }
 
   // update note via mongoosefindByIdAndUpdate method
+  console.log(`Backend- Updating note with following data:`, req.body);
   const updatedNote = await Note.findByIdAndUpdate(
     req.params.id,
     req.body,
-    { new: true } //tell Mongoose to return the document
+    { new: true } //return the updated document
   );
+  console.log('Backend- Updated note:', updatedNote);
 
   res.status(200).json(updatedNote);
 });
