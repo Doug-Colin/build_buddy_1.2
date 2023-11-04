@@ -22,16 +22,17 @@ const getNotes = async (token: string) => {
 // Update Note
 const updateNote = async (
   noteId: string,
-  newNoteContent: string,
+  updatedNote: Partial<Note>,
   token: string,
 ) => {
   const response = await axios.put(
     API_URL + noteId,
-    newNoteContent,
+    updatedNote,
     getConfig(token),
   )
   return response.data
 }
+
 
 //Delete note
 const deleteNote = async (noteId: string, token: string) => {
