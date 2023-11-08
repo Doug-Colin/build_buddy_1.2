@@ -69,7 +69,7 @@ export const updateNote = createTypedAsyncThunk(
   'notes/updateNote',
   async (
     // Had first arg type as 'editorState: EditorState', check if required when adhering to data model.
-    args: { noteId: string; newNoteContent: string },
+    args: { noteId: string; updatedNote: Partial<Note> },
     thunkAPI,
   ) => {
     try {
@@ -79,11 +79,11 @@ export const updateNote = createTypedAsyncThunk(
       if (!token) {
         throw new Error('Token is missing')
       }
-      // Stringify the new content of the note so it can be sent over HTTP.  
+      // Stringify the new content of the note so it can be sent over HTTP.
       const response = await noteService.updateNote(
         args.noteId,
-        //JSON.stringify(args.newNoteContent),
-        args.newNoteContent,
+        // JSON.stringify(args.updatedNoteContent),
+        args.updatedNote,
         token,
       )
       return response
@@ -121,11 +121,26 @@ export const noteSlice = createSlice({
 
   reducers: {
     setCurrentNote: (state, action: PayloadAction<Note>) => {
-      state.currentNote = action.payload;
-      console.log(state.currentNote)
+      state.currentNote = action.payload
+      console.log(
+        `state.currentNote is now set to ${
+          state.currentNote.noteTitle
+        }, with the following properties: ${JSON.stringify(state.currentNote)}`,
+      )
+      console.log(
+        `state.currentNote.noteContent unparsed is ${state.currentNote.noteContent}`,
+      )
+      // const parsedCurrentNoteContent = state.currentNote.noteContent
+      //   ? JSON.parse(state.currentNote.noteContent)
+      //   : 'Error, no state.currentNote.noteContent to parse.'
+      // console.log(
+      //   `state.currentNote.noteContent parsed is ${parsedCurrentNoteContent}`,
+      // )
     },
+
     clearCurrentNote: (state) => {
       state.currentNote = null
+      console.log(`state.currentNote cleared and set to ${state.currentNote}`)
     },
   },
 
@@ -197,6 +212,6 @@ export const noteSlice = createSlice({
   },
 })
 
-export const { setCurrentNote, clearCurrentNote } = noteSlice.actions;
+export const { setCurrentNote, clearCurrentNote } = noteSlice.actions
 
 export default noteSlice.reducer
