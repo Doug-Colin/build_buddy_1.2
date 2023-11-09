@@ -195,7 +195,9 @@ const plugins = createPlugins(
         [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
         [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
         [MARK_UNDERLINE]: withProps(PlateLeaf, { as: 'u' }),
-      }),
+      },
+      
+      ),
     },
   )
 
