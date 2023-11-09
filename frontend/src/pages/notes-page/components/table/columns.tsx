@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 // import { ArrowUpDown, MoreHorizontal } from 'lucide-react'
 import { MoreHorizontal } from 'lucide-react'
-import { useAppDispatch, useAppSelector } from '@/app/hooks'
+import { useAppDispatch} from '@/app/hooks'
 import { setCurrentNote, clearCurrentNote } from '@/features/notes/noteSlice'
 import { Button, Checkbox } from '@/components/ui'
 import { Note } from '@/types/types'
@@ -47,7 +47,13 @@ export const columns: ColumnDef<Note, any>[] = [
       const title = row.original.noteTitle
 
       return (
-        <Button variant="ghost" onClick={() => dispatch(setCurrentNote(row.original))}>
+        <Button
+          variant="ghost"
+          onClick={() => {
+            dispatch(clearCurrentNote())
+            dispatch(setCurrentNote(row.original))
+          }}
+        >
           {title}
         </Button>
       )
@@ -58,8 +64,6 @@ export const columns: ColumnDef<Note, any>[] = [
     id: 'actions',
     //access the row data using row.original in the cell function. Use this to handle actions for your row eg. use the id to make a DELETE call to your API.
     cell: ({ row }) => {
-   
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -72,7 +76,7 @@ export const columns: ColumnDef<Note, any>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             {/* DEFINITELY HAVE TO ADJUST THIS SHIT */}
             <DropdownMenuItem
-              // onClick={() => navigator.clipboard.writeText(task.taskName)}
+            // onClick={() => navigator.clipboard.writeText(task.taskName)}
             >
               Update Note
             </DropdownMenuItem>
