@@ -24,7 +24,12 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "project_notes/DialogDemo.tsx", "project_notes/alt-prev"],
+  "include": [
+    "src",
+    "project_notes/DialogDemo.tsx",
+    "project_notes/alt-prev",
+    "project_notes/example_components/EditorAttempts"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
