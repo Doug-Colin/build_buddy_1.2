@@ -1,5 +1,6 @@
+import { useState, useEffect, useRef } from 'react'
 import { TooltipProvider } from '@/components/plate-ui/tooltip'
-import { PlateEditor } from './components/PlateEditor'
+import ModularEditor from './components/ModularEditor'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
 import Layout from '@/components/Layout'
 import FormDialog from '@/components/FormDialog'
@@ -10,16 +11,56 @@ import { Note } from '@/types/types'
 import { columns } from './components/table/columns'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { getNotes } from '@/features/notes/noteSlice'
-import { useEffect } from 'react'
+import { MyValue } from '@/types/plate-types'
+import { updateNote } from '@/features/notes/noteSlice'
 
-export default function PrevNotesPage() {
-  // !user redirects to LandingPage
+
+export default function NotesPage() {
+  // Redirects to LandingPage upon invalid user credentials.
   useAuthCheck()
 
+  // Redux global state for currentNote updated via dispatch(updateNote()).
+  const notes = useAppSelector((state) => state.notes.notes)
+  const currentNote = useAppSelector((state) => state.notes.currentNote)
   const dispatch = useAppDispatch()
 
-  // Redux global state for notes.
-  const notes = useAppSelector((state) => state.notes.notes)
+  // Placeholder text for editor.
+  const placeholder = {
+    key: 'placeholder',
+    value: [
+      {
+        id: '1',
+        type: 'p',
+        children: [
+          {
+            text: 'Type here to start your note.',
+          },
+        ],
+      },
+    ],
+  }
+
+  const editorRef = useRef<typeof ModularEditor | null>(null)
+  const [key, setKey] = useState(
+    currentNote?.noteContent === null ? 'placeholder' : currentNote?._id,
+  )
+
+  // State and useEffect for populating editor upon user selection of note from table.
+  const [initialValue, setInitialValue] = useState<MyValue>(placeholder.value)
+
+  useEffect(() => {
+    if (currentNote?.noteContent === null) {
+      setKey('placeholder')
+      setInitialValue(placeholder.value)
+    } else if (currentNote && typeof currentNote.noteContent === 'string') {
+      const parsedContent = JSON.parse(currentNote.noteContent)
+      setInitialValue(parsedContent)
+      setKey(currentNote._id)
+    } else {
+      // Reset to placeholder or clear the editor when there's no current note
+      setInitialValue(placeholder.value)
+    }
+  }, [currentNote])
 
   // FormDialog state.
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
@@ -28,6 +69,26 @@ export default function PrevNotesPage() {
   useEffect(() => {
     dispatch(getNotes())
   }, [dispatch])
+
+  // Handler for saving changes in note content.
+  const saveContentChange = (newContent: MyValue) => {
+    const updatedContent = { noteContent: JSON.stringify(newContent) }
+    if (currentNote?._id) {
+      //  setKey(currentNote._id)
+      console.log(
+        `saveContentChange called, dispatching updateNote with arg key-values of noteId:${currentNote._id} and updatedNote: ${updatedContent}`,
+      )
+      dispatch(
+        updateNote({
+          noteId: currentNote._id,
+          updatedNote: updatedContent,
+        }),
+      )
+    }
+  }
+
+  // const initialValue = useMemo(() =>
+  //   currentNote?.noteContent ? JSON.parse(currentNote.noteContent) : placeholder, [currentNote])
 
   return (
     <Layout>
@@ -47,7 +108,12 @@ export default function PrevNotesPage() {
             />
           </div>
           <div className="max-w-[1336px] rounded-lg border bg-background shadow">
-            <PlateEditor />
+            <ModularEditor
+              editorRef={editorRef}
+              editorKey={key}
+              initialContent={initialValue}
+              onChange={saveContentChange}
+            />
           </div>
           <NotesDataTable<Note, any> columns={columns} data={notes} />
         </section>
