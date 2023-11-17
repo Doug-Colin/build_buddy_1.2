@@ -8,12 +8,14 @@ import { FloatingToolbarButtons } from '@/components/plate-ui/floating-toolbar-b
 import plugins from '../plugins/plugins'
 import { MyValue } from '@/types/plate-types'
 
+
 interface ModularEditorProps {
   editorRef: any
   initialContent: MyValue
   editorKey?: string
   //currentNote: Note,
   onChange: (initialContent: MyValue) => void
+ // isPlaceHolderVisible: boolean
 }
 
 export default function ModularEditor({
@@ -23,9 +25,8 @@ export default function ModularEditor({
   onChange,
 }: ModularEditorProps) {
   /* 
-Alternate note saving handler via Slate docs; checks for Abstract Syntax Tree (AST) changes & dispatches updateNote() accordingly.
-*/
-/*
+Alt. handleSave; checks for AST changes as per Slate Doc's & dispatches updateNote() accordingly.
+
 const saveAstContentChange = (newValue: MyValue) => {
      const isAstChange = newValue.some(n => n.type !== 'selection');
      if (isAstChange && currentNote?._id) {
