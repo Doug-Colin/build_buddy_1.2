@@ -105,7 +105,7 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
       <DropdownMenuTrigger asChild>
         <ToolbarButton
           pressed={openState.open}
-          tooltip='Turn into'
+          tooltip='Text Size'
           isDropdown
           className='lg:min-w-[130px]'
         >
