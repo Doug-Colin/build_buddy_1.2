@@ -7,6 +7,9 @@ import {
   usePlaceholderState,
 } from '@udecode/plate-common';
 import { ELEMENT_H1 } from '@udecode/plate-heading';
+import { ELEMENT_H2 } from '@udecode/plate-heading';
+import { ELEMENT_H3 } from '@udecode/plate-heading';
+
 import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
 
 export const Placeholder = (props: PlaceholderProps) => {
@@ -36,7 +39,7 @@ export const withPlaceholders = (components: any) =>
   withPlaceholdersPrimitive(components, [
     {
       key: ELEMENT_PARAGRAPH,
-      placeholder: 'Type a paragraph',
+      placeholder: 'Type here to start a note (click above to change text size).',
       hideOnBlur: true,
       query: {
         maxLevel: 1,
@@ -44,7 +47,17 @@ export const withPlaceholders = (components: any) =>
     },
     {
       key: ELEMENT_H1,
-      placeholder: 'Untitled',
+      placeholder: 'Heading',
+      hideOnBlur: false,
+    },
+    {
+      key: ELEMENT_H2,
+      placeholder: 'Smaller Heading',
+      hideOnBlur: false,
+    },
+    {
+      key: ELEMENT_H3,
+      placeholder: 'Smallest Heading',
       hideOnBlur: false,
     },
   ]);
