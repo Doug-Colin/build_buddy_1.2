@@ -14,12 +14,11 @@ import { getNotes } from '@/features/notes/noteSlice'
 import { MyValue } from '@/types/plate-types'
 import { updateNote } from '@/features/notes/noteSlice'
 
-
 export default function NotesPage() {
   // Redirects to LandingPage upon invalid user credentials.
   useAuthCheck()
 
-  // Redux global state for currentNote updated via dispatch(updateNote()).
+  // Redux global state for notes and currentNote
   const notes = useAppSelector((state) => state.notes.notes)
   const currentNote = useAppSelector((state) => state.notes.currentNote)
   const dispatch = useAppDispatch()
@@ -33,20 +32,19 @@ export default function NotesPage() {
         type: 'p',
         children: [
           {
-            text: 'Type here to start your note.',
+            text: '',
           },
         ],
       },
     ],
   }
 
+  // State and useEffect for populating editor upon user selection of note from table.
   const editorRef = useRef<typeof ModularEditor | null>(null)
+  const [initialValue, setInitialValue] = useState<MyValue>(placeholder.value)
   const [key, setKey] = useState(
     currentNote?.noteContent === null ? 'placeholder' : currentNote?._id,
   )
-
-  // State and useEffect for populating editor upon user selection of note from table.
-  const [initialValue, setInitialValue] = useState<MyValue>(placeholder.value)
 
   useEffect(() => {
     if (currentNote?.noteContent === null) {
@@ -74,10 +72,10 @@ export default function NotesPage() {
   const saveContentChange = (newContent: MyValue) => {
     const updatedContent = { noteContent: JSON.stringify(newContent) }
     if (currentNote?._id) {
-      //  setKey(currentNote._id)
       console.log(
         `saveContentChange called, dispatching updateNote with arg key-values of noteId:${currentNote._id} and updatedNote: ${updatedContent}`,
       )
+
       dispatch(
         updateNote({
           noteId: currentNote._id,
@@ -86,9 +84,6 @@ export default function NotesPage() {
       )
     }
   }
-
-  // const initialValue = useMemo(() =>
-  //   currentNote?.noteContent ? JSON.parse(currentNote.noteContent) : placeholder, [currentNote])
 
   return (
     <Layout>
