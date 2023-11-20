@@ -24,8 +24,9 @@ export default function ModularEditor({
   initialContent,
   onChange,
 }: ModularEditorProps) {
-  /* 
-Alt. handleSave; checks for AST changes as per Slate Doc's & dispatches updateNote() accordingly.
+
+/* 
+Alternate handleSave; checks for AST changes as per Slate Doc's & dispatches updateNote() accordingly.
 
 const saveAstContentChange = (newValue: MyValue) => {
      const isAstChange = newValue.some(n => n.type !== 'selection');
