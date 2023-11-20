@@ -1,14 +1,21 @@
 import { ColumnDef } from '@tanstack/react-table'
-
 import { Badge } from '@/components/ui/badge'
 import { Checkbox } from '@/components/ui/checkbox'
-
+import { LucideCopyPlus, LucideEdit, LucideTrash2 } from 'lucide-react'
+import { Button } from '@/components/ui'
+import DeletionAlertDialog from '@/components/DeletionAlertDialog'
+import { useAppDispatch } from '@/app/hooks'
 import {
   taskLabels,
   taskPriorities,
   taskStatuses,
 } from '@/pages/tasks-page/components/table/data-table-row-actions'
-
+import {
+  getTasks,
+  deleteTask,
+  duplicateTask,
+  updateTask,
+} from '@/features/tasks/taskSlice'
 //import { Task } from "../data/schema"
 import { DataTableColumnHeader } from '@/components/table/data-table-column-header'
 import { DataTableRowActions } from '@/pages/tasks-page/components/table/data-table-row-actions'
@@ -177,8 +184,75 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
     },
   },
 
+  // // Original implementation of actions, only visible upon clicking horizontal dots icon
+  // {
+  //   id: 'actions',
+  //   cell: ({ row }) => <DataTableRowActions row={row} />,
+  // },
+
+  // // Row actions that aren't hidden, with explicit buttons for more intuitive UI
+
   {
-    id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} />,
+    accessorKey: 'actions',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Actions" />
+    ),
+    cell: ({ row }) => {
+      const task = row.original // Assuming row.original contains the task data
+      const dispatch = useAppDispatch()
+      const handleDuplicate = () => {
+        dispatch(duplicateTask(task))
+      }
+
+      const onDelete = () => {
+        dispatch(deleteTask(task._id))
+      }
+
+      return (
+        <div className="flex items-center">
+          <Button variant="outline" onClick={handleDuplicate}>
+            <LucideCopyPlus className="mr-2 h-4 w-4" />
+            Duplicate
+          </Button>
+
+          <DeletionAlertDialog
+            button={
+              <Button variant="outline">
+                <LucideTrash2 className="mr-2 h-4 w-4" />
+                Delete
+              </Button>
+            }
+            alertDialogTitle={`Are you sure you want to delete this task?`}
+            alertDialogDescription={`If you delete ${task.taskName}, it cannot be undone.`}
+            alertDialogAction="Delete"
+            onDelete={onDelete}
+          />
+        </div>
+      )
+    },
+    enableSorting: false,
+    enableHiding: false,
   },
 ]
+
+/*
+
+<Button variant="outline" onClick={handleDuplicate}>
+            <LucideCopyPlus className="mr-2 h-4 w-4" />
+            Duplicate
+          </Button>
+
+          <DeletionAlertDialog
+            button={
+              <Button variant="outline">
+                <LucideTrash2 className="mr-2 h-4 w-4" />
+                Delete
+              </Button>
+            }
+            alertDialogTitle={`Are you sure you want to delete this task`}
+            alertDialogDescription={`If you delete ${task.taskName}, it cannot be undone.`}
+            alertDialogAction="Delete"
+            onDelete={onDelete}
+          ></DeletionAlertDialog>
+
+*/
