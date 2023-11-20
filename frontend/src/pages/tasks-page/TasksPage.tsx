@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
 import { useAppSelector, useAppDispatch } from '@/app/hooks'
-
+import { getTasks } from '@/features/tasks/taskSlice'
 // For buildout of form (In the event of user creating a new task linked to a project that does not yet exist)
 //import { getProjects } from '@/features/projects/projectSlice'
 
