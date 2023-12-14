@@ -36,7 +36,7 @@ export default function TasksPage() {
                 Welcome back!
               </h2>
               <p className="text-muted-foreground">
-                Here&apos;s a list of your tasks for this month!
+                Here is a list of your tasks for this month!
               </p>
             </div>
             <div className="flex items-center space-x-2">
