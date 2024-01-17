@@ -9,6 +9,7 @@ import DashboardPage from '@/pages/dashboard-page/DashboardPage'
 import ProjectsPage from '@/pages/projects-page/ProjectsPage'
 import TasksPage from './pages/tasks-page/TasksPage'
 import NotesPage from './pages/notes-page/NotesPage'
+import ClientsPage from './pages/clients-page/ClientsPage.tsx'
 
 export default function App() {
   return (
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="/projects" element={<ProjectsPage />} />
               <Route path="/tasks" element={<TasksPage />} />
               <Route path="/notes" element={<NotesPage />} />
+              <Route path="/clients" element={<ClientsPage />} />
             </Routes>
           </Router>
         </div>
