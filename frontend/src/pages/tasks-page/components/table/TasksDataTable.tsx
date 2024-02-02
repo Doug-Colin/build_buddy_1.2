@@ -23,6 +23,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 
+import { DataTableRowActions } from "@/components/"
 import { DataTablePagination } from "@/components/table/data-table-pagination"
 import { DataTableToolbar } from "@/components/table/data-table-toolbar.tsx"
 
