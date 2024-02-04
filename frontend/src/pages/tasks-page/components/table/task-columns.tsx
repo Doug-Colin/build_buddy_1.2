@@ -94,7 +94,9 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
   {
     accessorKey: 'label',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Label" />
+      <div className="hidden lg:flex">
+        <DataTableColumnHeader column={column} title="Label" />
+      </div>
     ),
     cell: ({ row }) => {
       const label = taskLabels.find(
@@ -102,7 +104,7 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
       )
 
       return (
-        <div className="flex space-x-2">
+        <div className="hidden lg:flex space-x-2">
           {label && <Badge variant="outline">{label.label}</Badge>}
           {/* <span className="max-w-[500px] truncate font-medium">
             {row.getValue('label')}
@@ -115,10 +117,12 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
   {
     accessorKey: 'taskDescription',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Description" />
+      <div className="hidden lg:flex">
+        <DataTableColumnHeader column={column} title="Description" />
+      </div>
     ),
     cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue('taskDescription')}</div>
+      <div className="">{row.getValue('taskDescription')}</div>
     ),
     enableSorting: false,
     enableHiding: false,
@@ -184,16 +188,9 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
     },
   },
 
-  // // Original implementation of actions, only visible upon clicking horizontal dots icon
-  // {
-  //   id: 'actions',
-  //   cell: ({ row }) => <DataTableRowActions row={row} />,
-  // },
-
-  // // Row actions that aren't hidden, with explicit buttons for more intuitive UI
-
+  // Original implementation of actions, only visible upon clicking horizontal dots icon
   {
-    accessorKey: 'actions',
+    id: 'actions',
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Actions" />
     ),
@@ -203,37 +200,97 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
       const handleDuplicate = () => {
         dispatch(duplicateTask(task))
       }
-
       const onDelete = () => {
         dispatch(deleteTask(task._id))
       }
 
       return (
-        <div className="flex items-center">
-          <Button variant="outline" onClick={handleDuplicate}>
-            <LucideCopyPlus className="mr-2 h-4 w-4" />
-            Duplicate
-          </Button>
-
-          <DeletionAlertDialog
-            button={
-              <Button variant="outline">
-                <LucideTrash2 className="mr-2 h-4 w-4" />
-                Delete
-              </Button>
-            }
-            alertDialogTitle={`Are you sure you want to delete this task?`}
-            alertDialogDescription={`If you delete ${task.taskName}, it cannot be undone.`}
-            alertDialogAction="Delete"
-            onDelete={onDelete}
-          />
-        </div>
+        <>
+          {/* For screens below xl (1280px), hide actions in three-dots icon dropdown. */}
+          <div className="xl:hidden">
+            <DataTableRowActions row={row} />
+          </div>
+          {/* For screens xl and above, display actions as buttons with distinct icons. */}
+          <div className="hidden xl:flex justify-start gap-4">
+            {/* Adjust onClick fn so that the task opens to the other view instead */}
+            <Button variant="outline" onClick={handleDuplicate}>
+              <LucideEdit className="mr-2 h-4 w-4" />
+              <div className="hidden lg:flex">Edit</div>
+            </Button>
+            <Button variant="outline" onClick={handleDuplicate}>
+              <LucideCopyPlus className="mr-2 h-4 w-4" />
+              <div className="hidden lg:flex">Duplicate</div>
+            </Button>
+            <DeletionAlertDialog
+              button={
+                <Button variant="outline">
+                  <LucideTrash2 className="mr-2 h-4 w-4" />
+                  <div className="hidden lg:flex">Delete</div>
+                </Button>
+              }
+              alertDialogTitle={`Are you sure you want to delete this task?`}
+              alertDialogDescription={`If you delete ${task.taskName}, it cannot be undone.`}
+              alertDialogAction="Delete"
+              onDelete={onDelete}
+            />
+          </div>
+        </>
       )
     },
     enableSorting: false,
     enableHiding: false,
   },
 ]
+
+// // Row actions that aren't hidden, with explicit buttons for more intuitive UI
+
+// {
+//   accessorKey: 'actions',
+//   header: ({ column }) => (
+//     <DataTableColumnHeader column={column} title="Actions" />
+//   ),
+//   cell: ({ row }) => {
+//     const task = row.original // Assuming row.original contains the task data
+//     const dispatch = useAppDispatch()
+//     const handleDuplicate = () => {
+//       dispatch(duplicateTask(task))
+//     }
+
+//     const onDelete = () => {
+//       dispatch(deleteTask(task._id))
+//     }
+
+//     return (
+//       <div className="flex justify-start gap-4">
+//         {/* Adjust onClick fn so that the task opens to the other view instead */}
+//         <Button variant="outline" onClick={handleDuplicate}>
+//           <LucideEdit className="mr-2 h-4 w-4" />
+//           <div className="hidden lg:flex">Edit</div>
+//         </Button>
+
+//         <Button variant="outline" onClick={handleDuplicate}>
+//           <LucideCopyPlus className="mr-2 h-4 w-4" />
+//           <div className="hidden lg:flex">Duplicate</div>
+//         </Button>
+
+//         <DeletionAlertDialog
+//           button={
+//             <Button variant="outline">
+//               <LucideTrash2 className="mr-2 h-4 w-4" />
+//               <div className="hidden lg:flex">Delete</div>
+//             </Button>
+//           }
+//           alertDialogTitle={`Are you sure you want to delete this task?`}
+//           alertDialogDescription={`If you delete ${task.taskName}, it cannot be undone.`}
+//           alertDialogAction="Delete"
+//           onDelete={onDelete}
+//         />
+//       </div>
+//     )
+//   },
+//   enableSorting: false,
+//   enableHiding: false,
+// },
 
 /*
 
@@ -255,4 +312,54 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
             onDelete={onDelete}
           ></DeletionAlertDialog>
 
+*/
+
+/*
+        'xs': '480px',    // Extra small devices
+        'sm': '640px',    // Small devices (default)
+        'md': '768px',    // Medium devices (default)
+        'lg': '1024px',   // Large devices (default)
+        'xl': '1280px',   // Extra large devices (default)
+        '2xl': '1536px',  // 2x large devices (default)
+        '3xl': '1800px',  // Custom large breakpoint
+*/
+
+/*
+PseudoCode: Making the Data Table Rsponsive
+-make Actions buttons dots unless xl: ; at xl: render full buttons (consult GPT to see which is more sensible or commonplace approach)
+Done, NICE!!!
+Next: Fix dissapearing Label and Description column headers, and also dissapearing View button. 
+Hopefully the former fixes the latter. 
+Then, Have the columns dissapear as screen sizes diminish by making them uncheced on view, because that actually fuckin gets rid of them. 
+Then when people try to click more than what will fit on the wcreen you can say 'I'm sorry, only _ table columns are viewable at this screen size'
+
+
+{
+  //   id: 'actions',
+  //   //access the row data using row.original in the cell function. Use this to handle actions for your row eg. use the id to make a DELETE call to your API.
+  //   cell: ({ row }) => {
+  //     return (
+  //       <DropdownMenu>
+  //         <DropdownMenuTrigger asChild>
+  //           <Button variant="ghost" className="h-8 w-8 p-0">
+  //             <span className="sr-only">Open menu</span>
+  //             <MoreHorizontal className="h-4 w-4" />
+  //           </Button>
+  //         </DropdownMenuTrigger>
+  //         <DropdownMenuContent align="end">
+  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+  //           <DropdownMenuItem
+  //           // onClick={() => navigator.clipboard.writeText(task.taskName)}
+  //           >
+  //             Update Note
+  //           </DropdownMenuItem>
+  //           <DropdownMenuSeparator />
+  //           <DropdownMenuItem>View project</DropdownMenuItem>
+  //           <DropdownMenuItem>View client</DropdownMenuItem>
+  //           <DropdownMenuItem>View task details</DropdownMenuItem>
+  //         </DropdownMenuContent>
+  //       </DropdownMenu>
+  //     )
+  //   },
+  // },
 */
