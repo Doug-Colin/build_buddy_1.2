@@ -40,18 +40,19 @@ export function MainNav({
       >
         Clients
       </Link>
-      <Link
+      {/* Following linksa were used for testing two primary responsive layouts/views */}
+      {/* <Link
         to="/responsive-table-view"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Responsive-Table-View
+        TableView
       </Link>
       <Link
         to="/responsive-item-detail-view"
         className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Responsive-Item-Detail-View
-      </Link>
+        ItemView
+      </Link> */}
     </nav>
   )
 }
