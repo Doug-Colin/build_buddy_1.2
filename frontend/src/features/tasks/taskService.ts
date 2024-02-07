@@ -42,7 +42,7 @@ const updateTask = async (
 //     ...originalTask,
 //     taskName: `${originalTask.taskName} (Copy)`,
 //     //populate
-//     status: 'In Progress',
+//     status: 'Underway',
 //     priority: 'Low',
 //   }
 //   delete copiedTask._id, copiedTask.createdAt, copiedTask.updatedAt
@@ -58,7 +58,7 @@ const updateTask = async (
 //     taskDesctiption: originalTask.taskDescription,
 //     client: originalTask.client,
 //     label: originalTask.label,
-//     status: 'In Progress', //Assume default for copiedTask.
+//     status: 'Underway', //Assume default for copiedTask.
 //     priority: 'Low',       //Assume default for copiedTask.
 //   }
 //   // delete copiedTask._id, copiedTask.createdAt, copiedTask.updatedAt
@@ -69,7 +69,7 @@ const updateTask = async (
 const duplicateTask = async (originalTask: Task, token: string) => {
   const { _id, createdAt, updatedAt, ...copiedTask } = originalTask;
     copiedTask.taskName = `${originalTask.taskName} (Copy)`
-    copiedTask.status = 'In Progress' //Assume default for copiedTask.
+    copiedTask.status = 'Underway' //Assume default for copiedTask.
     copiedTask.priority = 'Low'       //Assume default for copiedTask.
 
   const response = await axios.post(API_URL, copiedTask, getConfig(token))
