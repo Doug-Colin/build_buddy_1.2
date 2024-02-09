@@ -46,8 +46,8 @@ export default function TaskForm({ onFormSubmit }: TaskFormProps) {
   ]
   const taskStatusOptions: string[] = [
     'To Do',
-    'In Progress',
-    'Done',
+    'Underway',
+    'Completed',
     'Paused',
     'Canceled',
   ]
