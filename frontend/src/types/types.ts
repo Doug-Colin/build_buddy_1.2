@@ -56,7 +56,7 @@ export interface Task {
     | 'Maintenance'
   taskName: string
   taskDescription: string
-  status: 'To Do' | 'In Progress' | 'Done' | 'Paused' | 'Canceled'
+  status: 'To Do' | 'Underway' | 'Completed' | 'Paused' | 'Canceled'
   priority: 'Low' | 'Medium' | 'High' | 'Urgent'
   createdAt?: string
   updatedAt?: string
@@ -79,7 +79,7 @@ export interface TaskDTO {
     | 'Maintenance'
   taskName: string
   taskDescription: string
-  status: 'To Do' | 'In Progress' | 'Done' | 'Paused' | 'Canceled'
+  status: 'To Do' | 'Underway' | 'Completed' | 'Paused' | 'Canceled'
   priority: 'Low' | 'Medium' | 'High' | 'Urgent'
 }
 
