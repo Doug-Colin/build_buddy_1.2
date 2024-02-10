@@ -1,4 +1,3 @@
-import { DotsHorizontalIcon } from "@radix-ui/react-icons"
 import { Row } from "@tanstack/react-table"
 
 import { Button } from "@/components/ui/button"
@@ -22,10 +21,14 @@ import {
   ArrowUpIcon,
   CheckCircledIcon,
   CircleIcon,
+  CircleBackslashIcon,
+  ClockIcon,
   CrossCircledIcon,
-  StopwatchIcon,
+  DotsHorizontalIcon,
   ExclamationTriangleIcon,
+  LapTimerIcon,
 } from "@radix-ui/react-icons"
+
 import { PauseCircle } from "lucide-react"
 
 import { taskSchema } from "@/validators/taskSchema"
@@ -68,17 +71,17 @@ export const taskStatuses = [
   {
     value: 'To Do',
     label: 'To Do',
-    icone: CircleIcon,
+    icon: CircleIcon,
   }, 
   {
-    value: 'In Progress',
-    label: 'In Progress',
-    icone: StopwatchIcon,
+    value: 'Underway',
+    label: 'Underway',
+    icon: ClockIcon,
   },                      
   {
-    value: 'Done',
-    label: 'Done',
-    icone: CheckCircledIcon,
+    value: 'Completed',
+    label: 'Completed',
+    icon: CheckCircledIcon,
   }, 
   {
     value: 'Paused',
@@ -88,19 +91,19 @@ export const taskStatuses = [
   {
     value: 'Canceled',
     label: 'Canceled',
-    icone: CrossCircledIcon,
+    icon: CircleBackslashIcon,
   }
 ]
 
 export const taskPriorities = [
 {
-  value: 'Low',
-  label: 'Low',
+  value: 'Lowest',
+  label: 'Lowest',
   icon: ArrowDownIcon,
 },
 {
-  value: 'Medium',
-  label: 'Medium',
+  value: 'Low',
+  label: 'Low',
   icon: ArrowRightIcon,
 },
 {
@@ -138,7 +141,7 @@ export function DataTableRowActions<TData>({
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>Edit</DropdownMenuItem>
         <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem>Delete</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
