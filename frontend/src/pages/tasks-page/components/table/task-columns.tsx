@@ -94,7 +94,8 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
   {
     accessorKey: 'label',
     header: ({ column }) => (
-      <div className="hidden lg:flex">
+      //<div className="hidden lg:flex">
+      <div >
         <DataTableColumnHeader column={column} title="Label" />
       </div>
     ),
@@ -104,7 +105,8 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
       )
 
       return (
-        <div className="hidden lg:flex space-x-2">
+        //<div className="hidden lg:flex space-x-2">
+        <div >
           {label && <Badge variant="outline">{label.label}</Badge>}
           {/* <span className="max-w-[500px] truncate font-medium">
             {row.getValue('label')}
@@ -117,12 +119,13 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
   {
     accessorKey: 'taskDescription',
     header: ({ column }) => (
-      <div className="hidden lg:flex">
+      //<div className="hidden lg:flex">
+      <div className='max-w-[190px]'>
         <DataTableColumnHeader column={column} title="Description" />
       </div>
     ),
     cell: ({ row }) => (
-      <div className="">{row.getValue('taskDescription')}</div>
+      <div className="max-w-[190px] max-h-fit">{row.getValue('taskDescription')}</div>
     ),
     enableSorting: false,
     enableHiding: false,
@@ -333,6 +336,19 @@ Hopefully the former fixes the latter.
 Then, Have the columns dissapear as screen sizes diminish by making them uncheced on view, because that actually fuckin gets rid of them. 
 Then when people try to click more than what will fit on the wcreen you can say 'I'm sorry, only _ table columns are viewable at this screen size'
 
+*** Before dissapearing columns: ***
+            -@ 1024: In Progress -> 'Underway' change on backend & in DB entries as well. 
+            -@ 909 is issue, so change 'In Progress' to 'Underway'
+                
+            -Make Description and Task wrap less amounts of text from @md to @Doug-Colin
+              -See what happens if you have a very long description. If it breaks UI add a '...' abbreviator to be max text length including '...'
+              (lookup what thats called & how to)
+            
+              -see if that gets you to 768px see what 640 looks like (may need to start hiding columns or changing layout)
+            
+              -Mobile is still much smaller... At this point look into Mobile- should you create new card-based UI? Or change Rows to something
+            
+              -eventually change order to 'task, projecyt, priority, status, Descr., Label 
 
 {
   //   id: 'actions',
