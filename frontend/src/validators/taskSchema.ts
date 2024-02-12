@@ -17,8 +17,8 @@ export const taskSchema = z.object({
   taskDescription: z.string().min(3).max(300),
   status: z.union([
     z.literal('To Do'),
-    z.literal('In Progress'),
-    z.literal('Done'),
+    z.literal('Underway'),
+    z.literal('Completed'),
     z.literal('Paused'),
     z.literal('Canceled'),
   ]),
