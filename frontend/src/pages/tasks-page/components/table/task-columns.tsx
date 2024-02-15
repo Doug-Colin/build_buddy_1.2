@@ -17,7 +17,7 @@ import {
   updateTask,
 } from '@/features/tasks/taskSlice'
 //import { Task } from "../data/schema"
-import { DataTableColumnHeader } from '@/components/table/data-table-column-header'
+import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 import { DataTableRowActions } from '@/pages/tasks-page/components/table/data-table-row-actions'
 
 // Use Zod task schema.
