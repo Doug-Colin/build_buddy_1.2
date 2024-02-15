@@ -4,15 +4,15 @@ import { MoreHorizontal } from 'lucide-react'
 
 import { LucideCopyPlus, LucideEdit, LucideTrash2 } from 'lucide-react'
 import DeletionAlertDialog from '@/components/DeletionAlertDialog'
-import { DataTableColumnHeader } from '@/components/table/data-table-column-header'
+import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 import { deleteNote } from '@/features/notes/noteSlice'
 
-import { useAppDispatch} from '@/app/hooks'
+import { useAppDispatch } from '@/app/hooks'
 import { setCurrentNote, clearCurrentNote } from '@/features/notes/noteSlice'
 import { Button, Checkbox } from '@/components/ui'
 import { Note } from '@/types/types'
 
-//For Dropdown style actions, as opposed to currently implemented buttons. 
+//For Dropdown style actions, as opposed to currently implemented buttons.
 // import {
 //   DropdownMenu,
 //   DropdownMenuContent,
