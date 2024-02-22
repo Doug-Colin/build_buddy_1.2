@@ -37,7 +37,7 @@ export default function ProjectsPage() {
         </div>
         <div className="flex flex-wrap">
           {projects.map((project: Project) => (
-            <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
+            <div className="w-full smw-1/4 md:w-1/2 lg:w-1/3 xl:w-1/4 p-4">
               <ProjectCard key={project._id} project={project} />
             </div>
           ))}
@@ -46,3 +46,5 @@ export default function ProjectsPage() {
     </Layout>
   )
 }
+
+
