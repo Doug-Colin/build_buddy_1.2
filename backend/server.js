@@ -23,7 +23,7 @@ app.use('/api/notes', require('./routes/noteRoutes'));
 // Overwrite default express error handler
 app.use(errorHandler);
 
-// Listen on all available IP addresses (necesessary for cloud deployment)
+// Listens by default on all available IP addresses ('0.0.0.0' - necesessary for cloud deployment)
 app.listen(port, '0.0.0.0', () =>
   console.log(`Server started on port ${port}`)
 );
