@@ -1,0 +1,14 @@
+# EditorConfig: define and maintain consistent coding style between different editors/IDEs.
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines: newline ending every file
+# (prevents carriage return issues when working between Windows and Mac/Linux systems)
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Indentation settings
+indent_style = space
+indent_size = 2
