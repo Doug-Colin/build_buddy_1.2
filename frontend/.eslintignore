@@ -1,0 +1,16 @@
+
+# Ignore distribution directory
+dist/
+
+# Ignore node_modules directory
+node_modules/
+
+# Ignore frontend legacy code directories 
+project_notes/
+sample_data/
+
+# Ignore tests directory in the backend
+# backend/tests/
+
+# Ignore all log files
+# logs/
