@@ -324,7 +324,8 @@ export function LayoutMobile() {
                       itemCardMobile will be used in the mobile view, and the
                       itemCardDesktop will be used in the desktop view. The
                       itemCardMobile will be used in the mobile view, and the
-                      itemCardDesktop will be used in the desktop view. Use breadcrumbs, I think that's good. 
+                      itemCardDesktop will be used in the desktop view. Use
+                      breadcrumbs, I think that's good.
                     </CardDescription>
                   </CardHeader>
                   <CardContent></CardContent>

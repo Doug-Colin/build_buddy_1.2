@@ -1,10 +1,10 @@
-import React from 'react';
-import { cn } from '@udecode/cn';
-import { PlateContent } from '@udecode/plate-common';
-import { cva } from 'class-variance-authority';
+import React from 'react'
+import { cn } from '@udecode/cn'
+import { PlateContent } from '@udecode/plate-common'
+import { cva } from 'class-variance-authority'
 
-import type { PlateContentProps } from '@udecode/plate-common';
-import type { VariantProps } from 'class-variance-authority';
+import type { PlateContentProps } from '@udecode/plate-common'
+import type { VariantProps } from 'class-variance-authority'
 
 const editorVariants = cva(
   cn(
@@ -12,7 +12,7 @@ const editorVariants = cva(
     'min-h-[80px] w-full rounded-md bg-white px-3 py-2 text-sm ring-offset-white placeholder:text-stone-500 focus-visible:outline-none dark:bg-stone-950 dark:ring-offset-stone-950 dark:placeholder:text-stone-400',
     '[&_[data-slate-placeholder]]:text-stone-500 [&_[data-slate-placeholder]]:!opacity-100 dark:[&_[data-slate-placeholder]]:text-stone-400',
     '[&_[data-slate-placeholder]]:top-[auto_!important]',
-    '[&_strong]:font-bold'
+    '[&_strong]:font-bold',
   ),
   {
     variants: {
@@ -40,11 +40,11 @@ const editorVariants = cva(
       focusRing: true,
       size: 'sm',
     },
-  }
-);
+  },
+)
 
 export type EditorProps = PlateContentProps &
-  VariantProps<typeof editorVariants>;
+  VariantProps<typeof editorVariants>
 
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
   (
@@ -58,10 +58,10 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
       variant,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
-      <div ref={ref} className='relative w-full'>
+      <div ref={ref} className="relative w-full">
         <PlateContent
           className={cn(
             editorVariants({
@@ -71,7 +71,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
               size,
               variant,
             }),
-            className
+            className,
           )}
           disableDefaultStyles
           readOnly={disabled ?? readOnly}
@@ -79,9 +79,9 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(
           {...props}
         />
       </div>
-    );
-  }
-);
-Editor.displayName = 'Editor';
+    )
+  },
+)
+Editor.displayName = 'Editor'
 
-export { Editor };
+export { Editor }

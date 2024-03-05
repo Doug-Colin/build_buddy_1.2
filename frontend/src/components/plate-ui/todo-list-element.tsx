@@ -1,18 +1,18 @@
-import React from 'react';
-import { cn, withRef } from '@udecode/cn';
-import { PlateElement } from '@udecode/plate-common';
+import React from 'react'
+import { cn, withRef } from '@udecode/cn'
+import { PlateElement } from '@udecode/plate-common'
 import {
   useTodoListElement,
   useTodoListElementState,
-} from '@udecode/plate-list';
+} from '@udecode/plate-list'
 
-import { Checkbox } from './checkbox';
+import { Checkbox } from './checkbox'
 
 export const TodoListElement = withRef<typeof PlateElement>(
   ({ className, children, ...props }, ref) => {
-    const { element } = props;
-    const state = useTodoListElementState({ element });
-    const { checkboxProps } = useTodoListElement(state);
+    const { element } = props
+    const state = useTodoListElementState({ element })
+    const { checkboxProps } = useTodoListElement(state)
 
     return (
       <PlateElement
@@ -21,7 +21,7 @@ export const TodoListElement = withRef<typeof PlateElement>(
         {...props}
       >
         <div
-          className='mr-1.5 flex select-none items-center justify-center'
+          className="mr-1.5 flex select-none items-center justify-center"
           contentEditable={false}
         >
           <Checkbox {...checkboxProps} />
@@ -29,7 +29,7 @@ export const TodoListElement = withRef<typeof PlateElement>(
         <span
           className={cn(
             'flex-1 focus:outline-none',
-            state.checked && 'text-stone-500 line-through dark:text-stone-400'
+            state.checked && 'text-stone-500 line-through dark:text-stone-400',
           )}
           contentEditable={!state.readOnly}
           suppressContentEditableWarning
@@ -37,6 +37,6 @@ export const TodoListElement = withRef<typeof PlateElement>(
           {children}
         </span>
       </PlateElement>
-    );
-  }
-);
+    )
+  },
+)

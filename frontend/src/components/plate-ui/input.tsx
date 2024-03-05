@@ -1,5 +1,5 @@
-import { withVariants } from '@udecode/cn';
-import { cva } from 'class-variance-authority';
+import { withVariants } from '@udecode/cn'
+import { cva } from 'class-variance-authority'
 
 export const inputVariants = cva(
   'flex w-full rounded-md bg-transparent text-sm file:border-0 file:bg-white file:text-sm file:font-medium placeholder:text-stone-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:file:bg-stone-950 dark:placeholder:text-stone-400',
@@ -19,7 +19,7 @@ export const inputVariants = cva(
       variant: 'default',
       h: 'md',
     },
-  }
-);
+  },
+)
 
-export const Input = withVariants('input', inputVariants, ['variant', 'h']);
+export const Input = withVariants('input', inputVariants, ['variant', 'h'])

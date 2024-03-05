@@ -1,18 +1,17 @@
-'use client';
+'use client'
 
-import React from 'react';
-import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
+import React from 'react'
+import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu'
+import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote'
 import {
   focusEditor,
   insertEmptyElement,
   useEditorRef,
-} from '@udecode/plate-common';
-import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3 } from '@udecode/plate-heading';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
+} from '@udecode/plate-common'
+import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3 } from '@udecode/plate-heading'
+import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph'
 
-
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/icons'
 
 import {
   DropdownMenu,
@@ -22,8 +21,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+} from './dropdown-menu'
+import { ToolbarButton } from './toolbar'
 
 const items = [
   {
@@ -125,23 +124,23 @@ const items = [
   //     },
   //   ],
   // },
-];
+]
 
 export function InsertDropdownMenu(props: DropdownMenuProps) {
-  const editor = useEditorRef();
-  const openState = useOpenState();
+  const editor = useEditorRef()
+  const openState = useOpenState()
 
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
-        <ToolbarButton pressed={openState.open} tooltip='Insert' isDropdown>
+        <ToolbarButton pressed={openState.open} tooltip="Insert" isDropdown>
           <Icons.add />
         </ToolbarButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        align='start'
-        className='flex max-h-[500px] min-w-0 flex-col gap-0.5 overflow-y-auto'
+        align="start"
+        className="flex max-h-[500px] min-w-0 flex-col gap-0.5 overflow-y-auto"
       >
         {items.map(({ items: nestedItems, label }, index) => (
           <React.Fragment key={label}>
@@ -152,7 +151,7 @@ export function InsertDropdownMenu(props: DropdownMenuProps) {
               ({ value: type, label: itemLabel, icon: Icon }) => (
                 <DropdownMenuItem
                   key={type}
-                  className='min-w-[180px]'
+                  className="min-w-[180px]"
                   onSelect={async () => {
                     switch (type) {
                       // case ELEMENT_CODE_BLOCK: {
@@ -203,21 +202,21 @@ export function InsertDropdownMenu(props: DropdownMenuProps) {
                         insertEmptyElement(editor, type, {
                           select: true,
                           nextBlock: true,
-                        });
+                        })
                       }
                     }
 
-                    focusEditor(editor);
+                    focusEditor(editor)
                   }}
                 >
-                  <Icon className='mr-2 h-5 w-5' />
+                  <Icon className="mr-2 h-5 w-5" />
                   {itemLabel}
                 </DropdownMenuItem>
-              )
+              ),
             )}
           </React.Fragment>
         ))}
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }

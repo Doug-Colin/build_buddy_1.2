@@ -1,8 +1,8 @@
-'use client';
+'use client'
 
-import * as SeparatorPrimitive from '@radix-ui/react-separator';
-import { withProps, withVariants } from '@udecode/cn';
-import { cva } from 'class-variance-authority';
+import * as SeparatorPrimitive from '@radix-ui/react-separator'
+import { withProps, withVariants } from '@udecode/cn'
+import { cva } from 'class-variance-authority'
 
 const separatorVariants = cva('shrink-0 bg-stone-200 dark:bg-stone-800', {
   variants: {
@@ -14,12 +14,12 @@ const separatorVariants = cva('shrink-0 bg-stone-200 dark:bg-stone-800', {
   defaultVariants: {
     orientation: 'horizontal',
   },
-});
+})
 
 export const Separator = withVariants(
   withProps(SeparatorPrimitive.Root, {
     orientation: 'horizontal',
     decorative: true,
   }),
-  separatorVariants
-);
+  separatorVariants,
+)

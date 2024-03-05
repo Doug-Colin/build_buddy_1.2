@@ -1,6 +1,6 @@
-import React from 'react';
-import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu';
-import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote';
+import React from 'react'
+import { DropdownMenuProps } from '@radix-ui/react-dropdown-menu'
+import { ELEMENT_BLOCKQUOTE } from '@udecode/plate-block-quote'
 import {
   collapseSelection,
   findNode,
@@ -11,11 +11,11 @@ import {
   toggleNodeType,
   useEditorRef,
   useEditorSelector,
-} from '@udecode/plate-common';
-import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3 } from '@udecode/plate-heading';
-import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph';
+} from '@udecode/plate-common'
+import { ELEMENT_H1, ELEMENT_H2, ELEMENT_H3 } from '@udecode/plate-heading'
+import { ELEMENT_PARAGRAPH } from '@udecode/plate-paragraph'
 
-import { Icons } from '@/components/icons';
+import { Icons } from '@/components/icons'
 
 import {
   DropdownMenu,
@@ -25,8 +25,8 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
   useOpenState,
-} from './dropdown-menu';
-import { ToolbarButton } from './toolbar';
+} from './dropdown-menu'
+import { ToolbarButton } from './toolbar'
 
 const items = [
   {
@@ -71,54 +71,53 @@ const items = [
   //   description: 'Numbered list',
   //   icon: Icons.ol,
   // },
-];
+]
 
-const defaultItem = items.find((item) => item.value === ELEMENT_PARAGRAPH)!;
+const defaultItem = items.find((item) => item.value === ELEMENT_PARAGRAPH)!
 
 export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
   const value: string = useEditorSelector((editor) => {
     if (isCollapsed(editor.selection)) {
       const entry = findNode<TElement>(editor, {
         match: (n) => isBlock(editor, n),
-      });
+      })
 
       if (entry) {
         return (
           items.find((item) => item.value === entry[0].type)?.value ??
           ELEMENT_PARAGRAPH
-        );
+        )
       }
     }
 
-    return ELEMENT_PARAGRAPH;
-  }, []);
+    return ELEMENT_PARAGRAPH
+  }, [])
 
-  const editor = useEditorRef();
-  const openState = useOpenState();
+  const editor = useEditorRef()
+  const openState = useOpenState()
 
-  const selectedItem =
-    items.find((item) => item.value === value) ?? defaultItem;
-  const { icon: SelectedItemIcon, label: selectedItemLabel } = selectedItem;
+  const selectedItem = items.find((item) => item.value === value) ?? defaultItem
+  const { icon: SelectedItemIcon, label: selectedItemLabel } = selectedItem
 
   return (
     <DropdownMenu modal={false} {...openState} {...props}>
       <DropdownMenuTrigger asChild>
         <ToolbarButton
           pressed={openState.open}
-          tooltip='Text Size'
+          tooltip="Text Size"
           isDropdown
-          className='lg:min-w-[130px]'
+          className="lg:min-w-[130px]"
         >
-          <SelectedItemIcon className='h-5 w-5 lg:hidden' />
-          <span className='max-lg:hidden'>{selectedItemLabel}</span>
+          <SelectedItemIcon className="h-5 w-5 lg:hidden" />
+          <span className="max-lg:hidden">{selectedItemLabel}</span>
         </ToolbarButton>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align='start' className='min-w-0'>
+      <DropdownMenuContent align="start" className="min-w-0">
         <DropdownMenuLabel>Turn into</DropdownMenuLabel>
 
         <DropdownMenuRadioGroup
-          className='flex flex-col gap-0.5'
+          className="flex flex-col gap-0.5"
           value={value}
           onValueChange={(type) => {
             // if (type === 'ul' || type === 'ol') {
@@ -131,25 +130,25 @@ export function TurnIntoDropdownMenu(props: DropdownMenuProps) {
             //   }
             // } else {
             //   unwrapList(editor);
-            toggleNodeType(editor, { activeType: type });
+            toggleNodeType(editor, { activeType: type })
             // }
 
-            collapseSelection(editor);
-            focusEditor(editor);
+            collapseSelection(editor)
+            focusEditor(editor)
           }}
         >
           {items.map(({ value: itemValue, label, icon: Icon }) => (
             <DropdownMenuRadioItem
               key={itemValue}
               value={itemValue}
-              className='min-w-[180px]'
+              className="min-w-[180px]"
             >
-              <Icon className='mr-2 h-5 w-5' />
+              <Icon className="mr-2 h-5 w-5" />
               {label}
             </DropdownMenuRadioItem>
           ))}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
