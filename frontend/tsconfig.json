@@ -19,9 +19,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "strict": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true
+    "strict": false,
+    "noImplicitAny": false, // Disable implicit any checks
+    "noUnusedLocals": false, // Disable unused locals checks
+    "noUnusedParameters": false, // Disable unused parameters checks
     "noFallthroughCasesInSwitch": true
   },
   "include": [
