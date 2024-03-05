@@ -67,10 +67,10 @@ const updateTask = async (
 // }
 
 const duplicateTask = async (originalTask: Task, token: string) => {
-  const { _id, createdAt, updatedAt, ...copiedTask } = originalTask;
-    copiedTask.taskName = `${originalTask.taskName} (Copy)`
-    copiedTask.status = 'Underway' //Assume default for copiedTask.
-    copiedTask.priority = 'Low'       //Assume default for copiedTask.
+  const { _id, createdAt, updatedAt, ...copiedTask } = originalTask
+  copiedTask.taskName = `${originalTask.taskName} (Copy)`
+  copiedTask.status = 'Underway' //Assume default for copiedTask.
+  copiedTask.priority = 'Low' //Assume default for copiedTask.
 
   const response = await axios.post(API_URL, copiedTask, getConfig(token))
   return response.data

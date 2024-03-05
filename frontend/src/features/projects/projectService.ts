@@ -33,11 +33,10 @@ const updateProject = async (
   return response.data
 }
 
-
 const duplicateProject = async (originalProject: Project, token: string) => {
-  const { _id, createdAt, updatedAt, ...copiedProject } = originalProject;
-    copiedProject.projectName = `${originalProject.projectName} (Copy)`
-    copiedProject.status = 'In Progress' //Assume default for copiedProject's status.
+  const { _id, createdAt, updatedAt, ...copiedProject } = originalProject
+  copiedProject.projectName = `${originalProject.projectName} (Copy)`
+  copiedProject.status = 'In Progress' //Assume default for copiedProject's status.
 
   const response = await axios.post(API_URL, copiedProject, getConfig(token))
   return response.data

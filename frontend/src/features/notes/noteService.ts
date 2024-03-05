@@ -33,7 +33,6 @@ const updateNote = async (
   return response.data
 }
 
-
 //Delete note
 const deleteNote = async (noteId: string, token: string) => {
   const response = await axios.delete(API_URL + noteId, getConfig(token))
