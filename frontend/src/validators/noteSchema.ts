@@ -8,8 +8,7 @@ export const noteSchema = z.object({
     z.literal('Client'),
     z.literal('General'),
   ]),
-  projectId: z.string().min(3).max(150).optional(), 
-  taskId: z.string().min(3).max(150).optional(), 
+  projectId: z.string().min(3).max(150).optional(),
+  taskId: z.string().min(3).max(150).optional(),
   client: z.string().min(3).max(150).optional(),
 })
-
