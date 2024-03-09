@@ -9,6 +9,7 @@ import {
   taskLabels,
   taskPriorities,
   taskStatuses,
+  DataTableRowActions,
 } from '@/pages/tasks-page/components/table/data-table-row-actions'
 import {
   getTasks,
@@ -18,7 +19,6 @@ import {
 } from '@/features/tasks/taskSlice'
 //import { Task } from "../data/schema"
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
-import { DataTableRowActions } from '@/pages/tasks-page/components/table/data-table-row-actions'
 
 // Use Zod task schema.
 
@@ -95,7 +95,7 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
     accessorKey: 'label',
     header: ({ column }) => (
       //<div className="hidden lg:flex">
-      <div >
+      <div>
         <DataTableColumnHeader column={column} title="Label" />
       </div>
     ),
@@ -106,7 +106,7 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
 
       return (
         //<div className="hidden lg:flex space-x-2">
-        <div >
+        <div>
           {label && <Badge variant="outline">{label.label}</Badge>}
           {/* <span className="max-w-[500px] truncate font-medium">
             {row.getValue('label')}
@@ -120,12 +120,14 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
     accessorKey: 'taskDescription',
     header: ({ column }) => (
       //<div className="hidden lg:flex">
-      <div className='max-w-[190px]'>
+      <div className="max-w-[190px]">
         <DataTableColumnHeader column={column} title="Description" />
       </div>
     ),
     cell: ({ row }) => (
-      <div className="max-w-[190px] max-h-fit">{row.getValue('taskDescription')}</div>
+      <div className="max-w-[190px] max-h-fit">
+        {row.getValue('taskDescription')}
+      </div>
     ),
     enableSorting: false,
     enableHiding: false,

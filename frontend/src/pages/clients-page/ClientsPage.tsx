@@ -1,9 +1,5 @@
-import { LayoutMobile } from "@/components/LayoutMobile";
+import { LayoutMobile } from '@/components/LayoutMobile'
 
 export default function ClientsPage() {
-
-  return (
-    <LayoutMobile>
-    </LayoutMobile>
-  )
+  return <LayoutMobile></LayoutMobile>
 }

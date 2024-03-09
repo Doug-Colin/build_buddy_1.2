@@ -3,14 +3,12 @@ import { useAppDispatch, useAppSelector } from '@/app/hooks'
 import { useForm } from 'react-hook-form'
 import { RootState } from '@/app/store'
 import { getProjects } from '@/features/projects/projectSlice'
-import { getNotes } from '@/features/notes/noteSlice'
-import { createNote } from '@/features/notes/noteSlice'
+import { getNotes, createNote } from '@/features/notes/noteSlice'
 
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { noteSchema } from '@/validators/noteSchema'
 import { Project, NoteFormProps, NoteDTO } from '@/types/types'
-
 
 import { Button, Input } from '@/components/ui'
 import {
@@ -32,17 +30,13 @@ import {
 
 type Input = z.infer<typeof noteSchema>
 
-
-
 export default function NoteForm({ onFormSubmit }: NoteFormProps) {
   const dispatch = useAppDispatch()
   const projects = useAppSelector((state: RootState) => state.projects.projects)
 
-  const noteLabelOptions: string[] = [
-    'Project','Task', 'Client', 'General'
-  ]
+  const noteLabelOptions: string[] = ['Project', 'Task', 'Client', 'General']
 
-  function onSubmit(data: NoteDTO ) {
+  function onSubmit(data: NoteDTO) {
     dispatch(createNote(data))
     //console.log(`Here is entered form data: ${data}`)
     onFormSubmit(false)
@@ -69,7 +63,7 @@ export default function NoteForm({ onFormSubmit }: NoteFormProps) {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {/* Input for Note Title */}
-        <FormField
+          <FormField
             control={form.control}
             name="noteTitle"
             render={({ field }) => (
@@ -82,7 +76,7 @@ export default function NoteForm({ onFormSubmit }: NoteFormProps) {
               </FormItem>
             )}
           />
-          
+
           {/* input for projectName so note can be associated with project*/}
           <FormField
             control={form.control}
@@ -102,10 +96,7 @@ export default function NoteForm({ onFormSubmit }: NoteFormProps) {
                   <SelectContent>
                     {projects.map((project: Project) => {
                       return (
-                        <SelectItem
-                          key={project._id}
-                          value={project._id}
-                        >
+                        <SelectItem key={project._id} value={project._id}>
                           {project.projectName}
                         </SelectItem>
                       )
@@ -155,7 +146,6 @@ export default function NoteForm({ onFormSubmit }: NoteFormProps) {
             )}
           />
 
-          
           <Button type="submit">Submit</Button>
         </form>
       </Form>

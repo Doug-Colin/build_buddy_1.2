@@ -74,131 +74,129 @@ import { KbdLeaf } from '@/components/plate-ui/kbd-leaf'
 import { withPlaceholders } from '@/components/plate-ui/placeholder'
 
 const plugins = createPlugins(
-    [
-      createParagraphPlugin(),
-      createHeadingPlugin(),
-      createBlockquotePlugin(),
-      createHorizontalRulePlugin(),
-      createLinkPlugin({
-        renderAfterEditable: LinkFloatingToolbar as RenderAfterEditable,
-      }),
-      createImagePlugin(),
-      createCaptionPlugin({
-        options: {
-          pluginKeys: [
-            // ELEMENT_IMAGE, ELEMENT_MEDIA_EMBED
-          ],
-        },
-      }),
-      createTodoListPlugin(),
-      createBoldPlugin(),
-      createItalicPlugin(),
-      createUnderlinePlugin(),
-      createStrikethroughPlugin(),
-      createSubscriptPlugin(),
-      createSuperscriptPlugin(),
-      createFontColorPlugin(),
-      createFontSizePlugin(),
-      createHighlightPlugin(),
-      createKbdPlugin(),
-      createAlignPlugin({
-        inject: {
-          props: {
-            validTypes: [
-              ELEMENT_PARAGRAPH,
-              // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
-            ],
-          },
-        },
-      }),
-      createIndentPlugin({
-        inject: {
-          props: {
-            validTypes: [
-              ELEMENT_PARAGRAPH,
-              // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
-            ],
-          },
-        },
-      }),
-      createIndentListPlugin({
-        inject: {
-          props: {
-            validTypes: [
-              ELEMENT_PARAGRAPH,
-              // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
-            ],
-          },
-        },
-      }),
-      createLineHeightPlugin({
-        inject: {
-          props: {
-            defaultNodeValue: 1.5,
-            validNodeValues: [1, 1.2, 1.5, 2, 3],
-            validTypes: [
-              ELEMENT_PARAGRAPH,
-              // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
-            ],
-          },
-        },
-      }),
-      createExitBreakPlugin({
-        options: {
-          rules: [
-            {
-              hotkey: 'mod+enter',
-            },
-            {
-              hotkey: 'mod+shift+enter',
-              before: true,
-            },
-            {
-              hotkey: 'enter',
-              query: {
-                start: true,
-                end: true,
-                // allow: KEYS_HEADING,
-              },
-              relative: true,
-              level: 1,
-            },
-          ],
-        },
-      }),
-      createNodeIdPlugin(),
-      createDeletePlugin(),
-      createDeserializeDocxPlugin(),
-      createDeserializeCsvPlugin(),
-      createDeserializeMdPlugin(),
-      createJuicePlugin(),
-    ],
-    {
-      components: withPlaceholders({
-        [ELEMENT_BLOCKQUOTE]: BlockquoteElement,
-        [ELEMENT_HR]: HrElement,
-        [ELEMENT_IMAGE]: ImageElement,
-        [ELEMENT_LINK]: LinkElement,
-        [ELEMENT_H1]: withProps(HeadingElement, { variant: 'h1' }),
-        [ELEMENT_H2]: withProps(HeadingElement, { variant: 'h2' }),
-        [ELEMENT_H3]: withProps(HeadingElement, { variant: 'h3' }),
-        [ELEMENT_H4]: withProps(HeadingElement, { variant: 'h4' }),
-        [ELEMENT_H5]: withProps(HeadingElement, { variant: 'h5' }),
-        [ELEMENT_H6]: withProps(HeadingElement, { variant: 'h6' }),
-        [ELEMENT_PARAGRAPH]: ParagraphElement,
-        [ELEMENT_TODO_LI]: TodoListElement,
-        [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
-        [MARK_HIGHLIGHT]: HighlightLeaf,
-        [MARK_ITALIC]: withProps(PlateLeaf, { as: 'em' }),
-        [MARK_KBD]: KbdLeaf,
-        [MARK_STRIKETHROUGH]: withProps(PlateLeaf, { as: 's' }),
-        [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
-        [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
-        [MARK_UNDERLINE]: withProps(PlateLeaf, { as: 'u' }),
+  [
+    createParagraphPlugin(),
+    createHeadingPlugin(),
+    createBlockquotePlugin(),
+    createHorizontalRulePlugin(),
+    createLinkPlugin({
+      renderAfterEditable: LinkFloatingToolbar as RenderAfterEditable,
+    }),
+    createImagePlugin(),
+    createCaptionPlugin({
+      options: {
+        pluginKeys: [
+          // ELEMENT_IMAGE, ELEMENT_MEDIA_EMBED
+        ],
       },
-      
-      ),
-    },
-  )
+    }),
+    createTodoListPlugin(),
+    createBoldPlugin(),
+    createItalicPlugin(),
+    createUnderlinePlugin(),
+    createStrikethroughPlugin(),
+    createSubscriptPlugin(),
+    createSuperscriptPlugin(),
+    createFontColorPlugin(),
+    createFontSizePlugin(),
+    createHighlightPlugin(),
+    createKbdPlugin(),
+    createAlignPlugin({
+      inject: {
+        props: {
+          validTypes: [
+            ELEMENT_PARAGRAPH,
+            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
+          ],
+        },
+      },
+    }),
+    createIndentPlugin({
+      inject: {
+        props: {
+          validTypes: [
+            ELEMENT_PARAGRAPH,
+            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
+          ],
+        },
+      },
+    }),
+    createIndentListPlugin({
+      inject: {
+        props: {
+          validTypes: [
+            ELEMENT_PARAGRAPH,
+            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3, ELEMENT_BLOCKQUOTE, ELEMENT_CODE_BLOCK
+          ],
+        },
+      },
+    }),
+    createLineHeightPlugin({
+      inject: {
+        props: {
+          defaultNodeValue: 1.5,
+          validNodeValues: [1, 1.2, 1.5, 2, 3],
+          validTypes: [
+            ELEMENT_PARAGRAPH,
+            // ELEMENT_H1, ELEMENT_H2, ELEMENT_H3
+          ],
+        },
+      },
+    }),
+    createExitBreakPlugin({
+      options: {
+        rules: [
+          {
+            hotkey: 'mod+enter',
+          },
+          {
+            hotkey: 'mod+shift+enter',
+            before: true,
+          },
+          {
+            hotkey: 'enter',
+            query: {
+              start: true,
+              end: true,
+              // allow: KEYS_HEADING,
+            },
+            relative: true,
+            level: 1,
+          },
+        ],
+      },
+    }),
+    createNodeIdPlugin(),
+    createDeletePlugin(),
+    createDeserializeDocxPlugin(),
+    createDeserializeCsvPlugin(),
+    createDeserializeMdPlugin(),
+    createJuicePlugin(),
+  ],
+  {
+    components: withPlaceholders({
+      [ELEMENT_BLOCKQUOTE]: BlockquoteElement,
+      [ELEMENT_HR]: HrElement,
+      [ELEMENT_IMAGE]: ImageElement,
+      [ELEMENT_LINK]: LinkElement,
+      [ELEMENT_H1]: withProps(HeadingElement, { variant: 'h1' }),
+      [ELEMENT_H2]: withProps(HeadingElement, { variant: 'h2' }),
+      [ELEMENT_H3]: withProps(HeadingElement, { variant: 'h3' }),
+      [ELEMENT_H4]: withProps(HeadingElement, { variant: 'h4' }),
+      [ELEMENT_H5]: withProps(HeadingElement, { variant: 'h5' }),
+      [ELEMENT_H6]: withProps(HeadingElement, { variant: 'h6' }),
+      [ELEMENT_PARAGRAPH]: ParagraphElement,
+      [ELEMENT_TODO_LI]: TodoListElement,
+      [MARK_BOLD]: withProps(PlateLeaf, { as: 'strong' }),
+      [MARK_HIGHLIGHT]: HighlightLeaf,
+      [MARK_ITALIC]: withProps(PlateLeaf, { as: 'em' }),
+      [MARK_KBD]: KbdLeaf,
+      [MARK_STRIKETHROUGH]: withProps(PlateLeaf, { as: 's' }),
+      [MARK_SUBSCRIPT]: withProps(PlateLeaf, { as: 'sub' }),
+      [MARK_SUPERSCRIPT]: withProps(PlateLeaf, { as: 'sup' }),
+      [MARK_UNDERLINE]: withProps(PlateLeaf, { as: 'u' }),
+    }),
+  },
+)
 
-  export default plugins
+export default plugins

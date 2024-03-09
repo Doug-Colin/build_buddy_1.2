@@ -10,9 +10,8 @@ import { NotesDataTable } from '@/pages/notes-page/components/table/NotesDataTab
 import { Note } from '@/types/types'
 import { columns } from './components/table/columns'
 import { useAppDispatch, useAppSelector } from '@/app/hooks'
-import { getNotes } from '@/features/notes/noteSlice'
+import { getNotes, updateNote } from '@/features/notes/noteSlice'
 import { MyValue } from '@/types/plate-types'
-import { updateNote } from '@/features/notes/noteSlice'
 
 export default function NotesPage() {
   // Redirects to LandingPage upon invalid user credentials.

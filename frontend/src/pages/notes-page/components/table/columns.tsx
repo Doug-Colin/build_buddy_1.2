@@ -5,10 +5,14 @@ import { MoreHorizontal } from 'lucide-react'
 import { LucideCopyPlus, LucideEdit, LucideTrash2 } from 'lucide-react'
 import DeletionAlertDialog from '@/components/DeletionAlertDialog'
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
-import { deleteNote } from '@/features/notes/noteSlice'
+import {
+  deleteNote,
+  setCurrentNote,
+  clearCurrentNote,
+} from '@/features/notes/noteSlice'
 
 import { useAppDispatch } from '@/app/hooks'
-import { setCurrentNote, clearCurrentNote } from '@/features/notes/noteSlice'
+
 import { Button, Checkbox } from '@/components/ui'
 import { Note } from '@/types/types'
 
