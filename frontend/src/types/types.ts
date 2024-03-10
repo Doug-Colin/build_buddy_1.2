@@ -101,7 +101,7 @@ export interface NoteFormProps {
 
 export interface NoteDTO {
   noteTitle: string
-  
+
   //noteContent?: null | string
   noteContent?: null | string
   noteLabel: 'Project' | 'Task' | 'Client' | 'General'
