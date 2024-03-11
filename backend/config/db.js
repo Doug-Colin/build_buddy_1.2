@@ -1,5 +1,10 @@
 const mongoose = require('mongoose');
 
+// Check if MONGO_URI is defined
+if (!process.env.MONGO_URI) {
+  throw new Error('MONGO_URI environment variable is not defined');
+}
+
 //troubleshoot connection issues
 console.log('Connecting to:', process.env.MONGO_URI.split('@')[1]);
 
