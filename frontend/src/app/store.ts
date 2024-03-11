@@ -9,7 +9,7 @@ export const store = configureStore({
     auth: authReducer,
     projects: projectReducer,
     tasks: taskReducer,
-    notes: noteReducer
+    notes: noteReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
