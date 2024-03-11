@@ -29,7 +29,10 @@ export default function App() {
               <Route path="/notes" element={<NotesPage />} />
               <Route path="/clients" element={<ClientsPage />} />
               <Route path="/responsive-detail-view" element={<ClientsPage />} />
-              <Route path="/responsive-table-view" element={<ResponsiveTablePage />} />
+              <Route
+                path="/responsive-table-view"
+                element={<ResponsiveTablePage />}
+              />
             </Routes>
           </Router>
         </div>
