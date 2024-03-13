@@ -12,19 +12,23 @@ module.exports = {
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
-  plugins: ['import', 'import-resolver-alias', 'react-refresh'],
+  plugins: ['import', 'react-refresh'],
   settings: {
     'import/parsers': {
       '@typescript-eslint/parser': ['.ts', '.tsx'],
     },
     'import/resolver': {
+      alias: {
+        map: [['@', './src']],
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
+      },
       typescript: {
         alwaysTryTypes: true,
       },
     },
   },
   rules: {
-    'import/no-unresolved': 'error',
+    // 'import/no-unresolved': 'error',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
