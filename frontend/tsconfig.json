@@ -30,11 +30,12 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "src",
-    "project_notes/DialogDemo.tsx",
-    "project_notes/alt-prev",
-    "project_notes/example_components/EditorAttempts"
+    // "src",
+    // "project_notes/DialogDemo.tsx",
+    // "project_notes/alt-prev",
+    // "project_notes/example_components/EditorAttempts"
   ],
+  "exclude": [],
   "references": [
     {
       "path": "./tsconfig.node.json"
