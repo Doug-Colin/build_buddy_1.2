@@ -24,8 +24,8 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-import { DataTablePagination } from '@/components/table/data-table-pagination'
-import { DataTableToolbar } from '@/components/table/data-table-toolbar.tsx'
+import { DataTablePagination } from '@/components/data-table/data-table-pagination'
+import { DataTableToolbar } from '@/components/data-table/data-table-toolbar.tsx'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
