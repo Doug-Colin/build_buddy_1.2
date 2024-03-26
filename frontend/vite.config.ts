@@ -2,6 +2,19 @@ import path from 'path'
 // import react from "@vitejs/plugin-react"
 import { defineConfig } from 'vite'
 
+// Config for production.
+export default defineConfig({
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    outDir: 'dist',
+  },
+});
+
+/* Config for local development.
 // https://vitejs.dev/config/
 // & path alias per https://ui.shadcn.com/docs/installation/vite
 export default defineConfig({
@@ -14,7 +27,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:5050',
+        target: 'http://localhost:3150',
         changeOrigin: true,
         secure: false,
         ws: true,
@@ -39,3 +52,4 @@ export default defineConfig({
     },
   },
 })
+*/
