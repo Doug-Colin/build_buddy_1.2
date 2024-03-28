@@ -24,12 +24,15 @@ app.use('/api/notes', require('./routes/noteRoutes'));
 // Overwrite default express error handler
 app.use(errorHandler);
 
-// Code for serving the frontend directly from the backend in production mode.
-// - Use if hosting frontend and backend together.
-// - Ensure frontend is built and the path (../frontend/build) matches the location of built files.
-// - For separate hosting of frontend and backend, this code can be ignored.
-// - Adjust paths for tool used in frontend build (this case Vite).
+/*
+ Code for serving the frontend directly from the backend in production mode.
+ - Use if hosting frontend and backend together.
+ - Ensure frontend is built and the path (../frontend/build or (../frontend/dist) matches the location of built files.
+ - For separate hosting of frontend and backend, this code can be ignored.
+ - Adjust paths for tool used in frontend build (this case Vite).
+*/
 
+// Serve static files in production.
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
