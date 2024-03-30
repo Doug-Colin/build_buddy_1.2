@@ -32,12 +32,26 @@ app.use(errorHandler);
  - Adjust paths for tool used in frontend build (this case Vite).
 */
 
-// Serve static files in production.
+/* -------------- Faulty code for production mode ----------------
+// Serve static files in production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
   app.get('*', (req, res) =>
     res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'))
+  );
+} else {
+  app.get('/', (req, res) => res.send('Please set to production'));
+}
+*/
+
+// Serve static files in production.
+if (process.env.NODE_ENV === 'production') {
+  const __dirname = path.resolve();
+  app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
   );
 } else {
   app.get('/', (req, res) => res.send('Please set to production'));
