@@ -47,11 +47,14 @@ if (process.env.NODE_ENV === 'production') {
 
 // Serve static files in production.
 if (process.env.NODE_ENV === 'production') {
-  const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
+
+// Define path to the frontend build dƒrectory
+const pathToFrontend = path.resolve(__dirname, '../frontend/dist');
+
+  app.use(express.static(pathToFrontend));
 
   app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'))
+    res.sendFile(path.resolve(pathToFrontend, 'index.html'))
   );
 } else {
   app.get('/', (req, res) => res.send('Please set to production'));
