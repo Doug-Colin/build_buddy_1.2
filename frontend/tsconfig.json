@@ -5,7 +5,6 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
     /*resolve paths without error (https://ui.shadcn.com/docs/installation/vite)*/
     "baseUrl": ".",
     "paths": {
@@ -30,10 +29,8 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    // "src",
-    // "project_notes/DialogDemo.tsx",
-    // "project_notes/alt-prev",
-    // "project_notes/example_components/EditorAttempts"
+    "src",
+    "types"
   ],
   "exclude": [],
   "references": [
