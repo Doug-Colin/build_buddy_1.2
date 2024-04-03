@@ -5,7 +5,7 @@ const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware');
 const connectDB = require('./config/db');
 const path = require('path');
-const port = process.env.PORT || 5050;
+const port = process.env.PORT || 3150;
 
 connectDB();
 
@@ -48,7 +48,7 @@ if (process.env.NODE_ENV === 'production') {
 // Serve static files in production.
 if (process.env.NODE_ENV === 'production') {
 
-// Define path to the frontend build dƒrectory
+// Define path to the frontend build directory
 const pathToFrontend = path.resolve(__dirname, '../frontend/dist');
 
   app.use(express.static(pathToFrontend));
@@ -60,7 +60,7 @@ const pathToFrontend = path.resolve(__dirname, '../frontend/dist');
   app.get('/', (req, res) => res.send('Please set to production'));
 }
 
-// Listens by default on all available IP addresses ('0.0.0.0' - necesessary for cloud deployment)
+//Listens on all available IP addresses if deployed ('0.0.0.0' - necesessary for cloud deployment)
 app.listen(port, '0.0.0.0', () =>
   console.log(`Server started on port ${port}`)
 );
