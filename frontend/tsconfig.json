@@ -1,41 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
-    /*resolve paths without error (https://ui.shadcn.com/docs/installation/vite)*/
+    "jsx": "react",
+    // ...
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
-    /* Linting */
-    // "strict": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true
-    "strict": false,
-    "noImplicitAny": false, // Disable implicit any checks
-    "noUnusedLocals": false, // Disable unused locals checks
-    "noUnusedParameters": false, // Disable unused parameters checks
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": [
-    "src",
-    "types"
-  ],
-  "exclude": [],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
     }
-  ]
+    // ...
+  }
 }
