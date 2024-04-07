@@ -6,9 +6,9 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
-    //'plugin:import/errors',
+    'plugin:import/errors',
     'plugin:import/warnings',
-    //'plugin:import/typescript',
+    'plugin:import/typescript',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -33,10 +33,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    '@typescript-eslint/no-unused-vars': 'off', // Disable the rule globally
-    '@typescript-eslint/no-explicit-any': 'off', // Disable explicit any check temporarily
-    '@typescript-eslint/ban-types': 'off', // Disable ban types check temporarily
-    'react-hooks/rules-of-hooks': 'off', // Disable react hooks rules temporarily
+    '@typescript-eslint/no-unused-vars': 'true',
+    '@typescript-eslint/no-explicit-any': 'true',
+    '@typescript-eslint/ban-types': 'off',
+    'react-hooks/rules-of-hooks': 'off',
     // eslint-disable-next-line react/display-name (errant comment found in plate-ui/toolbar)
   },
 }
