@@ -16,6 +16,7 @@ export default defineConfig(({command, mode}) => {
 // During local development ... 
   if (command === 'serve') {
     return {
+      plugins: [react()],
       // Define path aliases.
       resolve: {
         alias: {
@@ -53,6 +54,7 @@ export default defineConfig(({command, mode}) => {
     }
   } else if (command === 'build') {
     return {
+      plugins: [react()],
         resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
