@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   ArrowDownIcon,
   ArrowUpIcon,
@@ -32,22 +33,31 @@ export function DataTableColumnHeader<TData, TValue>({
   }
 
   return (
-    <div className={cn('flex items-center space-x-2', className)}>
+    <div className={cn('flex items-center', className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             variant="ghost"
             size="sm"
-            className="-ml-3 h-8 data-[state=open]:bg-accent"
+            // p-0 & Text classes make table header button text responsive.
+            className="h-8 data-[state=open]:bg-accent p-0 text-xs lg:text-sm"
           >
             <span>{title}</span>
             {column.getIsSorted() === 'desc' ? (
-              <ArrowDownIcon className="ml-2 h-4 w-4" />
+              <ArrowDownIcon className="h-4 w-4 " />
             ) : column.getIsSorted() === 'asc' ? (
-              <ArrowUpIcon className="ml-2 h-4 w-4" />
+              <ArrowUpIcon className="ml-2 h-4 w-4 " />
             ) : (
-              <CaretSortIcon className="ml-2 h-4 w-4" />
+              <CaretSortIcon className="h-4 w-4 " />
             )}
+            {/* <span>{title}</span>
+            {column.getIsSorted() === 'desc' ? (
+              <ArrowDownIcon className="h-4 w-4 lg:ml-2" />
+            ) : column.getIsSorted() === 'asc' ? (
+              <ArrowUpIcon className="ml-2 h-4 w-4 lg:ml-2" />
+            ) : (
+              <CaretSortIcon className="h-4 w-4 lg:ml-2" />
+            )} */}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start">

@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import { MixerHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
@@ -30,7 +31,9 @@ export function DataTableViewOptions<TData>({
           View
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
+      {/* Got Rid of w-150; trying to find width that is making <th> 150 */}
+      {/* <DropdownMenuContent align="end" className="w-[150px]"> */}
+      <DropdownMenuContent align="end" className="">
         <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
