@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
 
@@ -28,7 +29,9 @@ export function DataTableToolbar<TData>({
               .getColumn('taskDescription')
               ?.setFilterValue(event.target.value)
           }
-          className="h-8 w-[150px] lg:w-[250px]"
+          // Got rid of w-150, trying to find width that is making <th> not responsive
+          // className="h-8 w-[150px] lg:w-[200px]"
+          className="h-8"
         />
         {isFiltered && (
           <Button
