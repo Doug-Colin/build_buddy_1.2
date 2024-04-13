@@ -1,5 +1,4 @@
-import React from 'react'
-
+import * as React from 'react'
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -25,11 +24,12 @@ import {
 } from '@/components/ui/table'
 
 import { DataTablePagination } from '@/components/data-table/data-table-pagination'
-import { DataTableToolbar } from '@/components/data-table/data-table-toolbar.tsx'
+import { DataTableToolbar } from '@/components/data-table/data-table-toolbar'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  style: 'string' 
 }
 
 export function DataTable<TData, TValue>({
@@ -67,9 +67,11 @@ export function DataTable<TData, TValue>({
   })
 
   return (
+    // adding responsive text classes direcltly below here does not succesfully affect components 
     <div className="space-y-4">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border">
+      <div className="rounded-md border ">
+        {/* <Table className='text-xs md:text-sm'> */}
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
