@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu'
 import { MixerHorizontalIcon } from '@radix-ui/react-icons'
 import { Table } from '@tanstack/react-table'
@@ -24,14 +25,16 @@ export function DataTableViewOptions<TData>({
         <Button
           variant="outline"
           size="sm"
-          //className="ml-auto hidden h-8 lg:flex"
+          // Responsive text style as class on this button to solve Button responsive text issues?
           className="ml-auto hidden h-8 md:flex"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
           View
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
+      {/* Got rid of 150px width trying to make table responsive */}
+      {/* <DropdownMenuContent align="end" className="w-[150px]"> */}
+      <DropdownMenuContent align="end" className="">
         <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table
