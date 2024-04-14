@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
@@ -30,7 +31,8 @@ export default function TasksPage() {
     <Layout>
       <>
         {/* <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex "> */}
-        <div className="h-full flex-1 flex-col space-y-8 p-8 md:flex ">
+        {/* Responsive padding fits more of the table on mobile screens. */}
+        <div className="h-full flex-1 flex-col space-y-8 p-1.5 md:flex md:p-8 ">
           <div className="flex items-center justify-between space-y-2">
             <div>
               <h2 className="text-2xl font-bold tracking-tight">
