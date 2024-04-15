@@ -1,5 +1,7 @@
 import * as React from 'react'
+import { CSSProperties } from 'react'
 import {
+  Column,
   ColumnDef,
   ColumnFiltersState,
   SortingState,
@@ -24,7 +26,7 @@ import {
 } from '@/components/ui/table'
 
 import { DataTablePagination } from '@/components/data-table/data-table-pagination'
-import { DataTableToolbar } from '@/components/data-table/data-table-toolbar.tsx'
+import { DataTableToolbar } from '@/components/data-table/data-table-toolbar'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -42,6 +44,9 @@ export function TasksDataTable<TData, TValue>({
     [],
   )
   const [sorting, setSorting] = React.useState<SortingState>([])
+  const [columnPinning, setColumnPinning] = React.useState({
+    left: ['select', 'taskName'],
+  })
 
   const table = useReactTable({
     data,
@@ -51,8 +56,11 @@ export function TasksDataTable<TData, TValue>({
       columnVisibility,
       rowSelection,
       columnFilters,
+      columnPinning,
     },
     enableRowSelection: true,
+    enableColumnPinning: true,
+    //onColumnPinningChange: setColumnPinning,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -65,17 +73,67 @@ export function TasksDataTable<TData, TValue>({
     getFacetedUniqueValues: getFacetedUniqueValues(),
   })
 
+  // // Check to confirm columns are pinnable
+  // React.useEffect(() => {
+  //   // Find the 'taskName' column
+  //   const taskNameColumn = table
+  //     .getAllColumns()
+  //     .find((column) => column.id === 'taskName')
+  //   if (taskNameColumn) {
+  //     console.log(`Can pin 'taskName' column: ${taskNameColumn.getCanPin()}`)
+  //   } else {
+  //     console.log('TaskName column not found')
+  //   }
+  // }, [table])
+
+  //These are the important styles to make sticky column pinning work!
+  //Apply styles like this using your CSS strategy of choice with this kind of logic to head cells, data cells, footer cells, etc.
+  //View the index.css file for more needed styles such as border-collapse: separate
+  const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
+    const isPinned = column.getIsPinned()
+    const isLastLeftPinnedColumn =
+      isPinned === 'left' && column.getIsLastColumn('left')
+    const isFirstRightPinnedColumn =
+      isPinned === 'right' && column.getIsFirstColumn('right')
+
+    return {
+      boxShadow: isLastLeftPinnedColumn
+        ? '-4px 0 4px -4px gray inset'
+        : isFirstRightPinnedColumn
+          ? '4px 0 4px -4px gray inset'
+          : undefined,
+      left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined, 
+      right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
+      opacity: isPinned ? 0.95 : 1,
+      position: isPinned ? 'sticky' : 'relative',
+      width: column.getSize(),
+      zIndex: isPinned ? 1 : 0,
+      backgroundColor: isPinned ? 'black' : 'undefined',
+    }
+  }
+
+
+
+
+
   return (
-    <div className="space-y-4">
-      <DataTableToolbar table={table} />
+    <div className="space-y-4" >
+      <DataTableToolbar table={table}/>
       <div className="rounded-md border">
-        <Table>
+        {/* Below works for everything inside table but the buttons in DataTableColumnHeader; adding these responsive text classes directly to the buttons in that file makes all the table text responsive, but lets see if we can get this done in one single place  */}
+        {/* Padding not being responsive here, but works directly in Table */}
+        <Table className='text-xs lg:text-sm'>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
+                  const { column } = header
                   return (
-                    <TableHead key={header.id} colSpan={header.colSpan}>
+                    <TableHead
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      style={{ ...getCommonPinningStyles(column) }}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -95,14 +153,20 @@ export function TasksDataTable<TData, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
                 >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
+                  {row.getVisibleCells().map((cell) => {
+                    const { column } = cell
+                    return (
+                      <TableCell
+                        key={cell.id}
+                        style={{ ...getCommonPinningStyles(column) }}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    )
+                  })}
                 </TableRow>
               ))
             ) : (
