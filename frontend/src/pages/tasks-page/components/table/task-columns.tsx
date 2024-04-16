@@ -1,7 +1,8 @@
+import React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
 import { Badge } from '@/components/ui/badge'
-import { Checkbox } from '@/components/ui/checkbox'
 import { LucideCopyPlus, LucideEdit, LucideTrash2 } from 'lucide-react'
+import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui'
 import DeletionAlertDialog from '@/components/DeletionAlertDialog'
 import { useAppDispatch } from '@/app/hooks'
@@ -28,42 +29,70 @@ import { z } from 'zod'
 type taskSchema = z.infer<typeof taskSchema>
 
 export const taskColumns: ColumnDef<taskSchema>[] = [
+  ////------- Attempt at rendering Checkbox as child of DataTableColumnHeader -----------------
+  //   // accessorKey is the key of the row object to use when extracting the value for the column.
+  //   {
+  //   id: 'select',
+  //   accessorKey: 'checkbox',
+  //   header: ({ column }) => (
+  //     <div>
+  //       <DataTableColumnHeader column={column} title="" />
+  //     </div>
+  //   ),
+  //   // Function to define how the data in each row cell of this column should be rendered.
+  //   // Fetch the value of the id or accessorKey property for each row & display in <div> 80px wide.
+  //   cell: ({ row }) => (
+  //     <div className="">{row.getValue('select')}</div>
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  //   size: 32
+  // },
+
+  // -------- Rendering Checkbox apart from DataTableColumnHeader as in shadcn Example --------------
   {
     id: 'select',
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && 'indeterminate')
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        className="translate-y-[2px]"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="translate-y-[2px]"
-      />
-    ),
+    accessorKey: 'checkbox',
+    header: ({ table }) => {
+      return (
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+          className="translate-y-[2px];"
+        />
+      )
+    },
+    cell: ({ row }) => {
+      return (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+          className="translate-y-[2px]"
+        />
+      )
+    },
     enableSorting: false,
     enableHiding: false,
+    // Provide exact width of first pinned column (checkbox) so getCommonPinningStyles() can determine where to place second pinned column (taskName).
+    size: 18,
   },
 
   {
+    // accessorKey is the key of the row object to use when extracting the value for the column.
     accessorKey: 'taskName',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Task" />
+      <div>
+        <DataTableColumnHeader column={column} title="Task" />
+      </div>
     ),
     // Function to define how the data in each row cell of this column should be rendered.
-    // Fetch the value of the id property for each row & display in <div> 80px wide.
+    // Fetch the value of the id or accessorKey property for each row & display in <div> 80px wide.
     cell: ({ row }) => (
-      <div className="w-[80px]">{row.getValue('taskName')}</div>
+      <div className="max-w-[100px]">{row.getValue('taskName')}</div>
     ),
-    enableSorting: false,
+    enableSorting: true,
     enableHiding: false,
   },
 
@@ -75,7 +104,7 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
     cell: ({ row }) => (
       <div className="w-[80px]">{row.getValue('projectName')}</div>
     ),
-    enableSorting: false,
+    enableSorting: true,
     enableHiding: false,
   },
 
@@ -119,13 +148,13 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
   {
     accessorKey: 'taskDescription',
     header: ({ column }) => (
-      //<div className="hidden lg:flex">
-      <div className="max-w-[190px]">
+      // <div className="hidden lg:flex">
+      <div className="max-w-[100px]">
         <DataTableColumnHeader column={column} title="Description" />
       </div>
     ),
     cell: ({ row }) => (
-      <div className="max-w-[190px] max-h-fit">
+      <div className="max-w-[100px] max-h-fit">
         {row.getValue('taskDescription')}
       </div>
     ),
