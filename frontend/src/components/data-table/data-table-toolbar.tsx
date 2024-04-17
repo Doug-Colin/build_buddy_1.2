@@ -18,7 +18,6 @@ export function DataTableToolbar<TData>({
 
   return (
     <div className="flex items-center justify-between">     
-      <div className="relative ml-auto flex-1 md:grow-0">
       <Search className="absolute left-2 top-2 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
@@ -42,7 +41,6 @@ export function DataTableToolbar<TData>({
             <Cross2Icon className="ml-2 h-4 w-4" />
           </Button>
         )}
-      </div>
       <DataTableViewOptions table={table} />
     </div>
   )
