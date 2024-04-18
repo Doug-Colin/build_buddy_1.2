@@ -29,7 +29,7 @@ export function DataTableViewOptions<TData>({
           className="ml-auto hidden h-8 md:flex"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          View
+          Columns
         </Button>
       </DropdownMenuTrigger>
       {/* Got rid of 150px width trying to make table responsive */}
