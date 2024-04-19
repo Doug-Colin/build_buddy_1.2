@@ -25,11 +25,10 @@ export function DataTableViewOptions<TData>({
         <Button
           variant="outline"
           size="sm"
-          // Responsive text style as class on this button to solve Button responsive text issues?
-          className="ml-auto hidden h-8 md:flex"
+          className="l-auto h-8 md:flex"
         >
           <MixerHorizontalIcon className="mr-2 h-4 w-4" />
-          Columns
+          <span className='hidden md:inline'>Columns</span>
         </Button>
       </DropdownMenuTrigger>
       {/* Got rid of 150px width trying to make table responsive */}
