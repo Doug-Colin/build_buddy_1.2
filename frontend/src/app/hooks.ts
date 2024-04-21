@@ -8,7 +8,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector
 
-// Typed wrapper for createAsyncThunk to handle reject values (reduce redundant code).
+//createTypedAsyncThunk: A typed wrapper for createAsyncThunk to handle reject values (reduces redundant code)
 export const createTypedAsyncThunk = createAsyncThunk.withTypes<{
   rejectValue: string
 }>()
