@@ -8,9 +8,11 @@ import {
   deleteTask,
   duplicateTask,
 } from '@/features/tasks/taskSlice'
-//import { Task } from '@/types/types'
+import { Task, TaskDTO } from '@/types/types'
 
-// Contexts for each feature ensure that
+// Note : Should Context files go in a separate Contexts folder, or withint each feature pages local components folder?
+
+// Contexts for each feature ensure that ...
 
 const TasksContext = createContext(null)
 
@@ -23,11 +25,13 @@ export const TasksProvider = ({ children }) => {
     dispatch(getTasks())
   }, [dispatch])
 
+  // Define handler functions for dispatching actions to Redux store so that all functions interacting with global tasks state are available in context provider.
   const handleGetTasks = () => dispatch(getTasks())
-  const handleCreateTask = (taskId) => dispatch(createTask(taskId))
-  const handleUpdateTask = (taskId) => dispatch(updateTask(taskId))
-  const handleDeleteTask = (taskId) => dispatch(deleteTask(taskId))
-  const handleDuplicateTask = (taskId) => dispatch(duplicateTask(taskId))
+  const handleCreateTask = (task: TaskDTO) => dispatch(createTask(task))
+  const handleUpdateTask = (taskId: string, updatedData: Partial<Task>) =>
+    dispatch(updateTask({ taskId, updatedData }))
+  const handleDeleteTask = (taskId: string) => dispatch(deleteTask(taskId))
+  const handleDuplicateTask = (task: Task) => dispatch(duplicateTask(task))
 
   const value = useMemo(
     () => ({
