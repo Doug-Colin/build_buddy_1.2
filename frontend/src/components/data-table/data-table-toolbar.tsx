@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { Cross2Icon } from '@radix-ui/react-icons'
-import { Search, File, PlusCircle } from 'lucide-react'
+import { Search, PlusCircle, LucideTrash2 } from 'lucide-react'
 import { Table } from '@tanstack/react-table'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import DeletionAlertDialog from '@/components/DeletionAlertDialog'
 import { DataTableViewOptions } from '@/components/data-table/data-table-view-options'
 
 // imports for DropdownMenu
@@ -17,6 +18,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+
+import {
+  getTasks,
+  deleteTask,
+  duplicateTask,
+  updateTask,
+} from '@/features/tasks/taskSlice'
+
 
 //imports for DataTableRowActions incorporated into this component, DataTableToolbar, on screens md and below
 import { LucideCopyPlus } from 'lucide-react'
@@ -82,6 +91,18 @@ export function DataTableToolbar<TData>({
             Duplicate
           </span>
         </Button>
+        <DeletionAlertDialog
+              button={
+                <Button variant="outline">
+                  <LucideTrash2 className="mr-2 h-4 w-4" />
+                  <div className="hidden lg:flex">Delete</div>
+                </Button>
+              }
+              alertDialogTitle={`Are you sure you want to delete this task?`}
+              alertDialogDescription={`If you delete ${task.taskName}, it cannot be undone.`}
+              alertDialogAction="Delete"
+              onDelete={onDelete}
+            />
       </div>
       <DataTableViewOptions table={table} />
     </div>
