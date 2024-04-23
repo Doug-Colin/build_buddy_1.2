@@ -25,6 +25,14 @@ const initialState: AuthState = {
   message: '',
 }
 
+/*
+  createAsyncThunk: a function that accepts two arguments: 
+  - a string action type, and
+  - a 'payload creator' callback that returns a promise (hence aysnc/ await); the promise contains the data you want to dispatch to the store.
+
+  createTypedAsyncThunk: A typed wrapper for createAsyncThunk to handle reject values (reduce redundant code)
+*/
+
 //Thunk action to register user; handles Axios-specific and general errors with help of getErrorMessage()
 export const register = createTypedAsyncThunk<User, RegisterUserData>(
   'auth/register',
