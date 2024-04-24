@@ -19,6 +19,14 @@ const initialState: TaskState = {
   message: null,
 }
 
+/*
+  createAsyncThunk: a function that accepts two arguments: 
+  - a string action type, and
+  - a 'payload creator' callback that returns a promise (hence aysnc/ await); the promise contains the data you want to dispatch to the store.
+
+  createTypedAsyncThunk: A typed wrapper for createAsyncThunk to handle reject values (reduce redundant code)
+*/
+
 //Create a task
 export const createTask = createTypedAsyncThunk(
   'tasks/createTask',
@@ -40,7 +48,7 @@ export const createTask = createTypedAsyncThunk(
   },
 )
 
-//Get Tasks
+//Get user's tasks.
 export const getTasks = createTypedAsyncThunk(
   'tasks/getUserTasks',
   async (_, thunkAPI) => {
@@ -49,7 +57,7 @@ export const getTasks = createTypedAsyncThunk(
       const token = state.auth.user?.token
 
       if (!token) {
-        throw new Error('Token is missing')
+        throw new Error('Token is missing.')
       }
 
       return await taskService.getTasks(token)
