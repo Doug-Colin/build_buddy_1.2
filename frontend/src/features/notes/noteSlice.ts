@@ -23,6 +23,14 @@ const initialState: NoteState = {
   message: null,
 }
 
+/*
+  createAsyncThunk: a function that accepts two arguments: 
+  - a string action type, and
+  - a 'payload creator' callback that returns a promise (hence aysnc/ await); the promise contains the data you want to dispatch to the store.
+
+  createTypedAsyncThunk: A typed wrapper for createAsyncThunk to handle reject values (reduce redundant code)
+*/
+
 // Async Thunk function to create a note.
 export const createNote = createTypedAsyncThunk(
   'notes/createNote',
@@ -44,7 +52,7 @@ export const createNote = createTypedAsyncThunk(
   },
 )
 
-// Async Thunk function to get user' s note's.
+// Async Thunk function to get user's notes.
 export const getNotes = createTypedAsyncThunk(
   'notes/getUserNotes',
   async (_, thunkAPI) => {
