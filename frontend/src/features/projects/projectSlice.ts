@@ -19,6 +19,14 @@ const initialState: ProjectState = {
   message: null,
 }
 
+/*
+  createAsyncThunk: a function that accepts two arguments: 
+  - a string action type, and
+  - a 'payload creator' callback that returns a promise (hence aysnc/ await); the promise contains the data you want to dispatch to the store.
+
+  createTypedAsyncThunk: A typed wrapper for createAsyncThunk to handle reject values (reduce redundant code)
+*/
+
 //Create project
 export const createProject = createTypedAsyncThunk(
   'projects/createProject',
