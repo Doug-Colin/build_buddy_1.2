@@ -9,21 +9,32 @@ import {
   duplicateTask,
 } from '@/features/tasks/taskSlice'
 import { Task, TaskDTO } from '@/types/types'
+import { array } from 'zod'
 
 // Note : Should Context files go in a separate Contexts folder, or withint each feature pages local components folder?
 
 // Contexts for each feature ensure that ...
 
+interface TasksContextType {
+  tasks: Task[];
+  handleGetTasks: () => void;
+  handleCreateTask: (task: TaskDTO) => void;
+  handleUpdateTask: (taskId: string, updatedData: Partial<Task>) => void;
+  handleDeleteTask: (taskId: string) => void;
+  handleDuplicateTask: (task: Task) => void;
+}
+
 const TasksContext = createContext(null)
 
 export const TasksProvider = ({ children }) => {
   const tasks = useAppSelector((state) => state.tasks.tasks)
+  console.log(tasks)
   const dispatch = useAppDispatch()
 
   // Fetch user tasks from Redux global state as soon as provider renders.
-  useEffect(() => {
-    dispatch(getTasks())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(getTasks())
+  // }, [dispatch])
 
   // Define handler functions for dispatching actions to Redux store so that all functions interacting with global tasks state are available in context provider.
   const handleGetTasks = () => dispatch(getTasks())
@@ -51,6 +62,13 @@ export const TasksProvider = ({ children }) => {
   )
 }
 
+// Hook to use tasks context
 export const useTasks = () => {
-  useContext(TasksContext)
-}
+ const context = useContext(TasksContext)
+
+  if (context === undefined) {
+    throw new Error('useTasks must be used within a TasksProvider');
+  }
+  console.log("Context value: ", context); // Debug log
+  return context;
+};
