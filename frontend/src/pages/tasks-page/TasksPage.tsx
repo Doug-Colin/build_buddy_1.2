@@ -2,10 +2,13 @@ import * as React from 'react'
 import { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
+import { TasksProvider } from '@/pages/tasks-page/TasksContext'
 import { useAppSelector, useAppDispatch } from '@/app/hooks'
 import { getTasks } from '@/features/tasks/taskSlice'
-// For buildout of form (In the event of user creating a new task linked to a project that does not yet exist)
+
+// For buildout of form ? (In the event of user creating a new task linked to a project that does not yet exist)
 //import { getProjects } from '@/features/projects/projectSlice'
+//import TasksPageContent from '@/pages/tasks-page/TasksPageContent'
 
 import { taskColumns } from '@/pages/tasks-page/components/table/task-columns'
 import { TasksDataTable } from '@/pages/tasks-page/components/table/TasksDataTable'
@@ -15,14 +18,19 @@ import FormDialog from '@/components/FormDialog'
 import TaskForm from '@/pages/tasks-page/components/TaskForm'
 import { useFormDialogState } from '@/hooks/useFormDialogState'
 
+
+
+
 export default function TasksPage() {
   // !user redirects to LandingPage
   useAuthCheck()
 
   const dispatch = useAppDispatch()
   const tasks = useAppSelector((state) => state.tasks.tasks)
+
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
 
+  // Replaced with TasksProvider, which calls it immediately
   useEffect(() => {
     dispatch(getTasks())
   }, [dispatch])
