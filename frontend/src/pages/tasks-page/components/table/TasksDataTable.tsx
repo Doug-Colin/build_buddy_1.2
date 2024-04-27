@@ -28,6 +28,7 @@ import {
 import { DataTablePagination } from '@/components/data-table/data-table-pagination'
 import { DataTableToolbar } from '@/components/data-table/data-table-toolbar'
 
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -47,6 +48,10 @@ export function TasksDataTable<TData, TValue>({
   const [columnPinning, setColumnPinning] = React.useState({
     left: ['select', 'taskName'],
   })
+
+    // Debug logs
+    console.log("Columns: ", columns); // Add this line to debug
+    console.log("Data: ", data); // Add this line to debug
 
   const table = useReactTable({
     data,
