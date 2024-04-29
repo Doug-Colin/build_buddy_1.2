@@ -1,55 +1,42 @@
-import React from 'react'
+import * as React from 'react'
 import { ColumnDef } from '@tanstack/react-table'
+
 import { Badge } from '@/components/ui/badge'
 import { LucideCopyPlus, LucideEdit, LucideTrash2 } from 'lucide-react'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui'
 import DeletionAlertDialog from '@/components/DeletionAlertDialog'
-import { useAppDispatch } from '@/app/hooks'
+
 import {
   taskLabels,
   taskPriorities,
   taskStatuses,
   DataTableRowActions,
 } from '@/pages/tasks-page/components/table/data-table-row-actions'
+
+import { Task } from '@/types/types'
+
+import { useAppDispatch } from '@/app/hooks'
 import {
   getTasks,
   deleteTask,
   duplicateTask,
   updateTask,
 } from '@/features/tasks/taskSlice'
-//import { Task } from "../data/schema"
+
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header'
 
 // Use Zod task schema.
-
 import { taskSchema } from '@/validators/taskSchema'
 import { z } from 'zod'
+
+// Access to dispatch functions from context.
+import { useTasks } from '@/pages/tasks-page/TasksContext'
 
 type taskSchema = z.infer<typeof taskSchema>
 
 export const taskColumns: ColumnDef<taskSchema>[] = [
-  ////------- Attempt at rendering Checkbox as child of DataTableColumnHeader -----------------
-  //   // accessorKey is the key of the row object to use when extracting the value for the column.
-  //   {
-  //   id: 'select',
-  //   accessorKey: 'checkbox',
-  //   header: ({ column }) => (
-  //     <div>
-  //       <DataTableColumnHeader column={column} title="" />
-  //     </div>
-  //   ),
-  //   // Function to define how the data in each row cell of this column should be rendered.
-  //   // Fetch the value of the id or accessorKey property for each row & display in <div> 80px wide.
-  //   cell: ({ row }) => (
-  //     <div className="">{row.getValue('select')}</div>
-  //   ),
-  //   enableSorting: false,
-  //   enableHiding: false,
-  //   size: 32
-  // },
 
-  // -------- Rendering Checkbox apart from DataTableColumnHeader as in shadcn Example --------------
   {
     id: 'select',
     accessorKey: 'checkbox',
@@ -229,14 +216,24 @@ export const taskColumns: ColumnDef<taskSchema>[] = [
       <DataTableColumnHeader column={column} title="Actions" />
     ),
     cell: ({ row }) => {
-      const task = row.original // Assuming row.original contains the task data
-      const dispatch = useAppDispatch()
+      const task = row.original as Task // Assuming row.original contains the task data
+      const { handleDuplicateTask, handleDeleteTask } = useTasks()
+
       const handleDuplicate = () => {
-        dispatch(duplicateTask(task))
+        handleDuplicateTask(task)
       }
       const onDelete = () => {
-        dispatch(deleteTask(task._id))
+        handleDeleteTask(task._id)
       }
+    
+      // const task = row.original // Assuming row.original contains the task data
+      // const dispatch = useAppDispatch()
+      // const handleDuplicate = () => {
+      //   dispatch(duplicateTask(task))
+      // }
+      // const onDelete = () => {
+      //   dispatch(deleteTask(task._id))
+      // }
 
       return (
         <>
