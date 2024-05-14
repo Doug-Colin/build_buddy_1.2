@@ -7,22 +7,41 @@ const connectDB = require('./config/db');
 const path = require('path');
 const port = process.env.PORT || 3150;
 
+
 connectDB();
 
 const app = express();
 
 // Middleware
-app.use(cors());
+//app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173', // Your frontend URL
+  credentials: true
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use((err, req, res, next) => {
+  console.error('Server error:', err.stack);
+  res.status(500).json({ message: 'Server error', error: err.message });
+});
+
+app.use((req, res, next) => {
+  console.log(`${req.method} request to ${req.url}`);
+  next();
+});
 
 app.use('/api/tasks', require('./routes/taskRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/notes', require('./routes/noteRoutes'));
 
+
+
+
+
 // Overwrite default express error handler
-app.use(errorHandler);
+//app.use(errorHandler);
 
 /*
  Code for serving the frontend directly from the backend in production mode.
@@ -32,19 +51,20 @@ app.use(errorHandler);
  - Adjust paths for tool used in frontend build (this case Vite).
 */
 
-/* -------------- Faulty code for production mode ----------------
+// -------------- Faulty code for production mode ----------------
 // Serve static files in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../frontend/dist')));
+// if (process.env.NODE_ENV === 'production') {
+//   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-  app.get('*', (req, res) =>
-    res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'))
-  );
-} else {
-  app.get('/', (req, res) => res.send('Please set to production'));
-}
-*/
+//   app.get('*', (req, res) =>
+//     res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'))
+//   );
+// } else {
+//   app.get('/', (req, res) => res.send('Please set to production'));
+// }
 
+
+// Functional code for production mode
 // Serve static files in production.
 if (process.env.NODE_ENV === 'production') {
 

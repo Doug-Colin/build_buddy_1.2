@@ -1,0 +1,21 @@
+=
+
+-backend authenticates by going to DB and making sure we have correct email and pw 
+-backend authorizes by sending correcty token for current user to correct route
+
+Using Postman to check functionality:
+-REGISTER new users, send POST req to http://localhost:5050/api/users, simply put name, email, pw into Body of request.
+
+-LOGIN users: send POST req with keys email and password and values in Body->x-www-urlencoded. use name and email to login (sample users passwords are 123456)
+
+Get, Post, Delete req's must be authorized & authenticated:
+For requests that need to be authorized/authenticated, take the user login token, go into Authorization tab of request, and in Type scrolldown, select 'Bearer Token'. Enter the token from the login request's server response into the field. Now this request is authorized.   
+
+DELETE Tasks: Send DELETE req to the url http://localhost:5050/api/tasks/, with the targeted task _id appended. Be sure to put the correct current user's Bearer Token  (Authorization tab). 
+
+Get req for single task: put correct user token from login into Authorization under type Bearer Token, and send Body request with key-value pair of task _id:value.
+
+Get current user: send GET req to http://localhost:5050/api/users/current-user with logged in user's token in Authorization tab as Bearer Token type
+
+NOTE ON taskController.js:
+In update and delete task functions, user is initialized before being checked for, or checked if matching req. Can probably get rid of const user initialization and just check val of req.body.user, instead of user.
