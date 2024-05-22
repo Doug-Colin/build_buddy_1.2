@@ -10,7 +10,7 @@ import ProjectsPage from '@/pages/projects-page/ProjectsPage'
 import TasksPage from './pages/tasks-page/TasksPage'
 import NotesPage from './pages/notes-page/NotesPage'
 import ClientsPage from './pages/clients-page/ClientsPage.tsx'
-import ResponsiveTablePage from './pages/responsive-table-view/ResponsiveTablePage'
+import ResponsiveDataTablePage from  './pages/modular-responsive-data-table-page/ResponsiveDataTablePage.tsx'
 
 export default function App() {
   return (
@@ -29,10 +29,7 @@ export default function App() {
               <Route path="/notes" element={<NotesPage />} />
               <Route path="/clients" element={<ClientsPage />} />
               <Route path="/responsive-detail-view" element={<ClientsPage />} />
-              <Route
-                path="/responsive-table-view"
-                element={<ResponsiveTablePage />}
-              />
+              <Route path="//modular-responsive-data-table" element={<ResponsiveDataTablePage />} />
             </Routes>
           </Router>
         </div>

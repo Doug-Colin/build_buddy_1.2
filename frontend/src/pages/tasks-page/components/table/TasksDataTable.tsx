@@ -28,7 +28,6 @@ import {
 import { DataTablePagination } from '@/components/data-table/data-table-pagination'
 import { DataTableToolbar } from '@/components/data-table/data-table-toolbar'
 
-
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
@@ -49,9 +48,9 @@ export function TasksDataTable<TData, TValue>({
     left: ['select', 'taskName'],
   })
 
-    // Debug logs
-    console.log("Columns: ", columns); // Add this line to debug
-    console.log("Data: ", data); // Add this line to debug
+  // Debug logs
+  console.log('Columns: ', columns) // Add this line to debug
+  console.log('Data: ', data) // Add this line to debug
 
   const table = useReactTable({
     data,
@@ -94,12 +93,13 @@ export function TasksDataTable<TData, TValue>({
   //These are the important styles to make sticky column pinning work!
   //Apply styles like this using your CSS strategy of choice with this kind of logic to head cells, data cells, footer cells, etc.
   //View the index.css file for more needed styles such as border-collapse: separate
+
   const getCommonPinningStyles = (column: Column<any>): CSSProperties => {
     const isPinned = column.getIsPinned()
     const isLastLeftPinnedColumn =
-      isPinned === 'left' && column.getIsLastColumn('left')
+      isPinned === 'left' && column.getIsLastColumn?.('left')
     const isFirstRightPinnedColumn =
-      isPinned === 'right' && column.getIsFirstColumn('right')
+      isPinned === 'right' && column.getIsFirstColumn?.('right')
 
     return {
       boxShadow: isLastLeftPinnedColumn
@@ -107,27 +107,23 @@ export function TasksDataTable<TData, TValue>({
         : isFirstRightPinnedColumn
           ? '4px 0 4px -4px gray inset'
           : undefined,
-      left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined, 
+      left: isPinned === 'left' ? `${column.getStart('left')}px` : undefined,
       right: isPinned === 'right' ? `${column.getAfter('right')}px` : undefined,
       opacity: isPinned ? 0.95 : 1,
       position: isPinned ? 'sticky' : 'relative',
       width: column.getSize(),
       zIndex: isPinned ? 1 : 0,
-      backgroundColor: isPinned ? 'black' : 'undefined',
+      backgroundColor: isPinned ? 'black' : undefined,
     }
   }
 
-
-
-
-
   return (
-    <div className="space-y-4" >
-      <DataTableToolbar table={table}/>
+    <div className="space-y-4">
+      <DataTableToolbar table={table} />
       <div className="rounded-md border">
         {/* Below works for everything inside table but the buttons in DataTableColumnHeader; adding these responsive text classes directly to the buttons in that file makes all the table text responsive, but lets see if we can get this done in one single place  */}
         {/* Padding not being responsive here, but works directly in Table */}
-        <Table className='text-xs lg:text-sm'>
+        <Table className="text-xs lg:text-sm">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>

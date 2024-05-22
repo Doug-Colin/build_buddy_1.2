@@ -21,7 +21,6 @@ const Table = React.forwardRef<
 ))
 Table.displayName = 'Table'
 
-//TEXT IS ALREADY SET TO BE RESPONSIVEIN ORIGINAL TABLE- CHANGING TEXT SIZES ABOVESEEMS TO FUCK UPNFIRST PINNED COLUMN SIZE.
 
 const TableHeader = React.forwardRef<
   HTMLTableSectionElement,
@@ -80,7 +79,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     // Responsive left-right padding for table headers (px-0.5rem (small through tablet screens, px-2rem (8px) laptop and up); aligns left-pinned checkbox header with column cells.
-    //pr-0 necessary for pinned columns to maintain stable position relative to each other.
+    // pr-0 necessary for pinned columns to maintain stable position relative to each other.
     className={cn( 
       'h-12 px-1 lg:px-2 text-left align-middle font-medium text-stone-500 [&:has([role=checkbox])]:pr-0 dark:text-stone-400',
       className,
@@ -98,7 +97,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     // Responsive left-right padding for table headers (px-0.5rem (small through tablet screens, px-2rem (8px) laptop and up); aligns left-pinned checkbox header with column cells.
-    //pr-0 necessary for pinned columns to maintain stable position relative to each other.
+    // pr-0 necessary for pinned columns to maintain stable position relative to each other.
     className={cn('px-1 lg:px-2  align-middle [&:has([role=checkbox])]:pr-0', className)}
     {...props}
   />

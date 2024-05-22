@@ -1,0 +1,206 @@
+build_buddy_1.2/
+┣ backend/
+┃ ┣ config/
+┃ ┃ ┗ db.js
+┃ ┣ controllers/
+┃ ┃ ┣ noteController.js
+┃ ┃ ┣ projectController.js
+┃ ┃ ┣ taskController.js
+┃ ┃ ┗ userController.js
+┃ ┣ middleware/
+┃ ┃ ┣ authMiddleware.js
+┃ ┃ ┗ errorMiddleware.js
+┃ ┣ models/
+┃ ┃ ┣ noteModel.js
+┃ ┃ ┣ projectModel.js
+┃ ┃ ┣ taskModel.js
+┃ ┃ ┗ userModel.js
+┃ ┣ routes/
+┃ ┃ ┣ noteRoutes.js
+┃ ┃ ┣ projectRoutes.js
+┃ ┃ ┣ taskRoutes.js
+┃ ┃ ┗ userRoutes.js
+┃ ┣ .env
+┃ ┣ .eslintrc.js
+┃ ┣ .prettierrc
+┃ ┗ server.js
+┗ frontend/
+  ┣ public/
+  ┣ src/
+┃ ┃ ┣ app/
+┃ ┃ ┃ ┣ hooks.ts
+┃ ┃ ┃ ┗ store.ts
+┃ ┃ ┣ assets/
+┃ ┃ ┃ ┣ barchartIconDarkMode.svg
+┃ ┃ ┃ ┣ barchartIconLightMode.svg
+┃ ┃ ┃ ┣ calcIconDarkMode.svg
+┃ ┃ ┃ ┣ calcIconLightMode.svg
+┃ ┃ ┃ ┣ estimateIconDarkMode.svg
+┃ ┃ ┃ ┣ estimateIconLightMode.svg
+┃ ┃ ┃ ┣ projectsIconDarkMode.svg
+┃ ┃ ┃ ┗ projectsIconLightMode.svg
+┃ ┃ ┣ components/
+┃ ┃ ┃ ┣ plate-ui/
+┃ ┃ ┃ ┃ ┣ blockquote-element.tsx
+┃ ┃ ┃ ┃ ┣ code-leaf.tsx
+┃ ┃ ┃ ┃ ┣ dropdown-menu.tsx
+┃ ┃ ┃ ┃ ┣ fixed-toolbar-buttons.tsx
+┃ ┃ ┃ ┃ ┣ fixed-toolbar.tsx
+┃ ┃ ┃ ┃ ┣ floating-toolbar-buttons.tsx
+┃ ┃ ┃ ┃ ┣ floating-toolbar.tsx
+┃ ┃ ┃ ┃ ┣ heading-element.tsx
+┃ ┃ ┃ ┃ ┣ insert-dropdown-menu.tsx
+┃ ┃ ┃ ┃ ┣ mark-toolbar-button.tsx
+┃ ┃ ┃ ┃ ┣ mode-dropdown-menu.tsx
+┃ ┃ ┃ ┃ ┣ more-dropdown-menu.tsx
+┃ ┃ ┃ ┃ ┣ paragraph-element.tsx
+┃ ┃ ┃ ┃ ┣ separator.tsx
+┃ ┃ ┃ ┃ ┣ toggle.tsx
+┃ ┃ ┃ ┃ ┣ toolbar.tsx
+┃ ┃ ┃ ┃ ┣ tooltip.tsx
+┃ ┃ ┃ ┃ ┗ turn-into-dropdown-menu.tsx
+┃ ┃ ┃ ┣ table/
+┃ ┃ ┃ ┃ ┣ data-table-column-header.tsx
+┃ ┃ ┃ ┃ ┣ data-table-column-toggle.tsx
+┃ ┃ ┃ ┃ ┣ data-table-pagination.tsx
+┃ ┃ ┃ ┃ ┣ data-table-toolbar.tsx
+┃ ┃ ┃ ┃ ┣ data-table-view-options.tsx
+┃ ┃ ┃ ┃ ┗ data-table.tsx
+┃ ┃ ┃ ┣ ui/
+┃ ┃ ┃ ┃ ┣ alert-dialog.tsx
+┃ ┃ ┃ ┃ ┣ badge.tsx
+┃ ┃ ┃ ┃ ┣ button.tsx
+┃ ┃ ┃ ┃ ┣ calendar.tsx
+┃ ┃ ┃ ┃ ┣ card.tsx
+┃ ┃ ┃ ┃ ┣ checkbox.tsx
+┃ ┃ ┃ ┃ ┣ command.tsx
+┃ ┃ ┃ ┃ ┣ dialog.tsx
+┃ ┃ ┃ ┃ ┣ dropdown-menu.tsx
+┃ ┃ ┃ ┃ ┣ form.tsx
+┃ ┃ ┃ ┃ ┣ index.ts
+┃ ┃ ┃ ┃ ┣ input.tsx
+┃ ┃ ┃ ┃ ┣ label.tsx
+┃ ┃ ┃ ┃ ┣ popover.tsx
+┃ ┃ ┃ ┃ ┣ scroll-area.tsx
+┃ ┃ ┃ ┃ ┣ select.tsx
+┃ ┃ ┃ ┃ ┣ separator.tsx
+┃ ┃ ┃ ┃ ┣ switch.tsx
+┃ ┃ ┃ ┃ ┣ table.tsx
+┃ ┃ ┃ ┃ ┣ tabs.tsx
+┃ ┃ ┃ ┃ ┣ toast.tsx
+┃ ┃ ┃ ┃ ┣ toaster.tsx
+┃ ┃ ┃ ┃ ┗ use-toast.ts
+┃ ┃ ┃ ┣ AppLayout.tsx
+┃ ┃ ┃ ┣ DeletionAlertDialog.tsx
+┃ ┃ ┃ ┣ Footer.tsx
+┃ ┃ ┃ ┣ FormDialog.tsx
+┃ ┃ ┃ ┣ Header.tsx
+┃ ┃ ┃ ┣ icons.tsx
+┃ ┃ ┃ ┣ MainNav.tsx
+┃ ┃ ┃ ┣ PageHeader.tsx
+┃ ┃ ┃ ┣ PageShell.tsx
+┃ ┃ ┃ ┣ Search.tsx
+┃ ┃ ┃ ┣ theme-provider.tsx
+┃ ┃ ┃ ┗ ThemeToggle.tsx
+┃ ┃ ┣ features/
+┃ ┃ ┃ ┣ auth/
+┃ ┃ ┃ ┃ ┣ authService.ts
+┃ ┃ ┃ ┃ ┗ authSlice.ts
+┃ ┃ ┃ ┣ notes/
+┃ ┃ ┃ ┃ ┣ noteService.ts
+┃ ┃ ┃ ┃ ┗ noteSlice.ts
+┃ ┃ ┃ ┣ projects/
+┃ ┃ ┃ ┃ ┣ projectService.ts
+┃ ┃ ┃ ┃ ┗ projectSlice.ts
+┃ ┃ ┃ ┗ tasks/
+┃ ┃ ┃   ┣ taskService.ts
+┃ ┃ ┃   ┗ taskSlice.ts
+┃ ┃ ┣ hooks/
+┃ ┃ ┃ ┣ useAuthCheck.ts
+┃ ┃ ┃ ┗ useFormDialogState.ts
+┃ ┃ ┣ lib/
+┃ ┃ ┃ ┣ assetUtils.ts
+┃ ┃ ┃ ┣ axiosUtils.ts
+┃ ┃ ┃ ┗ utils.ts
+┃ ┃ ┣ pages/
+┃ ┃ ┃ ┣ dashboard-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┗ DashboardPage.tsx
+┃ ┃ ┃ ┣ landing-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┃ ┗ FeatureCard.tsx
+┃ ┃ ┃ ┃ ┗ LandingPage.tsx
+┃ ┃ ┃ ┣ layout-notes-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┃ ┣ notes/
+┃ ┃ ┃ ┃ ┃ ┃ ┣ NoteCreateButton.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┣ NoteDetails.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┣ NoteHeader.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┣ NoteItem.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┗ NoteOperations.tsx
+┃ ┃ ┃ ┃ ┃ ┣ table/
+┃ ┃ ┃ ┃ ┃ ┃ ┣ columns.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┣ data-table-row-actions.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┗ NotesDataTable.tsx
+┃ ┃ ┃ ┃ ┃ ┣ editor.tsx
+┃ ┃ ┃ ┃ ┃ ┗ NoteForm.tsx
+┃ ┃ ┃ ┃ ┣ DocumentEditor.tsx
+┃ ┃ ┃ ┃ ┣ layout.tsx
+┃ ┃ ┃ ┃ ┗ NewNotesPage.tsx
+┃ ┃ ┃ ┣ login-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┃ ┗ LoginForm.tsx
+┃ ┃ ┃ ┃ ┗ LoginPage.tsx
+┃ ┃ ┃ ┣ notes-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┃ ┣ table/
+┃ ┃ ┃ ┃ ┃ ┃ ┣ columns.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┣ data-table-row-actions.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┗ NotesDataTable.tsx
+┃ ┃ ┃ ┃ ┃ ┣ editor.tsx
+┃ ┃ ┃ ┃ ┃ ┗ NoteForm.tsx
+┃ ┃ ┃ ┃ ┗ NotesPage.tsx
+┃ ┃ ┃ ┣ projects-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┃ ┣ DueDatePicker.tsx
+┃ ┃ ┃ ┃ ┃ ┣ ProjectCard.tsx
+┃ ┃ ┃ ┃ ┃ ┣ ProjectForm.tsx
+┃ ┃ ┃ ┃ ┃ ┗ StatusTabs.tsx
+┃ ┃ ┃ ┃ ┗ ProjectsPage.tsx
+┃ ┃ ┃ ┣ register-page/
+┃ ┃ ┃ ┃ ┣ components/
+┃ ┃ ┃ ┃ ┃ ┗ RegisterForm.tsx
+┃ ┃ ┃ ┃ ┗ RegisterPage.tsx
+┃ ┃ ┃ ┗ tasks-page/
+┃ ┃ ┃   ┣ components/
+┃ ┃ ┃ ┃ ┃ ┣ table/
+┃ ┃ ┃ ┃ ┃ ┃ ┣ data-table-row-actions.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┣ task-columns.tsx
+┃ ┃ ┃ ┃ ┃ ┃ ┗ TasksDataTable.tsx
+┃ ┃ ┃ ┃ ┃ ┣ ProjectNameCombobox.tsx
+┃ ┃ ┃ ┃ ┃ ┣ ProjectToggleTabs.tsx
+┃ ┃ ┃ ┃ ┃ ┗ TaskForm.tsx
+┃ ┃ ┃   ┗ TasksPage.tsx
+┃ ┃ ┣ types/
+┃ ┃ ┃ ┣ plate-types.ts
+┃ ┃ ┃ ┗ types.ts
+┃ ┃ ┣ validators/
+┃ ┃ ┃ ┣ loginSchema.ts
+┃ ┃ ┃ ┣ noteSchema.ts
+┃ ┃ ┃ ┣ projectSchema.ts
+┃ ┃ ┃ ┣ registerSchema.ts
+┃ ┃ ┃ ┗ taskSchema.ts
+┃ ┃ ┣ App.css
+┃ ┃ ┣ App.tsx
+┃ ┃ ┣ index.css
+┃ ┃ ┣ main.tsx
+┃ ┃ ┗ vite-env.d.ts
+  ┣ .eslintrc.cjs
+  ┣ .prettierrc
+  ┣ components.json
+  ┣ index.html
+  ┣ postcss.config.js
+  ┣ tailwind.config.js
+  ┣ tsconfig.json
+  ┣ tsconfig.node.json
+  ┗ vite.config.ts

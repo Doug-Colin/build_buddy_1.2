@@ -1,0 +1,68 @@
+Relevant info from Plate Discord:
+
+jeromec8194 — 12/10/2023 9:53 AM
+Hey, thanks for all the great work on this. I've been struggling for days with  loading content inside the editor, and initialising it correctly.
+I got to a point where loading content seems to work fine, but I  keep getting somehow random but not that random "Cannot resolve a DOM point from Slate point: "  errors whenever I'm trying to initialize my editor as empty. 
+
+Here's what I'm doing atm :
+I have a page component (using next)  loading my editor's content with a RTKQuery hook,.
+I'm passing the relevant content as a prop to my PlateEditor : <PlateEditor  content={JSON.parse(data.content)} ..../>
+In PlateEditor, I have a useEffect hook to set the editor's content whenever my prop is updated :   useEffect(() => {
+if (content) {
+  ref.current.children = content;}, [content]);
+
+So far, this seems to work, but whenever I load a page with an empty content, I'm getting the above errors. I've tried many hacks, such as passing "placecholders"', empty arrays etc, whenever the content was empty, but I keep getting errors at some point.
+Long story short, if someone would be some kind to guide me through how to properly load data into plate, that'd be much appreciated 🙂 Thanks !
+Joe Anderson — 12/10/2023 10:05 AM
+The initial editor value should be loaded into Plate using the initialValue prop. Changing the value after the initial render should be avoided if possible, but can be done either by mutating a key prop to force Plate to remount, or by calling replaceNodeChildren.
+jeromec8194 — 12/10/2023 10:08 AM
+Thx for the reply mate. What's the recommended approach then when loading data, only add the editor to the DOM after data has been fetched, and simply pass down the content's value as props?
+Joe Anderson — 12/10/2023 10:11 AM
+only add the editor to the DOM after data has been fetched
+That's right. Rendering an empty editor while the data is still loading is generally poor UX, in addition to the difficulty of getting it to work correctly with Plate. 
+jeromec8194 — 12/10/2023 10:20 AM
+cool, thx a lot for the guidance 🙂
+
+--------------------
+
+Hey 👋 I'm having a bit of a hard time populating my editor with data from my server. It works fine when I hard code the value to the initialValue prop, but not with data that isn't immediately available upon render.
+
+I have a prop called content that I pass into my PageEditor component. That then is passed into the Plate initialValue prop
+content is initially null, but then receives the JSON value from the database
+I can see in React DevTools that the Plate component eventually updates with the JSON initialValue value, but that value doesn't get passed down into the Slate component. The Slate component contains the following value:
+
+[
+  {
+    "type": "p",
+    "children": [
+      "{text: ""}"
+    ]
+  }
+]
+Joe Anderson — 10/15/2023 8:27 AM
+Don’t render the editor until the data is loaded. There’s no advantage to doing so.
+nomac — 10/15/2023 4:50 PM
+Thanks. That did the trick 🙌
+
+____________________
+woodpeng — 10/09/2023 11:26 PM
+has anyone trying to reset Editor content after it initialized? I implemented in older version(Plate@21.4.3)  with: 
+ 
+const [value, setValue] = usePlateStates(editorId).value();
+const resetEditor = useResetPlateEditor(editorId);
+......
+resetEditor();
+setValue(content);
+ 
+It works.
+But with Plate @24.4.0.   setValue()  does not work.  For detail, see: https://github.com/udecode/plate/discussions/2691
+
+Is the way I do this wrong? Any other ways to implement this (reset editor's content)? Thanks! 
+zbeyens — 10/10/2023 4:50 AM
+Try to use resetEditor or resetEditorChildren or useReplaceEditor
+woodpeng — 10/10/2023 6:10 AM
+replace editor.reset() with useReplaceEditor(), it works, Thanks!
+zbeyens — 10/10/2023 8:27 AM
+Super, please post the answer in github
+
+____________________________________

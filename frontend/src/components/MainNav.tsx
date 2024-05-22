@@ -40,6 +40,12 @@ export function MainNav({
       >
         Clients
       </Link>
+      <Link
+        to="/modular-responsive-data-table"
+        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+      >
+        Mod./Resp. DataTable
+      </Link>
     </nav>
   )
 }

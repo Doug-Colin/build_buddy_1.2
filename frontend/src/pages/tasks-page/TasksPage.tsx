@@ -2,7 +2,6 @@ import * as React from 'react'
 import { useEffect } from 'react'
 import Layout from '@/components/Layout'
 import { useAuthCheck } from '@/hooks/useAuthCheck'
-import { TasksProvider } from '@/pages/tasks-page/TasksContext'
 import { useAppSelector, useAppDispatch } from '@/app/hooks'
 import { getTasks } from '@/features/tasks/taskSlice'
 
@@ -30,7 +29,7 @@ export default function TasksPage() {
 
   const { isFormDialogOpen, handleFormDialogClose } = useFormDialogState(false)
 
-  // Replaced with TasksProvider, which calls it immediately
+  // Fetch user tasks on page load
   useEffect(() => {
     dispatch(getTasks())
   }, [dispatch])
