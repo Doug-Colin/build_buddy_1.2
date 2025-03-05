@@ -1,6 +1,8 @@
 import path from 'path'
-import react from "@vitejs/plugin-react"
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import visualizer from 'rollup-plugin-visualizer'
+import Inspect from 'vite-plugin-inspect'
 
 /*
 https://vitejs.dev/config/
@@ -12,10 +14,15 @@ Note on the 'serve' script command below:
   You won't find 'serve' in frontend/package.json scripts; In the cli 'vite', 'vite dev', and 'vite serve' are aliases for it. In Vite's API the command value is 'serve' during dev (in the cli vite, vite dev, and vite serve are aliases), and 'build' when building for production (vite build).
   */
 
-export default defineConfig(({command, mode}) => {
-// During local development ... 
+export default defineConfig(({ command, mode }) => {
+  // During local development.
   if (command === 'serve') {
     return {
+      //Plugins.
+      plugins: [
+        react(),
+        Inspect(),
+      ],
       // Define path aliases.
       resolve: {
         alias: {
@@ -49,24 +56,33 @@ export default defineConfig(({command, mode}) => {
           },
         },
       },
-
     }
+    // During production.
   } else if (command === 'build') {
     return {
-        resolve: {
-    alias: {
-      '@': path.resolve(__dirname, './src'),
-    },
-  },
-  // Directory to output build files to for production. 
-  build: {
-    outDir: 'dist',
-  },
+      plugins: [
+        react(),
+        Inspect(),
+        // Rollup bundle visualizer identifies large modules for performance optimization via code splitting and tree shaking.
+        visualizer({
+          open: true, // Automatically open the visualization
+          filename: 'stats.html', // Output file
+          gzipSize: true, // Show gzipped sizes
+          brotliSize: true, // Show brotli sizes
+        }),
+      ],
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, './src'),
+        },
+      },
+      // Directory to output build files to for production.
+      build: {
+        outDir: 'dist',
+      },
     }
   }
-
 })
-
 
 /*
 Original configuration for development:
