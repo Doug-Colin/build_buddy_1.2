@@ -1,7 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import visualizer from 'rollup-plugin-visualizer'
+import { visualizer } from 'rollup-plugin-visualizer'
 import Inspect from 'vite-plugin-inspect'
 
 /*
@@ -19,10 +19,7 @@ export default defineConfig(({ command, mode }) => {
   if (command === 'serve') {
     return {
       //Plugins.
-      plugins: [
-        react(),
-        Inspect(),
-      ],
+      plugins: [react(), Inspect()],
       // Define path aliases.
       resolve: {
         alias: {
